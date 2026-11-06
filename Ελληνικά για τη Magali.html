@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ελληνικά για τη Magali</title>
+<style>
+:root{--bg:#eef4f9;--c:#fff;--t:#10263d;--m:#586b80;--a:#0d5aa7;--ok:#17803f;--no:#b83227;--l:#cdd9e5;box-sizing:border-box;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0e1a27;--c:#17283a;--t:#eaf1f8;--m:#9db0c4;--a:#6db3f2;--ok:#4cc27f;--no:#ff7b6e;--l:#2c4258}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t);font:20px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:18px 20px 6px;max-width:980px;margin:auto}
+h1{margin:0;font:700 30px Georgia,serif}
+h1+p{margin:4px 0 0;color:var(--m)}
+#nav{display:flex;flex-wrap:wrap;gap:8px;max-width:980px;margin:10px auto;padding:0 20px}
+#nav button{min-width:64px;padding:8px 12px;border:2px solid var(--l);border-radius:10px;background:var(--c);color:var(--t);font:600 18px inherit;cursor:pointer}
+#nav button.on{background:var(--a);border-color:var(--a);color:#fff}
+#nav small{display:block;font-weight:400;font-size:13px;opacity:.85}
+#main{max-width:980px;margin:auto;padding:8px 20px 60px}
+h2{font:700 26px Georgia,serif;margin:12px 0}
+.q,.card,.rule{background:var(--c);border:1px solid var(--l);border-radius:12px;padding:14px 16px;margin:12px 0}
+.qh{display:flex;gap:12px;align-items:center;font-size:23px;font-weight:600}
+.n{flex:none;min-width:38px;height:38px;border-radius:50%;background:var(--a);color:#fff;display:inline-flex;align-items:center;justify-content:center;font:700 18px system-ui}
+.os{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-top:12px}
+.o{display:flex;gap:10px;align-items:center;text-align:left;padding:10px 12px;border:2px solid var(--l);border-radius:10px;background:var(--bg);color:var(--t);font:inherit;cursor:pointer}
+.o b{flex:none;width:32px;height:32px;border-radius:8px;background:var(--l);display:inline-flex;align-items:center;justify-content:center}
+.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--c))}
+.o.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 18%,var(--c))}
+.o:disabled{cursor:default;color:var(--t)}
+.sp,.ctl button{padding:8px 14px;border:2px solid var(--a);border-radius:10px;background:var(--c);color:var(--a);font:600 18px inherit;cursor:pointer}
+.score{font-weight:700;font-size:24px;margin:16px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{position:relative;cursor:pointer;min-height:130px;margin:0;padding-top:20px}
+.card .n{position:absolute;top:-10px;left:-8px;min-width:34px;height:34px}
+.el{font-size:26px;font-weight:700;margin-top:8px}
+.fr{display:none;color:var(--m);margin-top:6px}
+.card.f .fr{display:block}
+.card .sp{position:absolute;top:8px;right:8px;padding:2px 8px}
+.rule h3{margin:0 0 6px;display:flex;gap:10px;align-items:center;font-size:21px}
+table{border-collapse:collapse;margin:8px 0}
+td,th{border:1px solid var(--l);padding:4px 10px;text-align:left}
+.ex{color:var(--a);font-weight:600}
+</style></head><body>
+<header><h1>Ελληνικά για τη Magali</h1><p>Grec pour débutants · conversation de tous les jours</p></header>
+<div id="nav"></div><div id="main"></div>
+<script>
+const T=[["Αλφάβητο","Alphabet"],["Χαιρετισμοί","Salutations"],["Αριθμοί","Nombres"],["Στο καφέ","Au café"],["Αγορές","Achats"],["Καιρός","Météo"],["Δρόμος","Directions"],["Ταξίδι","Voyage"],["Γραμματική","Grammaire"],["Πρεσβεία","Travail"]];
+// format: question|bonne réponse|faux|faux|faux  (🔊 = écouter le mot)
+const D=[[
+"Comment lit-on « Β β » ?|v|b|m|p",
+"« Γ γ » devant « α » se lit…|gh (r doux)|j|k|ch",
+"Quelle lettre ressemble à « P » mais se lit « r » ?|Ρ ρ|Π π|Β β|Η η",
+"« Η η » se lit…|i|h|n|é",
+"« Θ θ » se lit comme « th » dans…|think|this|tea|sea",
+"« Σ σ / ς » se lit…|s|z|ch|x",
+"« Φ φ » se lit…|f|p|ch|t",
+"🔊Ευχαριστώ|merci|bonjour|au revoir|pardon",
+"« ου » se lit…|ou|oi|u|o",
+"« Ξ ξ » se lit…|ks|z|ch|s"],[
+"🔊Καλημέρα|bonjour (matin)|bonsoir|bonne nuit|au revoir",
+"« Με λένε Μαγκαλί » =|Je m’appelle Magali|J’ai Magali|Où est Magali|Je veux Magali",
+"« Πώς σε λένε; » =|Comment t’appelles-tu ?|D’où viens-tu ?|Quel âge as-tu ?|Où habites-tu ?",
+"« Τι κάνεις; » =|Comment ça va ?|Quelle heure est-il ?|Où habites-tu ?|Que veux-tu ?",
+"Réponse à « Τι κάνεις; »|Καλά, ευχαριστώ|Με λένε Νίκο|Από τη Γαλλία|Στην Αθήνα",
+"« Είμαι Γαλλίδα » =|Je suis française|J’ai la France|Je veux la France|Je vais en France",
+"« Χαίρω πολύ » =|Enchantée|Au revoir|Pardon|Merci",
+"Le soir on dit…|Καλησπέρα|Καλημέρα|Καληνύχτα|Παρακαλώ",
+"« Συγγνώμη » =|Excusez-moi|Merci|Bienvenue|De rien",
+"« Παρακαλώ » =|De rien / s’il vous plaît|Bonjour|Oui|Non"],[
+"« ένα » =|un|deux|trois|dix",
+"« δύο » =|deux|un|quatre|sept",
+"« τρία » =|trois|trente|deux|six",
+"« πέντε » =|cinq|quatre|sept|neuf",
+"« δέκα » =|dix|deux|douze|vingt",
+"🔊είκοσι|vingt|douze|deux|dix",
+"Comment dit-on « huit » ?|οκτώ|εννέα|επτά|έξι",
+"« Πόσο κάνει; » =|Combien ça coûte ?|Comment ça va ?|Où est-ce ?|Quelle heure ?",
+"« Τι ώρα είναι; » =|Quelle heure est-il ?|Quel jour ?|Quel temps ?|Combien ?",
+"« Δευτέρα » =|lundi|dimanche|mardi|samedi"],[
+"« Έναν καφέ, παρακαλώ » =|Un café, s’il vous plaît|L’addition, s’il vous plaît|Un jus, merci|De l’eau, pardon",
+"« νερό » =|eau|vin|lait|jus",
+"« γάλα » =|lait|sucre|eau|bière",
+"« ζάχαρη » =|sucre|sel|lait|thé",
+"« χυμός πορτοκάλι » =|jus d’orange|thé au citron|bière|soda",
+"Pour demander l’addition…|Τον λογαριασμό, παρακαλώ|Ένα τσάι, παρακαλώ|Πού είναι η τουαλέτα;|Καλημέρα",
+"« Θα ήθελα ένα τσάι » =|Je voudrais un thé|J’ai un thé|Où est le thé|Pas de thé",
+"« Ελληνικός καφές » =|café grec|café glacé|café au lait|thé grec",
+"« Τι θα πάρετε; » =|Que prenez-vous ?|Où allez-vous ?|Qui êtes-vous ?|Quand venez-vous ?",
+"« Χωρίς ζάχαρη » =|sans sucre|avec sucre|un peu de sucre|beaucoup de sucre"],[
+"« ψωμί » =|pain|poisson|fromage|riz",
+"« τυρί » =|fromage|poulet|pain|beurre",
+"« ντομάτες » =|tomates|pommes|oignons|olives",
+"« ελιές » =|olives|œufs|figues|poires",
+"« Ένα κιλό μήλα » =|Un kilo de pommes|Un litre de lait|Une douzaine d’œufs|Un paquet de riz",
+"« Πόσο κάνει αυτό; » =|Combien coûte ceci ?|Qu’est-ce que c’est ?|Où est ceci ?|Qui veut ceci ?",
+"« Είναι ακριβό » =|C’est cher|C’est bon|C’est petit|C’est ouvert",
+"« Θέλω ψάρι » =|Je veux du poisson|Je mange du pain|J’ai du riz|J’aime le vin",
+"« το κρέας » =|la viande|le lait|le poisson|le légume",
+"« Μια σαλάτα, παρακαλώ » =|Une salade, s’il vous plaît|Une soupe, merci|Un gâteau, merci|Une glace, pardon"],[
+"« Ο καιρός είναι καλός » =|Il fait beau|Il pleut|Il neige|Il y a du vent",
+"« Βρέχει » =|Il pleut|Il neige|Il fait chaud|Il fait nuit",
+"« Κάνει ζέστη » =|Il fait chaud|Il fait froid|Il pleut|Il y a des nuages",
+"« Κάνει κρύο » =|Il fait froid|Il fait chaud|Il fait beau|Il pleut",
+"« ο ήλιος » =|le soleil|la lune|le nuage|le vent",
+"« Έχει άνεμο » =|Il y a du vent|Il pleut|Il y a du soleil|Il fait chaud",
+"« Χιονίζει » =|Il neige|Il pleut|Il grêle|Il fait beau",
+"Comment demander le temps ?|Τι καιρό κάνει;|Τι ώρα είναι;|Πόσο κάνει;|Πού είναι;",
+"« Σήμερα έχει σύννεφα » =|Aujourd’hui il y a des nuages|Demain il pleut|Hier il neigeait|Ce soir il fait chaud",
+"« Αύριο » =|demain|hier|aujourd’hui|ce soir"],[
+"« Πού είναι η τουαλέτα; » =|Où sont les toilettes ?|Quelle heure est-il ?|Combien ça coûte ?|Qui est-ce ?",
+"« Δεξιά » =|à droite|à gauche|tout droit|derrière",
+"« Αριστερά » =|à gauche|à droite|devant|loin",
+"« Ευθεία » =|tout droit|à gauche|en arrière|ici",
+"« Κοντά » =|près|loin|ici|là",
+"« Μακριά » =|loin|près|devant|derrière",
+"« Où est la gare ? »|Πού είναι ο σταθμός;|Πόσο κάνει το τρένο;|Τι ώρα φεύγει;|Θέλω ένα εισιτήριο",
+"« Στρίψτε δεξιά » =|Tournez à droite|Allez tout droit|Arrêtez-vous|Revenez",
+"« Η στάση του λεωφορείου » =|l’arrêt de bus|la gare|l’aéroport|le port",
+"« Συγγνώμη, ξέρετε πού είναι η πρεσβεία; » =|Pardon, savez-vous où est l’ambassade ?|… où est le musée ?|… où est la plage ?|… où est la banque ?"],[
+"« Η Ακρόπολη » =|l’Acropole|le port|la plage|le marché",
+"« Το μουσείο » =|le musée|la mer|le village|la gare",
+"« Η θάλασσα » =|la mer|la montagne|la rue|la ville",
+"« Το νησί » =|l’île|la ville|le pont|la route",
+"« Το αεροδρόμιο » =|l’aéroport|le port|la gare|l’hôtel",
+"« Ένα εισιτήριο για την Αθήνα » =|Un billet pour Athènes|Une chambre à Athènes|Une carte d’Athènes|Un vol de Paris",
+"« Μου αρέσει η ιστορία » =|J’aime l’histoire|Je déteste l’histoire|J’étudie l’histoire|Je vends l’histoire",
+"« Το ξενοδοχείο » =|l’hôtel|le restaurant|l’église|la poste",
+"« Το βουνό » =|la montagne|la mer|la forêt|le lac",
+"« Καλό ταξίδι! » =|Bon voyage !|Bonne nuit !|Bon appétit !|Bonne chance !"],[
+"___ καφές (le café)|ο|η|το|οι",
+"___ θάλασσα (la mer)|η|ο|το|τα",
+"___ παιδί (l’enfant)|το|ο|η|οι",
+"Pluriel de « ο καφές »|οι καφέδες|ο καφέδες|τα καφέδες|οι καφές",
+"Εγώ ___ Γαλλίδα (je suis)|είμαι|είσαι|είναι|είμαστε",
+"Εσύ ___ (tu es)|είσαι|είμαι|είναι|είστε",
+"Εγώ ___ καφέ (je veux)|θέλω|θέλεις|θέλει|θέλουν",
+"« Je n’ai pas d’argent »|Δεν έχω λεφτά|Όχι έχω λεφτά|Μη έχω λεφτά|Δεν είμαι λεφτά",
+"En grec, le point d’interrogation s’écrit…|;|?|!|¿",
+"« une » (féminin)|μια|ένας|ένα|ο"],[
+"« Είμαι δασκάλα » =|Je suis enseignante|Je suis étudiante|Je suis médecin|Je suis avocate",
+"« Είμαι φοιτήτρια » =|Je suis étudiante|Je suis retraitée|Je suis infirmière|Je suis touriste",
+"« Η πρεσβεία » =|l’ambassade|le consulat|l’école|l’hôpital",
+"« Η πρακτική άσκηση » =|le stage|le travail|le cours|le diplôme",
+"« Μένω στη Γαλλία » =|J’habite en France|Je travaille en France|J’étudie en France|Je vais en France",
+"« Μιλάω γαλλικά και αγγλικά » =|Je parle français et anglais|Je lis français et anglais|J’écris français et anglais|J’aime le français et l’anglais",
+"« Μαθαίνω ελληνικά » =|J’apprends le grec|Je parle grec|J’enseigne le grec|J’aime le grec",
+"« Δεν καταλαβαίνω » =|Je ne comprends pas|Je ne sais pas|Je ne veux pas|Je ne peux pas",
+"« Πιο αργά, παρακαλώ » =|Plus lentement, s’il vous plaît|Plus fort, s’il vous plaît|Encore une fois|Plus vite",
+"« Μπορείτε να το επαναλάβετε; » =|Pouvez-vous répéter ?|Pouvez-vous payer ?|Pouvez-vous venir ?|Pouvez-vous écrire ?"]];
+const W="Καλημέρα|bonjour (matin)|kaliméra;Καλησπέρα|bonsoir|kalispéra;Ευχαριστώ|merci|efharistó;Παρακαλώ|de rien / s’il vous plaît|parakaló;Συγγνώμη|pardon|signómi;Ναι|oui|né;Όχι|non|óhi;Νερό|eau|neró;Καφές|café|kafés;Ψωμί|pain|psomí;Τυρί|fromage|tirí;Πόσο κάνει;|combien ça coûte ?|póso káni;Ο λογαριασμός|l’addition|o logariasmós;Δεξιά|à droite|dexiá;Αριστερά|à gauche|aristerá;Ευθεία|tout droit|efthía;Πού είναι…;|où est… ?|pou íne;Η πρεσβεία|l’ambassade|i presvía;Η θάλασσα|la mer|i thálassa;Ο ήλιος|le soleil|o ílios;Βρέχει|il pleut|vréhi;Ζέστη|chaleur|zésti;Σήμερα|aujourd’hui|símera;Αύριο|demain|ávrio;Το μουσείο|le musée|to mousío;Το εισιτήριο|le billet|to isitírio;Το ξενοδοχείο|l’hôtel|to xenodohío;Δεν καταλαβαίνω|je ne comprends pas|den katalavéno;Μιλάω ελληνικά|je parle grec|miláo elliniká;Μαθαίνω|j’apprends|mathéno".split(";").map(s=>s.split("|"));
+const R=[
+["Les articles définis (le / la)","<span class=ex>ο</span> φίλος (m) · <span class=ex>η</span> θάλασσα (f) · <span class=ex>το</span> παιδί (n). Le grec a 3 genres : masculin, féminin, neutre."],
+["Les articles au pluriel","<span class=ex>οι</span> φίλοι, <span class=ex>οι</span> θάλασσες (m/f) · <span class=ex>τα</span> παιδιά (n)."],
+["Les articles indéfinis (un / une)","<span class=ex>ένας</span> φίλος · <span class=ex>μια</span> θάλασσα · <span class=ex>ένα</span> παιδί."],
+["Είμαι — être","<table><tr><td>εγώ <b>είμαι</b></td><td>εμείς <b>είμαστε</b></td></tr><tr><td>εσύ <b>είσαι</b></td><td>εσείς <b>είστε</b></td></tr><tr><td>αυτός <b>είναι</b></td><td>αυτοί <b>είναι</b></td></tr></table>Exemple : <span class=ex>Είμαι Γαλλίδα.</span>"],
+["Έχω — avoir","<table><tr><td>έχω</td><td>έχουμε</td></tr><tr><td>έχεις</td><td>έχετε</td></tr><tr><td>έχει</td><td>έχουν</td></tr></table>Exemple : <span class=ex>Έχω ένα αδελφό.</span>"],
+["Θέλω / Θα ήθελα — vouloir / je voudrais","<span class=ex>Θέλω</span> έναν καφέ = je veux un café. Plus poli : <span class=ex>Θα ήθελα</span> έναν καφέ = je voudrais un café."],
+["La négation : Δεν + verbe","<span class=ex>Δεν</span> καταλαβαίνω = je ne comprends pas. <span class=ex>Δεν</span> μιλάω ελληνικά καλά."],
+["Poser une question","Le point d’interrogation grec est « <b>;</b> ». Mots-clés : Πού (où), Πόσο (combien), Τι (quoi), Πότε (quand), Ποιος (qui). Exemple : <span class=ex>Πού είναι η στάση;</span>"],
+["L’accent tonique","Chaque mot de 2 syllabes ou plus porte un accent (΄) sur la syllabe à appuyer : <span class=ex>καφές</span>, <span class=ex>θάλασσα</span>."]];
+const Q=D.map(c=>c.map(s=>{const p=s.split("|"),ok=p[1],o=p.slice(1).sort(()=>Math.random()-.5);return{q:p[0],o,k:o.indexOf(ok)}}));
+let A=Q.map(c=>c.map(()=>null)),cur="G";
+const $=id=>document.getElementById(id);
+function sp(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="el-GR";u.rate=.8;speechSynthesis.speak(u)}catch(e){}}
+const sc=n=>A[n].filter((a,i)=>a===Q[n][i].k).length;
+function nav(){let h=`<button class="${cur=="G"?"on":""}" onclick="go('G')">G<small>Grammaire</small></button><button class="${cur=="V"?"on":""}" onclick="go('V')">V<small>Vocabulaire</small></button>`;
+T.forEach((t,i)=>{h+=`<button class="${cur===i?"on":""}" onclick="go(${i})">${i+1}<small>${t[0]} ${A[i].some(a=>a!=null)?"· "+sc(i):""}</small></button>`});$("nav").innerHTML=h}
+function go(n){cur=n;draw();scrollTo(0,0)}
+function pick(n,i,j){if(A[n][i]==null){A[n][i]=j;draw()}}
+function reset(n){A[n]=A[n].map(()=>null);draw()}
+function flip(all){document.querySelectorAll(".card").forEach(c=>c.classList.toggle("f",all))}
+function draw(){nav();let h="";
+if(cur=="G"){h="<h2>G · Règles de grammaire</h2>"+R.map((r,i)=>`<div class=rule><h3><span class=n>${i+1}</span>${r[0]}</h3>${r[1]}</div>`).join("")}
+else if(cur=="V"){h=`<h2>V · Vocabulaire</h2><p>Cliquez sur une carte pour voir le français. 🔊 pour écouter.</p><p class=ctl><button onclick="flip(true)">Tout montrer</button> <button onclick="flip(false)">Tout cacher</button></p><div class=grid>`+W.map((w,i)=>`<div class=card onclick="this.classList.toggle('f')"><span class=n>${i+1}</span><button class=sp onclick="event.stopPropagation();sp('${w[0]}')">🔊</button><div class=el>${w[0]}</div><div class=fr>${w[1]}<br><i>${w[2]}</i></div></div>`).join("")+"</div>"}
+else{h=`<h2>${cur+1} · ${T[cur][0]} — ${T[cur][1]}</h2>`;
+Q[cur].forEach((q,i)=>{const a=A[cur][i],t=q.q.startsWith("🔊")?`<button class=sp onclick="sp('${q.q.slice(2)}')">🔊 Écoutez</button>`:q.q;
+h+=`<div class=q><div class=qh><span class=n>${i+1}</span><span>${t}</span></div><div class=os>`+q.o.map((o,j)=>`<button class="o ${a==null?"":j==q.k?"ok":j==a?"no":""}" ${a==null?"":"disabled"} onclick="pick(${cur},${i},${j})"><b>${"ABCD"[j]}</b>${o}</button>`).join("")+"</div></div>"});
+h+=`<div class=score>Score : ${sc(cur)} / 10</div><p class=ctl><button onclick="reset(${cur})">Recommencer</button>${cur<9?` <button onclick="go(${cur+1})">Catégorie ${cur+2}</button>`:""}</p>`}
+$("main").innerHTML=h}
+draw();
+</script></body></html>
