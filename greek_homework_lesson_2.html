@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Homework for Savanah - Lesson 2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdfa; /* Light teal background */ }
+        
+        .option-btn { transition: all 0.2s ease; }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .option-btn:disabled { cursor: default; }
+        
+        .correct-answer { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; font-weight: 700; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; opacity: 0.8; }
+        .missed-correct { background-color: #fef08a !important; border-color: #eab308 !important; color: #854d0e !important; font-weight: 700; border-style: dashed; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #99f6e4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5eead4; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-teal-600 text-white shadow-md z-10 shrink-0 border-b-4 border-orange-400">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight">Greek Homework for Savanah - Lesson 2 📝</h1>
+                <p class="text-teal-100 text-sm mt-1">Instructions: Read carefully and select A, B, C, or D for each question.</p>
+            </div>
+            <div class="hidden sm:block">
+                <span class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold shadow text-sm">Challenge Accepted!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-hidden relative flex">
+        
+        <!-- Sidebar for Exercises Menu -->
+        <aside class="w-72 max-w-sm bg-white border-r border-teal-200 flex flex-col h-full shadow-[2px_0_8px_rgba(0,0,0,0.05)] z-10 shrink-0">
+            <div class="p-5 bg-teal-50 border-b border-teal-100">
+                <h3 class="font-bold text-teal-800 text-lg">Categories (Κατηγορίες)</h3>
+                <p class="text-sm text-teal-600">Select an exercise tab to begin</p>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4 space-y-3" id="ex-menu">
+                <!-- Tabs injected via JS -->
+            </div>
+        </aside>
+
+        <!-- Quiz Area -->
+        <div class="flex-1 h-full overflow-y-auto bg-slate-50 p-6 lg:p-10 relative" id="quiz-area">
+            
+            <div id="quiz-welcome" class="flex flex-col items-center justify-center h-full text-center space-y-6">
+                <div class="text-7xl">👩🏼‍💻</div>
+                <h2 class="text-3xl font-bold text-slate-700">Ready for your Homework?</h2>
+                <p class="text-slate-500 text-xl max-w-lg">Choose a category on the left to start. There are exactly 15 questions in each section. Tell your teacher A, B, C, or D!</p>
+            </div>
+            
+            <div id="quiz-container" class="max-w-4xl mx-auto hidden pb-24">
+                <div class="flex justify-between items-end mb-8 border-b-2 border-slate-200 pb-4">
+                    <div>
+                        <h2 id="quiz-title" class="text-3xl font-extrabold text-teal-900">Title</h2>
+                        <p id="quiz-subtitle" class="text-slate-500 mt-2 text-lg">15 Questions</p>
+                    </div>
+                    <div class="text-right bg-white p-3 rounded-xl shadow-sm border border-slate-100">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider font-bold">Category Score</span>
+                        <div id="score-display" class="text-3xl font-black text-orange-500">0 / 15</div>
+                    </div>
+                </div>
+
+                <div id="questions-list" class="space-y-8">
+                    <!-- Questions injected here -->
+                </div>
+                
+                <div id="quiz-completed" class="hidden mt-12 p-10 bg-teal-100 border-4 border-teal-400 rounded-3xl text-center shadow-lg">
+                    <h3 class="text-4xl font-extrabold text-teal-800 mb-4">🎉 Συγχαρητήρια! (Amazing Job!)</h3>
+                    <p class="text-xl text-teal-700">You completed all 15 questions in this category! Pick the next one from the menu.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // EXACTLY 75 Questions (5 categories x 15 questions)
+        const quizData = [
+            {
+                id: 'cat1',
+                title: '1. Άρθρα (Articles)',
+                subtitle: 'Fill in the blank with Ο, Η, Το for the following new words.',
+                questions: [
+                    { q: "___ σκύλος (dog)", options: ["A) Ο", "B) Η", "C) Το", "D) Ένα"], ans: 0 },
+                    { q: "___ γάτα (cat)", options: ["A) Το", "B) Ο", "C) Η", "D) Ένα"], ans: 2 },
+                    { q: "___ δέντρο (tree)", options: ["A) Ο", "B) Η", "C) Ένα", "D) Το"], ans: 3 },
+                    { q: "___ κήπος (garden)", options: ["A) Ο", "B) Η", "C) Το", "D) Ένα"], ans: 0 },
+                    { q: "___ πόρτα (door)", options: ["A) Ο", "B) Η", "C) Το", "D) Ένα"], ans: 1 },
+                    { q: "___ αυτοκίνητο (car)", options: ["A) Ο", "B) Ένα", "C) Το", "D) Η"], ans: 2 },
+                    { q: "___ τοίχος (wall)", options: ["A) Ένα", "B) Η", "C) Το", "D) Ο"], ans: 3 },
+                    { q: "___ καρέκλα (chair)", options: ["A) Ο", "B) Η", "C) Το", "D) Ένα"], ans: 1 },
+                    { q: "___ μήλο (apple)", options: ["A) Το", "B) Ο", "C) Η", "D) Ένα"], ans: 0 },
+                    { q: "___ ουρανός (sky)", options: ["A) Η", "B) Το", "C) Ένα", "D) Ο"], ans: 3 },
+                    { q: "___ τσάντα (bag)", options: ["A) Η", "B) Ο", "C) Το", "D) Ένα"], ans: 0 },
+                    { q: "___ λουλούδι (flower)", options: ["A) Ο", "B) Το", "C) Η", "D) Ένα"], ans: 1 },
+                    { q: "___ δρόμος (road)", options: ["A) Ένα", "B) Η", "C) Ο", "D) Το"], ans: 2 },
+                    { q: "___ αυλή (yard)", options: ["A) Ο", "B) Η", "C) Το", "D) Ένα"], ans: 1 },
+                    { q: "___ παράθυρο (window)", options: ["A) Το", "B) Η", "C) Ο", "D) Ένα"], ans: 0 }
+                ]
+            },
+            {
+                id: 'cat2',
+                title: '2. Καταλήξεις (Endings)',
+                subtitle: 'Look at the article and fill in the missing ending for the noun.',
+                questions: [
+                    { q: "Ο υπολογιστ___ (computer)", options: ["A) -ος", "B) -ής", "C) -α", "D) -ο"], ans: 1 },
+                    { q: "Η γυναίκ___ (woman)", options: ["A) -ος", "B) -α", "C) -ο", "D) -ι"], ans: 1 },
+                    { q: "Το γραφεί___ (desk)", options: ["A) -ος", "B) -η", "C) -ο", "D) -α"], ans: 2 },
+                    { q: "Ο πίνακ___ (board)", options: ["A) -ος", "B) -ας", "C) -η", "D) -ι"], ans: 1 },
+                    { q: "Η ζω___ (life)", options: ["A) -ός", "B) -ή", "C) -ό", "D) -ί"], ans: 1 },
+                    { q: "Το τηλέφων___ (phone)", options: ["A) -ο", "B) -ος", "C) -η", "D) -ας"], ans: 0 },
+                    { q: "Η τηλεόρασ___ (TV)", options: ["A) -ος", "B) -η", "C) -ο", "D) -α"], ans: 1 },
+                    { q: "Το σπίτ___ (house)", options: ["A) -ος", "B) -α", "C) -ι", "D) -η"], ans: 2 },
+                    { q: "Η μπανάν___ (banana)", options: ["A) -ος", "B) -η", "C) -α", "D) -ι"], ans: 2 },
+                    { q: "Η ντομάτ___ (tomato)", options: ["A) -ος", "B) -η", "C) -α", "D) -ο"], ans: 2 },
+                    { q: "Ο σκύλ___ (dog)", options: ["A) -ος", "B) -ας", "C) -α", "D) -ι"], ans: 0 },
+                    { q: "Ο κήπ___ (garden)", options: ["A) -ος", "B) -ης", "C) -α", "D) -ο"], ans: 0 },
+                    { q: "Το δέντρ___ (tree)", options: ["A) -ος", "B) -α", "C) -ι", "D) -ο"], ans: 3 },
+                    { q: "Ο δρόμ___ (road)", options: ["A) -ος", "B) -ης", "C) -α", "D) -ο"], ans: 0 },
+                    { q: "Η γάτ___ (cat)", options: ["A) -ος", "B) -α", "C) -ο", "D) -ι"], ans: 1 }
+                ]
+            },
+            {
+                id: 'cat3',
+                title: '3. Το ρήμα "Είμαι" (Verb To Be)',
+                subtitle: 'Fill in the blank with the correct form of the verb "είμαι".',
+                questions: [
+                    { q: "Εγώ _______ στο σπίτι. (I am)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 0 },
+                    { q: "Εσύ _______ στον κήπο; (Are you)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είστε"], ans: 1 },
+                    { q: "Ο σκύλος _______ έξω. (The dog is)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 2 },
+                    { q: "Εμείς _______ στο αυτοκίνητο. (We are)", options: ["A) είναι", "B) είσαι", "C) είμαι", "D) είμαστε"], ans: 3 },
+                    { q: "Εσείς _______ στο γραφείο; (Are you - plural)", options: ["A) είστε", "B) είμαι", "C) είναι", "D) είμαστε"], ans: 0 },
+                    { q: "Η γυναίκα _______ εδώ. (The woman is)", options: ["A) είμαι", "B) είναι", "C) είμαστε", "D) είσαι"], ans: 1 },
+                    { q: "Εγώ δεν _______ καλά σήμερα. (I am not)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είστε"], ans: 0 },
+                    { q: "Τα λουλούδια _______ στην αυλή. (The flowers are)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 2 },
+                    { q: "Το τηλέφωνο _______ πάνω στο γραφείο. (The phone is)", options: ["A) είσαι", "B) είναι", "C) είμαι", "D) είμαστε"], ans: 1 },
+                    { q: "Εμείς _______ χαρούμενοι. (We are happy)", options: ["A) είμαι", "B) είστε", "C) είμαστε", "D) είναι"], ans: 2 },
+                    { q: "Εσύ από πού _______; (Where are you from?)", options: ["A) είσαι", "B) είμαι", "C) είναι", "D) είμαστε"], ans: 0 },
+                    { q: "Η γάτα _______ πάνω στο δέντρο. (The cat is)", options: ["A) είμαι", "B) είναι", "C) είσαι", "D) είστε"], ans: 1 },
+                    { q: "Εσείς _______ φίλοι; (Are you friends? - plural)", options: ["A) είναι", "B) είσαι", "C) είστε", "D) είμαστε"], ans: 2 },
+                    { q: "Εγώ _______ η Σαβάνα. (I am)", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 0 },
+                    { q: "Αυτοί _______ στον δρόμο. (They are)", options: ["A) είμαι", "B) είναι", "C) είσαι", "D) είστε"], ans: 1 }
+                ]
+            },
+            {
+                id: 'cat4',
+                title: '4. Εθνικότητες (Nationalities)',
+                subtitle: 'Determine the correct nationality based on the country and gender.',
+                questions: [
+                    { q: "Ο Κάρλο είναι από την Ιταλία. Είναι _______.", options: ["A) Ιταλός", "B) Ιταλίδα", "C) Ισπανός", "D) Γάλλος"], ans: 0 },
+                    { q: "Η Μαρία είναι από την Ισπανία. Είναι _______.", options: ["A) Ισπανός", "B) Ιταλίδα", "C) Ισπανίδα", "D) Γαλλίδα"], ans: 2 },
+                    { q: "Ο Ζακ είναι από τη Γαλλία. Είναι _______.", options: ["A) Γερμανός", "B) Γάλλος", "C) Γαλλίδα", "D) Άγγλος"], ans: 1 },
+                    { q: "Η Χάιντι είναι από τη Γερμανία. Είναι _______.", options: ["A) Γερμανός", "B) Γερμανίδα", "C) Αγγλίδα", "D) Ιταλίδα"], ans: 1 },
+                    { q: "Ο Τζον είναι από την Αγγλία. Είναι _______.", options: ["A) Άγγλος", "B) Αγγλίδα", "C) Γάλλος", "D) Ιταλός"], ans: 0 },
+                    { q: "Η Σοφία είναι από την Ιταλία. Είναι _______.", options: ["A) Ιταλός", "B) Ισπανίδα", "C) Ιταλίδα", "D) Γαλλίδα"], ans: 2 },
+                    { q: "Ο Χουάν είναι από την Ισπανία. Είναι _______.", options: ["A) Ισπανίδα", "B) Ισπανός", "C) Γερμανός", "D) Γάλλος"], ans: 1 },
+                    { q: "Η Ζουλιέτ είναι από τη Γαλλία. Είναι _______.", options: ["A) Γάλλος", "B) Γερμανίδα", "C) Γαλλίδα", "D) Αγγλίδα"], ans: 2 },
+                    { q: "Ο Χανς είναι από τη Γερμανία. Είναι _______.", options: ["A) Γερμανίδα", "B) Γερμανός", "C) Άγγλος", "D) Ιταλός"], ans: 1 },
+                    { q: "Η Έμμα είναι από την Αγγλία. Είναι _______.", options: ["A) Άγγλος", "B) Αγγλίδα", "C) Γερμανίδα", "D) Γαλλίδα"], ans: 1 },
+                    { q: "Ο Μάριο είναι από την Ιταλία. Είναι _______.", options: ["A) Ιταλός", "B) Ιταλίδα", "C) Ισπανός", "D) Γάλλος"], ans: 0 },
+                    { q: "Η Κάρμεν είναι από την Ισπανία. Είναι _______.", options: ["A) Ισπανός", "B) Ιταλίδα", "C) Ισπανίδα", "D) Αγγλίδα"], ans: 2 },
+                    { q: "Ο Πιέρ είναι από τη Γαλλία. Είναι _______.", options: ["A) Γαλλίδα", "B) Γάλλος", "C) Γερμανός", "D) Άγγλος"], ans: 1 },
+                    { q: "Η Κλάρα είναι από τη Γερμανία. Είναι _______.", options: ["A) Γερμανός", "B) Γερμανίδα", "C) Αγγλίδα", "D) Ιταλίδα"], ans: 1 },
+                    { q: "Ο Ντέιβιντ είναι από την Αγγλία. Είναι _______.", options: ["A) Άγγλος", "B) Αγγλίδα", "C) Γάλλος", "D) Ισπανός"], ans: 0 }
+                ]
+            },
+            {
+                id: 'cat5',
+                title: '5. Επαγγέλματα (Professions)',
+                subtitle: 'Identify the correct profession based on the context and gender.',
+                questions: [
+                    { q: "Ο Νίκος δουλεύει στο νοσοκομείο. Είναι _______.", options: ["A) δικηγόρος", "B) γιατρός", "C) μάγειρας", "D) ηθοποιός"], ans: 1 },
+                    { q: "Η Ελένη υπερασπίζεται στο δικαστήριο. Είναι _______.", options: ["A) τραγουδίστρια", "B) γιατρός", "C) δικηγόρος", "D) αστυνομικός"], ans: 2 },
+                    { q: "Ο Πέτρος μαγειρεύει στο εστιατόριο (male). Είναι _______.", options: ["A) μάγειρας", "B) μαγείρισσα", "C) σερβιτόρος", "D) δικηγόρος"], ans: 0 },
+                    { q: "Η Άννα φέρνει καφέ (female). Είναι _______.", options: ["A) σερβιτόρος", "B) σερβιτόρα", "C) μαγείρισσα", "D) γιατρός"], ans: 1 },
+                    { q: "Ο Γιώργος τραγουδάει επαγγελματικά (male). Είναι _______.", options: ["A) τραγουδιστής", "B) τραγουδίστρια", "C) ηθοποιός", "D) αστυνομικός"], ans: 0 },
+                    { q: "Η Μαρία παίζει στο θέατρο (female). Είναι _______.", options: ["A) τραγουδίστρια", "B) ηθοποιός", "C) δικηγόρος", "D) μαγείρισσα"], ans: 1 },
+                    { q: "Ο Κώστας πιάνει κλέφτες (male). Είναι _______.", options: ["A) δικηγόρος", "B) αστυνομικός", "C) γιατρός", "D) μάγειρας"], ans: 1 },
+                    { q: "Η Σοφία μαγειρεύει φανταστικά (female). Είναι _______.", options: ["A) μάγειρας", "B) μαγείρισσα", "C) σερβιτόρα", "D) ηθοποιός"], ans: 1 },
+                    { q: "Ο Γιάννης φέρνει το φαγητό (male). Είναι _______.", options: ["A) σερβιτόρα", "B) σερβιτόρος", "C) ηθοποιός", "D) τραγουδιστής"], ans: 1 },
+                    { q: "Η Έλενα τραγουδάει υπέροχα (female). Είναι _______.", options: ["A) τραγουδιστής", "B) τραγουδίστρια", "C) δικηγόρος", "D) αστυνομικός"], ans: 1 },
+                    { q: "Ο Αντρέας είναι νομικός (male). Είναι _______.", options: ["A) δικηγόρος", "B) γιατρός", "C) ηθοποιός", "D) σερβιτόρος"], ans: 0 },
+                    { q: "Η Κατερίνα δουλεύει στην κλινική (female). Είναι _______.", options: ["A) μάγειρας", "B) γιατρός", "C) ηθοποιός", "D) δικηγόρος"], ans: 1 },
+                    { q: "Ο Δημήτρης παίζει στο σινεμά (male). Είναι _______.", options: ["A) ηθοποιός", "B) τραγουδιστής", "C) αστυνομικός", "D) μάγειρας"], ans: 0 },
+                    { q: "Η Ελένη δουλεύει στην αστυνομία (female). Είναι _______.", options: ["A) αστυνομικός", "B) δικηγόρος", "C) μαγείρισσα", "D) σερβιτόρα"], ans: 0 },
+                    { q: "Ο Νίκος δουλεύει στο δικαστήριο (male). Είναι _______.", options: ["A) μάγειρας", "B) σερβιτόρος", "C) δικηγόρος", "D) τραγουδιστής"], ans: 2 }
+                ]
+            }
+        ];
+
+        let currentQuizId = null;
+        let scores = {}; // Keeps track of correct answers per quiz
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderSidebarMenu();
+        });
+
+        function renderSidebarMenu() {
+            const menu = document.getElementById("ex-menu");
+            menu.innerHTML = "";
+            quizData.forEach(quiz => {
+                scores[quiz.id] = 0; // Initialize score
+                const btn = document.createElement("button");
+                btn.className = "w-full text-left p-4 rounded-xl font-bold text-teal-800 transition-all border border-teal-200 bg-white hover:bg-teal-50 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-teal-400";
+                btn.innerText = quiz.title;
+                btn.id = `nav-${quiz.id}`;
+                btn.onclick = () => loadQuiz(quiz.id);
+                menu.appendChild(btn);
+            });
+        }
+
+        function loadQuiz(quizId) {
+            currentQuizId = quizId;
+            scores[quizId] = 0; // Reset score on reload
+            updateScoreDisplay();
+
+            // UI switching
+            document.getElementById('quiz-welcome').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-completed').classList.add('hidden');
+
+            // Highlight active menu item
+            quizData.forEach(q => {
+                const btn = document.getElementById(`nav-${q.id}`);
+                if (q.id === quizId) {
+                    btn.classList.add("bg-teal-100", "border-teal-400", "shadow-sm");
+                    btn.classList.remove("bg-white", "border-teal-200");
+                } else {
+                    btn.classList.remove("bg-teal-100", "border-teal-400", "shadow-sm");
+                    btn.classList.add("bg-white", "border-teal-200");
+                }
+            });
+
+            // Load Content
+            const quiz = quizData.find(q => q.id === quizId);
+            document.getElementById('quiz-title').innerText = quiz.title;
+            document.getElementById('quiz-subtitle').innerText = quiz.subtitle;
+            
+            const list = document.getElementById('questions-list');
+            list.innerHTML = "";
+
+            quiz.questions.forEach((q, qIndex) => {
+                let html = `
+                    <div class="bg-white p-7 rounded-2xl shadow-sm border-2 border-slate-100" id="q-${quizId}-${qIndex}">
+                        <h4 class="text-2xl font-bold text-slate-800 mb-5">${qIndex + 1}. ${q.q}</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                `;
+
+                q.options.forEach((opt, optIndex) => {
+                    html += `
+                        <button 
+                            class="option-btn text-left p-5 rounded-xl border-2 border-slate-200 text-xl font-semibold text-slate-600 hover:border-teal-500 hover:bg-teal-50 focus:outline-none w-full"
+                            onclick="handleAnswer(this, '${quizId}', ${qIndex}, ${optIndex}, ${q.ans})"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+            
+            // Scroll to top of quiz area smoothly
+            document.getElementById('quiz-area').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleAnswer(btnElement, quizId, qIndex, selectedOptIndex, correctOptIndex) {
+            const qContainer = document.getElementById(`q-${quizId}-${qIndex}`);
+            const buttons = qContainer.querySelectorAll('button');
+
+            // Disable all buttons in this question to prevent double clicking
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedOptIndex === correctOptIndex) {
+                // Selected Correctly
+                btnElement.classList.add('correct-answer');
+                btnElement.classList.remove('text-slate-600');
+                scores[quizId]++;
+            } else {
+                // Selected Wrongly
+                btnElement.classList.add('wrong-answer');
+                btnElement.classList.remove('text-slate-600');
+                // Point out the correct one
+                buttons[correctOptIndex].classList.add('missed-correct');
+                buttons[correctOptIndex].classList.remove('text-slate-600');
+            }
+
+            updateScoreDisplay();
+            checkCompletion(quizId);
+        }
+
+        function updateScoreDisplay() {
+            if(currentQuizId) {
+                document.getElementById('score-display').innerText = `${scores[currentQuizId]} / 15`;
+            }
+        }
+
+        function checkCompletion(quizId) {
+            // Count answered questions by looking for disabled buttons
+            const qContainers = document.querySelectorAll(`[id^="q-${quizId}-"]`);
+            let answeredCount = 0;
+            
+            qContainers.forEach(container => {
+                if (container.querySelector('button:disabled')) {
+                    answeredCount++;
+                }
+            });
+
+            // If all 15 are answered, show completion message
+            if (answeredCount === 15) {
+                document.getElementById('quiz-completed').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
