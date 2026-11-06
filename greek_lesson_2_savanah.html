@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Lesson 2: Theory & Practice for Savanah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        /* Interactive Buttons */
+        .option-btn { transition: all 0.2s ease; }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .option-btn:disabled { cursor: default; }
+        
+        /* Feedback Colors */
+        .correct-answer { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; font-weight: 700; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; opacity: 0.8; }
+        .missed-correct { background-color: #fef08a !important; border-color: #eab308 !important; color: #854d0e !important; font-weight: 700; border-style: dashed; }
+        
+        /* Genders Colors */
+        .masculine { background-color: #eff6ff; border-left: 5px solid #3b82f6; color: #1e3a8a; }
+        .feminine { background-color: #fdf2f8; border-left: 5px solid #ec4899; color: #831843; }
+        .neuter { background-color: #f0fdf4; border-left: 5px solid #22c55e; color: #14532d; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- Header & Tabs -->
+    <header class="bg-indigo-600 text-white shadow-md z-10 shrink-0">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight">Greek Lesson 2 🇬🇷</h1>
+                <p class="text-indigo-200 text-sm mt-1">Student: Savanah | Topics: Genders, Nationalities, Occupations</p>
+            </div>
+            <div class="flex space-x-2 bg-indigo-800 p-1 rounded-lg">
+                <button onclick="switchTab('theory')" id="tab-theory" class="px-6 py-2 rounded-md font-semibold bg-white text-indigo-700 shadow transition-colors">📖 Θεωρία (Theory)</button>
+                <button onclick="switchTab('exercises')" id="tab-exercises" class="px-6 py-2 rounded-md font-semibold text-white hover:bg-indigo-700 transition-colors">✏️ Ασκήσεις (Exercises)</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-hidden relative">
+        
+        <!-- ================= THEORY TAB ================= -->
+        <div id="theory-content" class="h-full overflow-y-auto p-6 lg:p-10 block">
+            <div class="max-w-5xl mx-auto space-y-10 pb-20">
+                
+                <!-- Section 1: Genders -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">1. Τα Γένη (Noun Genders & Articles)</h2>
+                    <p class="text-slate-500 mb-6 text-lg">In Greek, nouns have three genders. Look at the ending of the word to know which article to use!</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Masculine -->
+                        <div class="masculine p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">🟦 Ο (Masculine)</h3>
+                            <p class="mb-4">Usually ends in:<br><strong class="text-xl">-ος, -ης, -ας</strong></p>
+                            <ul class="space-y-2 text-lg">
+                                <li><strong>Ο</strong> φίλ<span class="font-bold text-blue-600">ος</span> (friend)</li>
+                                <li><strong>Ο</strong> μαθητ<span class="font-bold text-blue-600">ής</span> (student)</li>
+                                <li><strong>Ο</strong> πατέρ<span class="font-bold text-blue-600">ας</span> (father)</li>
+                                <li><strong>Ο</strong> καφ<span class="font-bold text-blue-600">ές</span> (coffee)</li>
+                            </ul>
+                        </div>
+                        <!-- Feminine -->
+                        <div class="feminine p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">🟥 Η (Feminine)</h3>
+                            <p class="mb-4">Usually ends in:<br><strong class="text-xl">-α, -η</strong></p>
+                            <ul class="space-y-2 text-lg">
+                                <li><strong>Η</strong> φίλ<span class="font-bold text-pink-600">η</span> (friend)</li>
+                                <li><strong>Η</strong> θάλασσ<span class="font-bold text-pink-600">α</span> (sea)</li>
+                                <li><strong>Η</strong> μητέρ<span class="font-bold text-pink-600">α</span> (mother)</li>
+                                <li><strong>Η</strong> δασκάλ<span class="font-bold text-pink-600">α</span> (teacher)</li>
+                            </ul>
+                        </div>
+                        <!-- Neuter -->
+                        <div class="neuter p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">🟩 Το (Neuter)</h3>
+                            <p class="mb-4">Usually ends in:<br><strong class="text-xl">-ο, -ι, -μα</strong></p>
+                            <ul class="space-y-2 text-lg">
+                                <li><strong>Το</strong> βιβλί<span class="font-bold text-green-600">ο</span> (book)</li>
+                                <li><strong>Το</strong> παιδ<span class="font-bold text-green-600">ί</span> (child)</li>
+                                <li><strong>Το</strong> όνομ<span class="font-bold text-green-600">α</span> (name)</li>
+                                <li><strong>Το</strong> νερ<span class="font-bold text-green-600">ό</span> (water)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Nationalities -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">2. Εθνικότητες (Nationalities)</h2>
+                    <p class="text-slate-500 mb-6 text-lg">Nationalities also change depending on whether you are a man (Ο) or a woman (Η).</p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-600 border-b-2 border-slate-200">
+                                    <th class="p-4 font-semibold text-lg">Country (Χώρα)</th>
+                                    <th class="p-4 font-semibold text-lg text-blue-700">Man (Ο)</th>
+                                    <th class="p-4 font-semibold text-lg text-pink-700">Woman (Η)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-lg divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-4">Αμερική (America)</td>
+                                    <td class="p-4 font-medium text-blue-800">Αμερικαν<span class="font-bold">ός</span></td>
+                                    <td class="p-4 font-medium text-pink-800">Αμερικαν<span class="font-bold">ίδα</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-4">Ελλάδα (Greece)</td>
+                                    <td class="p-4 font-medium text-blue-800">Έλλην<span class="font-bold">ας</span></td>
+                                    <td class="p-4 font-medium text-pink-800">Ελλην<span class="font-bold">ίδα</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-4">Αγγλία (England)</td>
+                                    <td class="p-4 font-medium text-blue-800">Άγγλ<span class="font-bold">ος</span></td>
+                                    <td class="p-4 font-medium text-pink-800">Αγγλ<span class="font-bold">ίδα</span></td>
+                                </tr>
+                                <tr class="hover:bg-slate-50">
+                                    <td class="p-4">Ιταλία (Italy)</td>
+                                    <td class="p-4 font-medium text-blue-800">Ιταλ<span class="font-bold">ός</span></td>
+                                    <td class="p-4 font-medium text-pink-800">Ιταλ<span class="font-bold">ίδα</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                        <p class="text-lg"><strong>Example:</strong> Είμαι από την Αμερική. Είμαι Αμερικανίδα.</p>
+                    </div>
+                </section>
+
+                <!-- Section 3: Occupations -->
+                <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">3. Επαγγέλματα (Occupations)</h2>
+                    <p class="text-slate-500 mb-6 text-lg">Like nationalities, jobs have genders too!</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border border-slate-200 rounded-xl p-6 hover:shadow-md transition">
+                            <h4 class="font-bold text-xl mb-3 border-b pb-2">Teacher 🍎</h4>
+                            <p class="text-lg mb-1"><span class="text-blue-600 font-bold">Ο</span> δάσκαλ<span class="font-bold text-blue-600">ος</span> (Man)</p>
+                            <p class="text-lg"><span class="text-pink-600 font-bold">Η</span> δασκάλ<span class="font-bold text-pink-600">α</span> (Woman)</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-6 hover:shadow-md transition">
+                            <h4 class="font-bold text-xl mb-3 border-b pb-2">Student 📚</h4>
+                            <p class="text-lg mb-1"><span class="text-blue-600 font-bold">Ο</span> μαθητ<span class="font-bold text-blue-600">ής</span> (Boy)</p>
+                            <p class="text-lg"><span class="text-pink-600 font-bold">Η</span> μαθήτρι<span class="font-bold text-pink-600">α</span> (Girl)</p>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-6 hover:shadow-md transition md:col-span-2">
+                            <h4 class="font-bold text-xl mb-3 border-b pb-2">Doctor 🩺</h4>
+                            <p class="text-lg">For "Doctor", we usually use the same word for both!<br>
+                            <span class="text-blue-600 font-bold">Ο</span> γιατρός / <span class="text-pink-600 font-bold">Η</span> γιατρός</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- ================= EXERCISES TAB ================= -->
+        <div id="exercises-content" class="h-full hidden flex overflow-hidden">
+            
+            <!-- Sidebar for Exercises Menu -->
+            <aside class="w-64 sm:w-1/3 max-w-sm bg-white border-r border-slate-200 flex flex-col h-full shadow-[2px_0_8px_rgba(0,0,0,0.05)] z-10 shrink-0">
+                <div class="p-4 bg-slate-50 border-b border-slate-200">
+                    <h3 class="font-bold text-slate-700 text-lg">Επίλεξε Άσκηση</h3>
+                    <p class="text-sm text-slate-500">Select an exercise</p>
+                </div>
+                <div class="flex-1 overflow-y-auto p-3 space-y-2" id="ex-menu">
+                    <!-- Buttons injected via JS -->
+                </div>
+            </aside>
+
+            <!-- Quiz Area -->
+            <div class="flex-1 h-full overflow-y-auto bg-slate-50 p-6 lg:p-10 relative" id="quiz-area">
+                <div id="quiz-welcome" class="flex flex-col items-center justify-center h-full text-center space-y-4">
+                    <div class="text-6xl">🎯</div>
+                    <h2 class="text-2xl font-bold text-slate-700">Ready to practice?</h2>
+                    <p class="text-slate-500 text-lg max-w-md">Choose an exercise category from the menu on the left to begin your 15-question quiz!</p>
+                </div>
+                
+                <div id="quiz-container" class="max-w-4xl mx-auto hidden pb-24">
+                    <div class="flex justify-between items-end mb-6 border-b-2 border-slate-200 pb-4">
+                        <div>
+                            <h2 id="quiz-title" class="text-3xl font-extrabold text-indigo-900">Title</h2>
+                            <p id="quiz-subtitle" class="text-slate-500 mt-1">15 Questions</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-sm text-slate-500 uppercase tracking-wide font-bold">Score</span>
+                            <div id="score-display" class="text-2xl font-black text-indigo-600">0 / 15</div>
+                        </div>
+                    </div>
+
+                    <div id="questions-list" class="space-y-8">
+                        <!-- Questions injected here -->
+                    </div>
+                    
+                    <div id="quiz-completed" class="hidden mt-10 p-8 bg-green-100 border-2 border-green-400 rounded-2xl text-center">
+                        <h3 class="text-3xl font-bold text-green-800 mb-2">🎉 Συγχαρητήρια! (Congratulations!)</h3>
+                        <p class="text-xl text-green-700">You finished this exercise! Select another one from the menu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            const theoryBtn = document.getElementById('tab-theory');
+            const exercisesBtn = document.getElementById('tab-exercises');
+            const theoryContent = document.getElementById('theory-content');
+            const exercisesContent = document.getElementById('exercises-content');
+
+            if (tabId === 'theory') {
+                theoryBtn.className = "px-6 py-2 rounded-md font-semibold bg-white text-indigo-700 shadow transition-colors";
+                exercisesBtn.className = "px-6 py-2 rounded-md font-semibold text-white hover:bg-indigo-700 transition-colors";
+                theoryContent.classList.remove('hidden');
+                exercisesContent.classList.add('hidden');
+            } else {
+                exercisesBtn.className = "px-6 py-2 rounded-md font-semibold bg-white text-indigo-700 shadow transition-colors";
+                theoryBtn.className = "px-6 py-2 rounded-md font-semibold text-white hover:bg-indigo-700 transition-colors";
+                exercisesContent.classList.remove('hidden');
+                theoryContent.classList.add('hidden');
+            }
+        }
+
+        // Quiz Data - EXACTLY 5 Categories, EXACTLY 15 Questions each (75 total)
+        const quizData = [
+            {
+                id: 'ex1',
+                title: 'Άσκηση 1: Άρθρα (Ο, Η, Το)',
+                subtitle: 'Find the correct article based on the word ending.',
+                questions: [
+                    { q: "___ καφές (coffee)", options: ["A) Ο", "B) Η", "C) Το", "D) Οι"], ans: 0 },
+                    { q: "___ θάλασσα (sea)", options: ["A) Ο", "B) Το", "C) Η", "D) Τα"], ans: 2 },
+                    { q: "___ νερό (water)", options: ["A) Η", "B) Ο", "C) Οι", "D) Το"], ans: 3 },
+                    { q: "___ φίλος (male friend)", options: ["A) Η", "B) Ο", "C) Το", "D) Οι"], ans: 1 },
+                    { q: "___ φίλη (female friend)", options: ["A) Ο", "B) Η", "C) Το", "D) Τα"], ans: 1 },
+                    { q: "___ βιβλίο (book)", options: ["A) Η", "B) Οι", "C) Ο", "D) Το"], ans: 3 },
+                    { q: "___ μπαμπάς (dad)", options: ["A) Ο", "B) Η", "C) Το", "D) Τα"], ans: 0 },
+                    { q: "___ μαμά (mom)", options: ["A) Ο", "B) Το", "C) Η", "D) Οι"], ans: 2 },
+                    { q: "___ παιδί (child)", options: ["A) Το", "B) Ο", "C) Η", "D) Τα"], ans: 0 },
+                    { q: "___ ήλιος (sun)", options: ["A) Το", "B) Η", "C) Ο", "D) Οι"], ans: 2 },
+                    { q: "___ ντομάτα (tomato)", options: ["A) Ο", "B) Η", "C) Το", "D) Τα"], ans: 1 },
+                    { q: "___ τυρί (cheese)", options: ["A) Η", "B) Ο", "C) Οι", "D) Το"], ans: 3 },
+                    { q: "___ μαθητής (male student)", options: ["A) Ο", "B) Η", "C) Το", "D) Οι"], ans: 0 },
+                    { q: "___ δασκάλα (female teacher)", options: ["A) Το", "B) Ο", "C) Η", "D) Τα"], ans: 2 },
+                    { q: "___ όνομα (name)", options: ["A) Η", "B) Το", "C) Ο", "D) Οι"], ans: 1 }
+                ]
+            },
+            {
+                id: 'ex2',
+                title: 'Άσκηση 2: Καταλήξεις (Endings)',
+                subtitle: 'Choose the correct ending for the noun based on the article.',
+                questions: [
+                    { q: "Ο φίλ...", options: ["A) -ος", "B) -α", "C) -ο", "D) -ι"], ans: 0 },
+                    { q: "Η θάλασσ...", options: ["A) -ος", "B) -α", "C) -ι", "D) -ό"], ans: 1 },
+                    { q: "Το σπίτ...", options: ["A) -ος", "B) -η", "C) -ι", "D) -ας"], ans: 2 },
+                    { q: "Ο μαθητ...", options: ["A) -ή", "B) -ό", "C) -ής", "D) -α"], ans: 2 },
+                    { q: "Η φίλ...", options: ["A) -η", "B) -ος", "C) -ο", "D) -ας"], ans: 0 },
+                    { q: "Το νερ...", options: ["A) -ος", "B) -η", "C) -ό", "D) -ας"], ans: 2 },
+                    { q: "Ο πατέρ...", options: ["A) -α", "B) -ας", "C) -η", "D) -ι"], ans: 1 },
+                    { q: "Η μητέρ...", options: ["A) -ος", "B) -ό", "C) -α", "D) -ι"], ans: 2 },
+                    { q: "Το όνομ...", options: ["A) -α", "B) -ος", "C) -η", "D) -ας"], ans: 0 },
+                    { q: "Ο ουραν...", options: ["A) -α", "B) -ός", "C) -ι", "D) -η"], ans: 1 },
+                    { q: "Η νύχτ...", options: ["A) -ο", "B) -ος", "C) -α", "D) -ι"], ans: 2 },
+                    { q: "Το τυρ...", options: ["A) -α", "B) -ί", "C) -ος", "D) -η"], ans: 1 },
+                    { q: "Ο χάρτ...", options: ["A) -ης", "B) -α", "C) -ο", "D) -ι"], ans: 0 },
+                    { q: "Η ζάχαρ...", options: ["A) -ο", "B) -ας", "C) -η", "D) -ος"], ans: 2 },
+                    { q: "Το παιδ...", options: ["A) -α", "B) -ος", "C) -η", "D) -ί"], ans: 3 }
+                ]
+            },
+            {
+                id: 'ex3',
+                title: 'Άσκηση 3: Χώρες & Εθνικότητες',
+                subtitle: 'Match the nationality to the person.',
+                questions: [
+                    { q: "Είμαι από την Αμερική (γυναίκα). Είμαι...", options: ["A) Αμερικανός", "B) Αμερικανίδα", "C) Αγγλίδα", "D) Ελληνίδα"], ans: 1 },
+                    { q: "Ο Νίκος είναι από την Ελλάδα. Είναι...", options: ["A) Έλληνας", "B) Ελληνίδα", "C) Ιταλός", "D) Άγγλος"], ans: 0 },
+                    { q: "Είμαι από την Αγγλία (άντρας). Είμαι...", options: ["A) Αγγλίδα", "B) Ιταλός", "C) Άγγλος", "D) Αμερικανός"], ans: 2 },
+                    { q: "Η Μαρία είναι από την Ελλάδα. Είναι...", options: ["A) Έλληνας", "B) Ελληνίδα", "C) Αμερικανίδα", "D) Ιταλίδα"], ans: 1 },
+                    { q: "Ο Τζον είναι από την Αμερική. Είναι...", options: ["A) Αμερικανίδα", "B) Άγγλος", "C) Αμερικανός", "D) Έλληνας"], ans: 2 },
+                    { q: "Η Σαβάνα είναι από την Αμερική. Είναι...", options: ["A) Αμερικανός", "B) Ελληνίδα", "C) Αμερικανίδα", "D) Αγγλίδα"], ans: 2 },
+                    { q: "Είμαι από την Ιταλία (γυναίκα). Είμαι...", options: ["A) Ιταλός", "B) Ιταλίδα", "C) Ισπανός", "D) Αγγλίδα"], ans: 1 },
+                    { q: "Ο Χουάν είναι από την Ισπανία. Είναι...", options: ["A) Ισπανίδα", "B) Ιταλός", "C) Ισπανός", "D) Έλληνας"], ans: 2 },
+                    { q: "Η Άννα είναι από την Αγγλία. Είναι...", options: ["A) Αγγλίδα", "B) Άγγλος", "C) Αμερικανίδα", "D) Ελληνίδα"], ans: 0 },
+                    { q: "Ο Πάολο είναι από την Ιταλία. Είναι...", options: ["A) Ιταλίδα", "B) Ιταλός", "C) Ισπανός", "D) Άγγλος"], ans: 1 },
+                    { q: "Από πού είσαι; - Είμαι _______ την Αμερική.", options: ["A) στο", "B) σε", "C) από", "D) για"], ans: 2 },
+                    { q: "Η Ελένη (από Ελλάδα) είναι _______ .", options: ["A) Έλληνας", "B) Ελληνίδα", "C) Αγγλίδα", "D) Ιταλίδα"], ans: 1 },
+                    { q: "Ο Τομ (από Αμερική) είναι _______.", options: ["A) Αμερικανίδα", "B) Άγγλος", "C) Αμερικανός", "D) Έλληνας"], ans: 2 },
+                    { q: "Εγώ (άντρας) είμαι από την Ισπανία. Είμαι...", options: ["A) Ισπανός", "B) Ισπανίδα", "C) Ιταλός", "D) Έλληνας"], ans: 0 },
+                    { q: "Η Τζούλια (από Ιταλία) είναι _______ .", options: ["A) Ιταλός", "B) Ιταλίδα", "C) Ισπανίδα", "D) Αγγλίδα"], ans: 1 }
+                ]
+            },
+            {
+                id: 'ex4',
+                title: 'Άσκηση 4: Επαγγέλματα & Ρήμα Είμαι',
+                subtitle: 'Practice the verb "to be" and occupations.',
+                questions: [
+                    { q: "Εγώ _______ δασκάλα. (I am)", options: ["A) είσαι", "B) είναι", "C) είμαι", "D) είμαστε"], ans: 2 },
+                    { q: "Ο Νίκος _______ μαθητής. (He is)", options: ["A) είμαι", "B) είναι", "C) είσαι", "D) είστε"], ans: 1 },
+                    { q: "Εσύ _______ γιατρός; (Are you)", options: ["A) είναι", "B) είμαι", "C) είσαι", "D) είστε"], ans: 2 },
+                    { q: "Η Μαρία είναι _______ . (female teacher)", options: ["A) δάσκαλος", "B) μαθητής", "C) δασκάλα", "D) γιατρός"], ans: 2 },
+                    { q: "Ο Γιώργος είναι _______ . (male teacher)", options: ["A) δασκάλα", "B) δάσκαλος", "C) μαθήτρια", "D) φίλη"], ans: 1 },
+                    { q: "Εγώ είμαι _______ . (female student)", options: ["A) μαθητής", "B) δάσκαλος", "C) μαθήτρια", "D) φίλος"], ans: 2 },
+                    { q: "Εμείς _______ μαθητές. (We are)", options: ["A) είμαστε", "B) είστε", "C) είμαι", "D) είναι"], ans: 0 },
+                    { q: "Εσείς _______ δάσκαλοι; (Are you - plural)", options: ["A) είμαστε", "B) είστε", "C) είναι", "D) είσαι"], ans: 1 },
+                    { q: "Αυτός είναι _______ . (male student)", options: ["A) μαθήτρια", "B) μαθητής", "C) δασκάλα", "D) φίλη"], ans: 1 },
+                    { q: "Ο Πέτρος είναι _______ . (doctor)", options: ["A) γιατρός", "B) δασκάλα", "C) μαθήτρια", "D) φίλη"], ans: 0 },
+                    { q: "Η Σαβάνα είναι _______ . (female student)", options: ["A) δάσκαλος", "B) μαθητής", "C) μαθήτρια", "D) Έλληνας"], ans: 2 },
+                    { q: "Ο κύριος (Mr.) Νίκος είναι _______ .", options: ["A) δασκάλα", "B) δάσκαλος", "C) μαθήτρια", "D) Ελληνίδα"], ans: 1 },
+                    { q: "Η κυρία (Mrs.) Άννα είναι _______ .", options: ["A) δάσκαλος", "B) μαθητής", "C) δασκάλα", "D) Αμερικανός"], ans: 2 },
+                    { q: "Η Ελένη είναι _______ . (doctor)", options: ["A) δάσκαλος", "B) γιατρός", "C) μαθητής", "D) φίλος"], ans: 1 },
+                    { q: "Αυτοί _______ γιατροί. (They are)", options: ["A) είμαι", "B) είσαι", "C) είμαστε", "D) είναι"], ans: 3 }
+                ]
+            },
+            {
+                id: 'ex5',
+                title: 'Άσκηση 5: Μικτή Επανάληψη',
+                subtitle: 'Combine Articles, Nationalities, and Occupations!',
+                questions: [
+                    { q: "___ Νίκος είναι Έλληνας.", options: ["A) Η", "B) Το", "C) Ο", "D) Οι"], ans: 2 },
+                    { q: "___ Μαρία είναι δασκάλα.", options: ["A) Ο", "B) Η", "C) Το", "D) Τα"], ans: 1 },
+                    { q: "Το αγόρι (boy) _______ από την Ελλάδα.", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 2 },
+                    { q: "Η Σαβάνα είναι από _______ Αμερική.", options: ["A) τον", "B) την", "C) το", "D) στο"], ans: 1 },
+                    { q: "Εγώ είμαι Αμερικανίδα και εσύ _______ Έλληνας.", options: ["A) είσαι", "B) είναι", "C) είμαι", "D) είστε"], ans: 0 },
+                    { q: "___ δάσκαλος είναι από την Ιταλία.", options: ["A) Η", "B) Το", "C) Ο", "D) Οι"], ans: 2 },
+                    { q: "___ μαθήτρια είναι Αγγλίδα.", options: ["A) Ο", "B) Η", "C) Το", "D) Τα"], ans: 1 },
+                    { q: "Το όνομά μου _______ Σαβάνα.", options: ["A) είμαι", "B) είσαι", "C) είναι", "D) είμαστε"], ans: 2 },
+                    { q: "Ο φίλος μου (from America) είναι _______. ", options: ["A) Αμερικανίδα", "B) Αμερικανός", "C) Αγγλίδα", "D) Έλληνας"], ans: 1 },
+                    { q: "Η φίλη μου (teaches kids) είναι _______. ", options: ["A) δάσκαλος", "B) δασκάλα", "C) μαθητής", "D) γιατρός"], ans: 1 },
+                    { q: "Εγώ _______ μαθήτρια από την Αμερική.", options: ["A) είναι", "B) είσαι", "C) είμαι", "D) είμαστε"], ans: 2 },
+                    { q: "___ βιβλίο είναι εδώ.", options: ["A) Ο", "B) Η", "C) Το", "D) Οι"], ans: 2 },
+                    { q: "Ο Γιάννης (from Greece) είναι _______ .", options: ["A) Ελληνίδα δασκάλα", "B) Έλληνας δάσκαλος", "C) Αμερικανός", "D) Αγγλίδα"], ans: 1 },
+                    { q: "Η Ελένη (from Greece) είναι _______ .", options: ["A) Έλληνας δάσκαλος", "B) Ελληνίδα μαθήτρια", "C) Ιταλός", "D) Αμερικανός"], ans: 1 },
+                    { q: "Εμείς _______ φίλοι!", options: ["A) είμαι", "B) είναι", "C) είστε", "D) είμαστε"], ans: 3 }
+                ]
+            }
+        ];
+
+        let currentQuizId = null;
+        let scores = {}; // Keeps track of correct answers per quiz
+
+        document.addEventListener("DOMContentLoaded", () => {
+            renderSidebarMenu();
+        });
+
+        function renderSidebarMenu() {
+            const menu = document.getElementById("ex-menu");
+            menu.innerHTML = "";
+            quizData.forEach(quiz => {
+                scores[quiz.id] = 0; // Initialize score
+                const btn = document.createElement("button");
+                btn.className = "w-full text-left p-3 rounded-lg font-medium text-slate-700 transition-colors border-2 border-transparent hover:bg-indigo-50 focus:outline-none focus:border-indigo-300";
+                btn.innerText = quiz.title;
+                btn.id = `nav-${quiz.id}`;
+                btn.onclick = () => loadQuiz(quiz.id);
+                menu.appendChild(btn);
+            });
+        }
+
+        function loadQuiz(quizId) {
+            currentQuizId = quizId;
+            scores[quizId] = 0; // Reset score on reload
+            updateScoreDisplay();
+
+            // UI switching
+            document.getElementById('quiz-welcome').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-completed').classList.add('hidden');
+
+            // Highlight active menu item
+            quizData.forEach(q => {
+                const btn = document.getElementById(`nav-${q.id}`);
+                if (q.id === quizId) {
+                    btn.classList.add("bg-indigo-100", "text-indigo-800", "border-indigo-300", "font-bold");
+                } else {
+                    btn.classList.remove("bg-indigo-100", "text-indigo-800", "border-indigo-300", "font-bold");
+                }
+            });
+
+            // Load Content
+            const quiz = quizData.find(q => q.id === quizId);
+            document.getElementById('quiz-title').innerText = quiz.title;
+            document.getElementById('quiz-subtitle').innerText = quiz.subtitle;
+            
+            const list = document.getElementById('questions-list');
+            list.innerHTML = "";
+
+            quiz.questions.forEach((q, qIndex) => {
+                let html = `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200" id="q-${quizId}-${qIndex}">
+                        <h4 class="text-xl font-bold text-slate-800 mb-4">${qIndex + 1}. ${q.q}</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                `;
+
+                q.options.forEach((opt, optIndex) => {
+                    html += `
+                        <button 
+                            class="option-btn text-left p-4 rounded-xl border-2 border-slate-200 text-lg font-medium text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 w-full"
+                            onclick="handleAnswer(this, '${quizId}', ${qIndex}, ${optIndex}, ${q.ans})"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+            
+            // Scroll to top of quiz area
+            document.getElementById('quiz-area').scrollTop = 0;
+        }
+
+        function handleAnswer(btnElement, quizId, qIndex, selectedOptIndex, correctOptIndex) {
+            const qContainer = document.getElementById(`q-${quizId}-${qIndex}`);
+            const buttons = qContainer.querySelectorAll('button');
+
+            // Disable all buttons in this question
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedOptIndex === correctOptIndex) {
+                // Correct
+                btnElement.classList.add('correct-answer');
+                scores[quizId]++;
+            } else {
+                // Wrong
+                btnElement.classList.add('wrong-answer');
+                // Highlight the correct one so they can learn
+                buttons[correctOptIndex].classList.add('missed-correct');
+            }
+
+            updateScoreDisplay();
+            checkCompletion(quizId);
+        }
+
+        function updateScoreDisplay() {
+            if(currentQuizId) {
+                document.getElementById('score-display').innerText = `${scores[currentQuizId]} / 15`;
+            }
+        }
+
+        function checkCompletion(quizId) {
+            // Count how many questions have been answered by counting disabled buttons
+            const qContainers = document.querySelectorAll(`[id^="q-${quizId}-"]`);
+            let answeredCount = 0;
+            
+            qContainers.forEach(container => {
+                if (container.querySelector('button:disabled')) {
+                    answeredCount++;
+                }
+            });
+
+            if (answeredCount === 15) {
+                document.getElementById('quiz-completed').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
