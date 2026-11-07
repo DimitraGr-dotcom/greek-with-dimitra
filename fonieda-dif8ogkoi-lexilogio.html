@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Practice for Mariam - Φωνήεντα, Δίφθογγοι & Ρήματα</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .tab-btn.active {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+        /* Μεγάλα ραδιοφωνικά κουμπιά */
+        input[type="radio"] {
+            width: 1.75rem;
+            height: 1.75rem;
+            accent-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-20">
+
+    <div class="max-w-7xl mx-auto pt-8 px-4 sm:px-6 lg:px-8">
+        <header class="text-center mb-10 border-b-4 border-blue-200 pb-6">
+            <h1 class="text-4xl lg:text-5xl font-extrabold text-blue-900 mb-4 tracking-tight">Ασκήσεις Ελληνικών για τη Μαριάμ</h1>
+            <p class="text-2xl text-blue-700 font-medium">Φωνήεντα, Δίφθογγοι, Ρήματα & Λεξιλόγιο (Επίπεδο Α1)</p>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="flex flex-wrap lg:flex-nowrap overflow-x-auto pb-4 mb-8 space-x-3 justify-center" id="tabs-nav">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- Main Content Area -->
+        <div id="tab-content-container" class="bg-white p-6 sm:p-10 rounded-3xl shadow-xl border-2 border-blue-100 min-h-[600px]">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <script>
+        const exercises = [
+            {
+                id: 0,
+                title: "1. Ορθογραφία & Φωνήεντα",
+                desc: "Διάλεξε τα σωστά γράμματα για να συμπληρώσεις τη λέξη.",
+                questions: [
+                    { text: "Το παιδί παίζει με το π__χνίδι του.", options: ["1. αι", "2. ε", "3. ει"], correct: 0 },
+                    { text: "Η μ__τέρα μου μαγειρεύει.", options: ["1. ι", "2. η", "3. υ"], correct: 1 },
+                    { text: "Θα πάμε βόλτα με το __τοκίνητο.", options: ["1. αυ", "2. αβ", "3. αφ"], correct: 0 },
+                    { text: "Τρώμε το φαγητό με το πιρ__νι.", options: ["1. ου", "2. υ", "3. οι"], correct: 0 },
+                    { text: "Το κορ__τσι διαβάζει.", options: ["1. ί", "2. ή", "3. ύ"], correct: 0 },
+                    { text: "Η οικ__γένεια τρώει μαζί.", options: ["1. ω", "2. ο", "3. ου"], correct: 1 },
+                    { text: "Θέλω να φάω ένα γλυκ__.", options: ["1. ώ", "2. ό", "3. όυ"], correct: 1 },
+                    { text: "Ο θ__ος μου μένει στην Αθήνα.", options: ["1. εί", "2. ί", "3. ή"], correct: 0 },
+                    { text: "Σήμερα έχει ωρ__ο καιρό.", options: ["1. αί", "2. έ", "3. ί"], correct: 0 },
+                    { text: "Η γυνα__κα φοράει καπέλο.", options: ["1. ί", "2. εί", "3. ή"], correct: 1 },
+                    { text: "Κόβω το ψωμί με το μαχ__ρι.", options: ["1. αί", "2. έ", "3. εί"], correct: 0 },
+                    { text: "Τα παπ__τσια μου είναι καινούρια.", options: ["1. ού", "2. ύ", "3. ιώ"], correct: 0 },
+                    { text: "Πίνω κρύο νερ__.", options: ["1. ώ", "2. ό", "3. ού"], correct: 1 },
+                    { text: "Το δ__ντρο έχει πράσινα φύλλα.", options: ["1. αί", "2. έ", "3. εί"], correct: 1 },
+                    { text: "__χαριστώ πολύ για το δώρο!", options: ["1. Ευ", "2. Εφ", "3. Εβ"], correct: 0 }
+                ]
+            },
+            {
+                id: 1,
+                title: "2. Ρήματα (Σωστό Πρόσωπο)",
+                desc: "Διάλεξε το σωστό ρήμα που ταιριάζει στην πρόταση.",
+                questions: [
+                    { text: "Εγώ ________ μουσική κάθε μέρα.", options: ["1. ακούει", "2. ακούω", "3. ακούμε"], correct: 1 },
+                    { text: "Εσύ ________ ελληνικά πολύ καλά!", options: ["1. μιλάω", "2. μιλάς", "3. μιλάει"], correct: 1 },
+                    { text: "Η Μαρία ________ το βιβλίο της.", options: ["1. διαβάζει", "2. διαβάζω", "3. διαβάζουν"], correct: 0 },
+                    { text: "Εμείς ________ στο σχολείο.", options: ["1. πηγαίνουν", "2. πηγαίνουμε", "3. πηγαίνετε"], correct: 1 },
+                    { text: "Τα παιδιά ________ στην αυλή.", options: ["1. παίζω", "2. παίζει", "3. παίζουν"], correct: 2 },
+                    { text: "Ο μπαμπάς ________ νωρίς το πρωί.", options: ["1. ξυπνάει", "2. ξυπνάω", "3. ξυπνάμε"], correct: 0 },
+                    { text: "Εσείς ________ ωραίο φαγητό!", options: ["1. τρώμε", "2. τρώτε", "3. τρώνε"], correct: 1 },
+                    { text: "Ο σκύλος ________ στο κρεβάτι.", options: ["1. κοιμάται", "2. κοιμάμαι", "3. κοιμούνται"], correct: 0 },
+                    { text: "Εγώ και ο αδερφός μου ________ τηλεόραση.", options: ["1. βλέπει", "2. βλέπουν", "3. βλέπουμε"], correct: 2 },
+                    { text: "Η γιαγιά ________ μια ωραία πίτα.", options: ["1. φτιάχνει", "2. φτιάχνω", "3. φτιάχνουν"], correct: 0 },
+                    { text: "Εγώ ________ την πόρτα γιατί κάνει κρύο.", options: ["1. κλείνω", "2. κλείνει", "3. κλείνεις"], correct: 0 },
+                    { text: "Τα πουλιά ________ ψηλά στον ουρανό.", options: ["1. πετάει", "2. πετάνε", "3. πετάω"], correct: 1 },
+                    { text: "Ο δάσκαλος ________ στον πίνακα.", options: ["1. γράφω", "2. γράφεις", "3. γράφει"], correct: 2 },
+                    { text: "Εμείς ________ γάλα το πρωί.", options: ["1. πίνουμε", "2. πίνουν", "3. πίνετε"], correct: 0 },
+                    { text: "Εσύ ________ το παράθυρο;", options: ["1. ανοίγω", "2. ανοίγεις", "3. ανοίγει"], correct: 1 }
+                ]
+            },
+            {
+                id: 2,
+                title: "3. Γύρω από το σπίτι",
+                desc: "Διάλεξε τη σωστή λέξη για κάθε πρόταση.",
+                questions: [
+                    { text: "Πλένουμε τα χέρια μας στο ________.", options: ["1. μπάνιο", "2. μπαλκόνι", "3. σαλόνι"], correct: 0 },
+                    { text: "Μαγειρεύουμε το φαγητό στην ________.", options: ["1. κρεβατοκάμαρα", "2. κουζίνα", "3. αποθήκη"], correct: 1 },
+                    { text: "Κοιμόμαστε πάνω στο ________.", options: ["1. τραπέζι", "2. κρεβάτι", "3. χαλί"], correct: 1 },
+                    { text: "Βάζουμε τα ρούχα μας μέσα στην ________.", options: ["1. ντουλάπα", "2. καρέκλα", "3. βιβλιοθήκη"], correct: 0 },
+                    { text: "Όταν έχει ήλιο, καθόμαστε έξω στο ________.", options: ["1. μπάνιο", "2. μπαλκόνι", "3. ταβάνι"], correct: 1 },
+                    { text: "Τρώμε το φαγητό μας πάνω στο ________.", options: ["1. πάτωμα", "2. κρεβάτι", "3. τραπέζι"], correct: 2 },
+                    { text: "Βλέπουμε ταινίες στην ________.", options: ["1. τηλεόραση", "2. ντουλάπα", "3. πόρτα"], correct: 0 },
+                    { text: "Διαβάζουμε τα μαθήματά μας στο ________.", options: ["1. γραφείο", "2. μπάνιο", "3. παράθυρο"], correct: 0 },
+                    { text: "Ο αδερφός του μπαμπά μου είναι ο ________ μου.", options: ["1. παππούς", "2. θείος", "3. ξάδερφος"], correct: 1 },
+                    { text: "Η μαμά της μαμάς μου είναι η ________ μου.", options: ["1. θεία", "2. αδερφή", "3. γιαγιά"], correct: 2 },
+                    { text: "Ο γιος της θείας μου είναι ο ________ μου.", options: ["1. θείος", "2. ξάδερφος", "3. αδερφός"], correct: 1 },
+                    { text: "Πίνουμε νερό από το ________.", options: ["1. πιάτο", "2. πιρούνι", "3. ποτήρι"], correct: 2 },
+                    { text: "Σκουπίζουμε το στόμα μας με την ________.", options: ["1. πετσέτα", "2. χαρτοπετσέτα", "3. κουβέρτα"], correct: 1 },
+                    { text: "Το χειμώνα σκεπαζόμαστε με την ________.", options: ["1. κουβέρτα", "2. μαξιλάρι", "3. καρέκλα"], correct: 0 },
+                    { text: "Ανάβουμε το ________ για να βλέπουμε το βράδυ.", options: ["1. νερό", "2. φως", "3. ραδιόφωνο"], correct: 1 }
+                ]
+            },
+            {
+                id: 3,
+                title: "4. Επίθετα & Περιγραφές",
+                desc: "Διάλεξε το σωστό επίθετο που περιγράφει τη λέξη.",
+                questions: [
+                    { text: "Ο ελέφαντας είναι ένα ________ ζώο.", options: ["1. μεγάλο", "2. μικρό", "3. γρήγορο"], correct: 0 },
+                    { text: "Το ποντίκι είναι πολύ ________.", options: ["1. ψηλό", "2. μικρό", "3. χοντρό"], correct: 1 },
+                    { text: "Το λεμόνι είναι ________.", options: ["1. γλυκό", "2. ξινό", "3. αλμυρό"], correct: 1 },
+                    { text: "Η σοκολάτα είναι ________.", options: ["1. γλυκιά", "2. πικρή", "3. ξινή"], correct: 0 },
+                    { text: "Το καλοκαίρι ο καιρός είναι πολύ ________.", options: ["1. κρύος", "2. ζεστός", "3. παγωμένος"], correct: 1 },
+                    { text: "Το χειμώνα βάζουμε ________ ρούχα.", options: ["1. λεπτά", "2. ζεστά", "3. κοντά"], correct: 1 },
+                    { text: "Η χελώνα περπατάει πολύ ________.", options: ["1. γρήγορα", "2. αργά", "3. δυνατά"], correct: 1 },
+                    { text: "Ο λαγός τρέχει πολύ ________.", options: ["1. αργά", "2. σιγά", "3. γρήγορα"], correct: 2 },
+                    { text: "Ο πύργος είναι πολύ ________.", options: ["1. κοντός", "2. ψηλός", "3. χοντρός"], correct: 1 },
+                    { text: "Όταν πλένω τα χέρια μου, είναι ________.", options: ["1. βρώμικα", "2. καθαρά", "3. μαύρα"], correct: 1 },
+                    { text: "Το παγωτό είναι ________.", options: ["1. ζεστό", "2. καυτό", "3. κρύο"], correct: 2 },
+                    { text: "Όταν γελάμε είμαστε ________.", options: ["1. χαρούμενοι", "2. λυπημένοι", "3. θυμωμένοι"], correct: 0 },
+                    { text: "Ο παππούς μου είναι ________.", options: ["1. νέος", "2. ηλικιωμένος", "3. μωρό"], correct: 1 },
+                    { text: "Το βιβλίο που αγοράσαμε χθες είναι ________.", options: ["1. παλιό", "2. καινούριο", "3. σκισμένο"], correct: 1 },
+                    { text: "Ο ουρανός έχει χρώμα ________.", options: ["1. κόκκινο", "2. γαλάζιο", "3. πράσινο"], correct: 1 }
+                ]
+            },
+            {
+                id: 4,
+                title: "5. Καθημερινές Φράσεις",
+                desc: "Ολοκλήρωσε τη φράση με τη σωστή λέξη.",
+                questions: [
+                    { text: "Το πρωί μόλις ξυπνάω, ________ το πρόσωπό μου.", options: ["1. πλένω", "2. διαβάζω", "3. γράφω"], correct: 0 },
+                    { text: "Πριν κοιμηθώ, βουρτσίζω τα ________ μου.", options: ["1. μαλλιά", "2. δόντια", "3. παπούτσια"], correct: 1 },
+                    { text: "Φοράω τα παπούτσια μου για να πάω μια ________.", options: ["1. βόλτα", "2. ύπνο", "3. ταινία"], correct: 0 },
+                    { text: "Όταν πεινάω, θέλω να ________.", options: ["1. πιω", "2. κοιμηθώ", "3. φάω"], correct: 2 },
+                    { text: "Όταν διψάω, πίνω ένα ποτήρι ________.", options: ["1. ψωμί", "2. νερό", "3. τυρί"], correct: 1 },
+                    { text: "Βάζω τα βιβλία μου μέσα στην ________.", options: ["1. τσάντα", "2. ντουλάπα", "3. τηλεόραση"], correct: 0 },
+                    { text: "Όταν βρέχει, κρατάω την ________ μου.", options: ["1. ομπρέλα", "2. ζακέτα", "3. κάλτσα"], correct: 0 },
+                    { text: "Στο πάρτι ακούμε μουσική και ________.", options: ["1. κοιμόμαστε", "2. χορεύουμε", "3. κλαίμε"], correct: 1 },
+                    { text: "Πηγαίνω στο σούπερ μάρκετ για να κάνω ________.", options: ["1. μπάνιο", "2. ψώνια", "3. μάθημα"], correct: 1 },
+                    { text: "Ο μπαμπάς οδηγεί το ________.", options: ["1. ποδήλατο", "2. αυτοκίνητο", "3. αεροπλάνο"], correct: 1 },
+                    { text: "Με το ψαλίδι ________ το χαρτί.", options: ["1. κόβω", "2. κολλάω", "3. ζωγραφίζω"], correct: 0 },
+                    { text: "Με το μολύβι ________ στο τετράδιο.", options: ["1. γράφω", "2. σβήνω", "3. κόβω"], correct: 0 },
+                    { text: "Στο φούρνο ψήνουμε το ________.", options: ["1. νερό", "2. φαγητό", "3. ποτήρι"], correct: 1 },
+                    { text: "Το βράδυ βλέπουμε τα ________ στον ουρανό.", options: ["1. αστέρια", "2. δέντρα", "3. αυτοκίνητα"], correct: 0 },
+                    { text: "Όταν έχει κρύο φοράω το ________ μου.", options: ["1. μαγιό", "2. μπουφάν", "3. καπέλο"], correct: 1 }
+                ]
+            }
+        ];
+
+        let currentTab = 0;
+
+        function initApp() {
+            renderTabs();
+            renderTabContent(currentTab);
+        }
+
+        function renderTabs() {
+            const nav = document.getElementById('tabs-nav');
+            let tabsHtml = '';
+            
+            exercises.forEach((ex, index) => {
+                tabsHtml += `
+                    <button onclick="switchTab(${index})" id="tab-btn-${index}" class="tab-btn text-xl font-bold py-3 px-6 m-1 rounded-2xl border-4 border-transparent text-blue-600 hover:text-blue-900 hover:bg-blue-50 transition-all ${index === currentTab ? 'active' : ''}">
+                        ${ex.title}
+                    </button>
+                `;
+            });
+            nav.innerHTML = tabsHtml;
+        }
+
+        function switchTab(index) {
+            currentTab = index;
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('active');
+                    btn.classList.remove('text-blue-600', 'hover:text-blue-900', 'hover:bg-blue-50');
+                } else {
+                    btn.classList.remove('active');
+                    btn.classList.add('text-blue-600', 'hover:text-blue-900', 'hover:bg-blue-50');
+                }
+            });
+            renderTabContent(index);
+        }
+
+        function renderTabContent(tabIndex) {
+            const container = document.getElementById('tab-content-container');
+            const ex = exercises[tabIndex];
+            
+            let html = `
+                <div class="mb-10 text-center">
+                    <h2 class="text-4xl font-extrabold text-slate-800 mb-3">${ex.title}</h2>
+                    <p class="text-2xl text-slate-600 font-medium">${ex.desc}</p>
+                </div>
+                <div class="space-y-8" id="questions-container-${tabIndex}">
+            `;
+
+            ex.questions.forEach((q, qIndex) => {
+                html += `
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200" id="qdiv_${tabIndex}_${qIndex}">
+                        <p class="text-3xl font-bold text-slate-900 mb-6 flex items-center">
+                            <span class="bg-blue-500 text-white rounded-full min-w-[40px] h-[40px] flex items-center justify-center mr-4 text-xl shrink-0">${qIndex + 1}</span> 
+                            <span>${q.text}</span>
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                `;
+                
+                q.options.forEach((optText, optIndex) => {
+                    html += `
+                            <label class="block relative rounded-xl border-4 border-gray-300 bg-white cursor-pointer hover:bg-blue-50 transition-all">
+                                <input type="radio" name="q_${tabIndex}_${qIndex}" value="${optIndex}" class="peer sr-only">
+                                <div class="p-4 text-2xl font-bold text-slate-700 peer-checked:bg-blue-100 peer-checked:text-blue-900 rounded-lg option-inner h-full flex items-center">
+                                    ${optText}
+                                </div>
+                            </label>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                </div>
+                
+                <div class="mt-12 text-center border-t-2 border-gray-200 pt-10">
+                    <button id="check_btn_${tabIndex}" onclick="checkAnswers(${tabIndex})" class="bg-blue-600 hover:bg-blue-700 text-white text-3xl font-bold py-6 px-16 rounded-2xl shadow-xl transition-transform transform hover:scale-105">
+                        Έλεγχος Απαντήσεων (Check)
+                    </button>
+                    
+                    <div id="result_${tabIndex}" class="hidden mt-8 text-4xl p-8 rounded-2xl"></div>
+                    
+                    <button id="retry_btn_${tabIndex}" onclick="renderTabContent(${tabIndex})" class="hidden mt-6 mx-auto bg-slate-600 hover:bg-slate-700 text-white text-2xl font-bold py-4 px-10 rounded-2xl shadow transition">
+                        Ξανά από την αρχή
+                    </button>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function checkAnswers(tabIndex) {
+            let score = 0;
+            const ex = exercises[tabIndex];
+            const total = ex.questions.length;
+            
+            ex.questions.forEach((q, qIndex) => {
+                const questionDiv = document.getElementById(`qdiv_${tabIndex}_${qIndex}`);
+                const selected = document.querySelector(`input[name="q_${tabIndex}_${qIndex}"]:checked`);
+                const labels = questionDiv.querySelectorAll('.option-inner');
+                const inputs = questionDiv.querySelectorAll('input');
+                
+                // Disable inputs
+                inputs.forEach(input => input.disabled = true);
+
+                if (selected) {
+                    const val = parseInt(selected.value);
+                    if (val === q.correct) {
+                        score++;
+                        // Σωστό -> Πράσινο (bg-green-200)
+                        labels[val].classList.replace('peer-checked:bg-blue-100', 'bg-green-200');
+                        labels[val].classList.replace('peer-checked:text-blue-900', 'text-green-900');
+                        labels[val].parentElement.classList.replace('border-gray-300', 'border-green-500');
+                    } else {
+                        // Λάθος -> Κόκκινο (bg-red-200)
+                        labels[val].classList.replace('peer-checked:bg-blue-100', 'bg-red-200');
+                        labels[val].classList.replace('peer-checked:text-blue-900', 'text-red-900');
+                        labels[val].parentElement.classList.replace('border-gray-300', 'border-red-500');
+                        
+                        // Δείξε το σωστό
+                        labels[q.correct].classList.add('bg-green-200', 'text-green-900');
+                        labels[q.correct].parentElement.classList.replace('border-gray-300', 'border-green-500');
+                    }
+                } else {
+                    // Δεν απάντησε -> Δείξε το σωστό
+                    labels[q.correct].classList.add('bg-green-200', 'text-green-900');
+                    labels[q.correct].parentElement.classList.replace('border-gray-300', 'border-green-500');
+                }
+            });
+
+            const resultDiv = document.getElementById(`result_${tabIndex}`);
+            resultDiv.innerHTML = `Σκορ: <strong>${score} / ${total}</strong>`;
+            
+            if (score === total) {
+                resultDiv.className = "mt-8 text-4xl p-8 rounded-2xl bg-green-200 text-green-900 font-extrabold border-4 border-green-500 block";
+            } else if (score >= total / 2) {
+                resultDiv.className = "mt-8 text-4xl p-8 rounded-2xl bg-yellow-200 text-yellow-900 font-extrabold border-4 border-yellow-500 block";
+            } else {
+                resultDiv.className = "mt-8 text-4xl p-8 rounded-2xl bg-red-200 text-red-900 font-extrabold border-4 border-red-500 block";
+            }
+
+            document.getElementById(`check_btn_${tabIndex}`).classList.add('hidden');
+            document.getElementById(`retry_btn_${tabIndex}`).classList.remove('hidden');
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
