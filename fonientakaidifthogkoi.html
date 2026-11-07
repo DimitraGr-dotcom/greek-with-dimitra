@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Quiz: Φωνήεντα & Δίφθογγοι</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdfa; }
+        .tab-btn.active {
+            background-color: #0d9488;
+            color: white;
+            border-color: #0d9488;
+        }
+        .tabs-container::-webkit-scrollbar { height: 8px; }
+        .tabs-container::-webkit-scrollbar-thumb { background-color: #99f6e4; border-radius: 10px; }
+        
+        /* Μεγάλα ραδιοφωνικά κουμπιά */
+        input[type="radio"] {
+            width: 1.5rem;
+            height: 1.5rem;
+            accent-color: #0d9488;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-20">
+
+    <div class="max-w-6xl mx-auto pt-8 px-4 sm:px-6 lg:px-8">
+        <header class="text-center mb-10">
+            <h1 class="text-5xl font-extrabold text-teal-900 mb-4 tracking-tight">Διαδραστικές Ασκήσεις: Φωνήεντα</h1>
+            <p class="text-2xl text-teal-700 font-medium">Επιλέξτε τον αριθμό της σωστής απάντησης!</p>
+        </header>
+
+        <!-- Tabs Navigation -->
+        <div class="flex overflow-x-auto pb-4 mb-8 tabs-container space-x-3 justify-start lg:justify-center border-b-4 border-teal-200" id="tabs-nav">
+            <!-- Tabs rendered by JS -->
+        </div>
+
+        <!-- Main Content Area -->
+        <div id="tab-content-container" class="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border-2 border-teal-100 min-h-[600px]">
+            <!-- Content rendered by JS -->
+        </div>
+    </div>
+
+    <script>
+        // ------------------ ΔΕΔΟΜΕΝΑ ΑΣΚΗΣΕΩΝ (75 Ερωτήσεις) ------------------
+        const exercises = [
+            {
+                id: 0,
+                title: "1. Δίψηφα Φωνήεντα",
+                subtitle: "(αι, ει, οι, ου, υι)",
+                desc: "Ποιον ήχο βγάζουν τα έντονα γράμματα στις παρακάτω λέξεις;",
+                questions: [
+                    { text: "π<b>αι</b>δί", options: ["ε", "ι", "ου"], correct: 0 },
+                    { text: "<b>ει</b>κόνα", options: ["ι", "ε", "ου"], correct: 0 },
+                    { text: "<b>ου</b>ρανός", options: ["ου", "ο-υ", "ι"], correct: 0 },
+                    { text: "<b>οι</b>κογένεια", options: ["ε", "ι", "ο-ι"], correct: 1 },
+                    { text: "<b>υι</b>ός", options: ["υ", "υ-ι", "ι"], correct: 2 },
+                    { text: "σφ<b>αι</b>ρα", options: ["α-ι", "ε", "ι"], correct: 1 },
+                    { text: "τ<b>ει</b>χος", options: ["ε", "ι", "ε-ι"], correct: 1 },
+                    { text: "κήπ<b>ου</b>ρος", options: ["ο", "υ", "ου"], correct: 2 },
+                    { text: "μ<b>οι</b>ρα", options: ["ι", "ε", "ο-ι"], correct: 0 },
+                    { text: "αδελφ<b>οι</b>", options: ["ε", "ι", "ου"], correct: 1 },
+                    { text: "θ<b>ει</b>ος", options: ["η", "ε", "ι"], correct: 2 },
+                    { text: "κ<b>ου</b>λούρι", options: ["ο-υ", "ο", "ου"], correct: 2 },
+                    { text: "π<b>αι</b>χνίδι", options: ["ε", "ι", "α-ι"], correct: 0 },
+                    { text: "<b>υι</b>οθεσία", options: ["υ", "ι", "υ-ι"], correct: 1 },
+                    { text: "<b>αι</b>ώνιος", options: ["ε", "ι", "α"], correct: 0 }
+                ]
+            },
+            {
+                id: 1,
+                title: "2. Συνδυασμοί",
+                subtitle: "(αυ, ευ)",
+                desc: "Πώς ακούγεται ο συνδυασμός (αυ/ευ) στις παρακάτω λέξεις;",
+                questions: [
+                    { text: "<b>αυ</b>τοκίνητο", options: ["αφ", "αβ"], correct: 0 },
+                    { text: "<b>αύ</b>ριο", options: ["αφ", "αβ"], correct: 1 },
+                    { text: "<b>ευ</b>χαριστώ", options: ["εβ", "εφ"], correct: 1 },
+                    { text: "<b>Ευ</b>ρώπη", options: ["εβ", "εφ"], correct: 0 },
+                    { text: "ν<b>αύ</b>της", options: ["αβ", "αφ"], correct: 1 },
+                    { text: "Δ<b>ευ</b>τέρα", options: ["εφ", "εβ"], correct: 0 },
+                    { text: "<b>εύ</b>κολος", options: ["εφ", "εβ"], correct: 0 },
+                    { text: "<b>αυ</b>λή", options: ["αβ", "αφ"], correct: 0 },
+                    { text: "<b>ευ</b>αγγέλιο", options: ["εφ", "εβ"], correct: 1 },
+                    { text: "ρ<b>εύ</b>μα", options: ["εβ", "εφ"], correct: 0 },
+                    { text: "ψ<b>εύ</b>της", options: ["εβ", "εφ"], correct: 1 },
+                    { text: "<b>αυ</b>γό", options: ["αβ", "αφ"], correct: 0 },
+                    { text: "π<b>αύ</b>ση", options: ["αβ", "αφ"], correct: 1 },
+                    { text: "τ<b>αυ</b>τότητα", options: ["αβ", "αφ"], correct: 1 },
+                    { text: "προστατ<b>εύ</b>ω", options: ["εφ", "εβ"], correct: 1 }
+                ]
+            },
+            {
+                id: 2,
+                title: "3. Πραγματικοί Δίφθογγοι",
+                subtitle: "(Διαλυτικά και Τονισμός)",
+                desc: "Πόσους ήχους ακούμε στο έντονο κομμάτι των λέξεων; (Διαβάζεται σαν 1 γράμμα ή 2;)",
+                questions: [
+                    { text: "γ<b>άι</b>δαρος", options: ["2 ήχοι (α - ι)", "1 ήχος (ε)"], correct: 0 },
+                    { text: "μ<b>αϊ</b>μού", options: ["1 ήχος (ε)", "2 ήχοι (α - ι)"], correct: 1 },
+                    { text: "σ<b>όι</b>", options: ["2 ήχοι (ο - ι)", "1 ήχος (ι)"], correct: 0 },
+                    { text: "κορ<b>όι</b>δο", options: ["1 ήχος (ι)", "2 ήχοι (ο - ι)"], correct: 1 },
+                    { text: "κ<b>έι</b>κ", options: ["2 ήχοι (ε - ι)", "1 ήχος (ι)"], correct: 0 },
+                    { text: "<b>αί</b>μα", options: ["2 ήχοι (α - ι)", "1 ήχος (ε)"], correct: 1 },
+                    { text: "Μ<b>άι</b>ος", options: ["2 ήχοι (α - ι)", "1 ήχος (ε)"], correct: 0 },
+                    { text: "κα<b>ΐ</b>κι", options: ["1 ήχος (ε)", "2 ήχοι (α - ι)"], correct: 1 },
+                    { text: "νερά<b>ι</b>δα", options: ["2 ήχοι (α - ι)", "1 ήχος (ε)"], correct: 0 },
+                    { text: "τ<b>οί</b>χος", options: ["1 ήχος (ι)", "2 ήχοι (ο - ι)"], correct: 0 },
+                    { text: "β<b>οή</b>θεια", options: ["2 ήχοι (ο - η)", "1 ήχος (ι)"], correct: 0 },
+                    { text: "ρολ<b>όι</b>", options: ["1 ήχος (ι)", "2 ήχοι (ο - ι)"], correct: 1 },
+                    { text: "ζε<b>ϊ</b>μπέκικο", options: ["2 ήχοι (ε - ι)", "1 ήχος (ι)"], correct: 0 },
+                    { text: "π<b>αί</b>ζω", options: ["2 ήχοι (α - ι)", "1 ήχος (ε)"], correct: 1 },
+                    { text: "κομπολ<b>όι</b>", options: ["1 ήχος (ι)", "2 ήχοι (ο - ι)"], correct: 1 }
+                ]
+            },
+            {
+                id: 3,
+                title: "4. Αναγνώριση Ήχου",
+                subtitle: "(Πώς ακούγεται;)",
+                desc: "Πώς προφέρουμε σωστά (φθογγικά) την κάθε λέξη;",
+                questions: [
+                    { text: "παίζουν", options: ["πέ-ζουν", "πά-ι-ζουν", "πάι-ζουν"], correct: 0 },
+                    { text: "αύριο", options: ["ά-φρι-ο", "ά-βρι-ο", "α-ύ-ρι-ο"], correct: 1 },
+                    { text: "ναύτης", options: ["νά-βτης", "νά-φτης", "να-ύ-της"], correct: 1 },
+                    { text: "παιδί", options: ["πα-ι-δί", "παι-δί", "πε-δί"], correct: 2 },
+                    { text: "Ευρώπη", options: ["Ε-φρώ-πη", "Ε-υ-ρώ-πη", "Ε-βρώ-πη"], correct: 2 },
+                    { text: "ευχαριστώ", options: ["ε-φχα-ρι-στώ", "ε-βχα-ρι-στώ", "ευ-χα-ρι-στώ"], correct: 0 },
+                    { text: "εικόνα", options: ["ι-κό-να", "ει-κό-να", "ε-ι-κό-να"], correct: 0 },
+                    { text: "τοίχος", options: ["τοί-χος", "τί-χος", "το-ί-χος"], correct: 1 },
+                    { text: "ουρανός", options: ["ου-ρα-νός", "ο-υ-ρα-νός", "οβ-ρα-νός"], correct: 0 },
+                    { text: "γάιδαρος", options: ["γέ-δα-ρος", "γά-ι-δα-ρος", "γά-βδα-ρος"], correct: 1 },
+                    { text: "αίμα", options: ["ά-ι-μα", "έ-μα", "ά-βμα"], correct: 1 },
+                    { text: "ρεύμα", options: ["ρέ-φμα", "ρέ-υ-μα", "ρέ-βμα"], correct: 2 },
+                    { text: "ψεύτης", options: ["ψέ-φτης", "ψέ-βτης", "ψέ-υ-της"], correct: 0 },
+                    { text: "κορόιδο", options: ["κο-ρί-δο", "κο-ρό-ι-δο", "κο-ρέ-δο"], correct: 1 },
+                    { text: "αυλή", options: ["α-φλή", "α-υ-λή", "α-βλή"], correct: 2 }
+                ]
+            },
+            {
+                id: 4,
+                title: "5. Μικτή Επανάληψη",
+                subtitle: "(Όλοι οι κανόνες)",
+                desc: "Συνδύασε όσα έμαθες! Τι ισχύει για τα έντονα γράμματα;",
+                questions: [
+                    { text: "π<b>αι</b>χνίδι", options: ["ε", "ι", "α-ι (2 ήχοι)"], correct: 0 },
+                    { text: "τ<b>αυ</b>τότητα", options: ["αβ", "αφ", "α-υ"], correct: 1 },
+                    { text: "μ<b>οί</b>ρα", options: ["ο-ι (2 ήχοι)", "ε", "ι"], correct: 2 },
+                    { text: "κ<b>έι</b>κ", options: ["ε-ι (2 ήχοι)", "ι", "ε"], correct: 0 },
+                    { text: "Δ<b>ευ</b>τέρα", options: ["εβ", "εφ", "ε-υ"], correct: 1 },
+                    { text: "σ<b>όι</b>", options: ["ι", "ο-ι (2 ήχοι)", "ο-υ"], correct: 1 },
+                    { text: "<b>υι</b>ός", options: ["υ", "ου", "ι"], correct: 2 },
+                    { text: "<b>αυ</b>γό", options: ["αφ", "αβ", "α-υ"], correct: 1 },
+                    { text: "π<b>αύ</b>ση", options: ["αβ", "αφ", "α-υ"], correct: 1 },
+                    { text: "κορ<b>όι</b>δο", options: ["ι", "ο-ι (2 ήχοι)", "ε"], correct: 1 },
+                    { text: "Μ<b>άι</b>ος", options: ["α-ι (2 ήχοι)", "ε", "ι"], correct: 0 },
+                    { text: "<b>εί</b>ναι", options: ["ε", "ε-ι (2 ήχοι)", "ι"], correct: 2 },
+                    { text: "<b>εύ</b>κολος", options: ["εβ", "εφ", "ε-υ"], correct: 1 },
+                    { text: "<b>αι</b>ώνιος", options: ["ι", "ε", "α-ι (2 ήχοι)"], correct: 1 },
+                    { text: "<b>ου</b>ρανός", options: ["ο-υ", "ι", "ου (ένας ήχος)"], correct: 2 }
+                ]
+            }
+        ];
+
+        // ------------------ ΛΟΓΙΚΗ ΕΦΑΡΜΟΓΗΣ ------------------
+        let currentTab = 0;
+
+        function initApp() {
+            renderTabs();
+            renderTabContent(currentTab);
+        }
+
+        function renderTabs() {
+            const nav = document.getElementById('tabs-nav');
+            let tabsHtml = '';
+            
+            exercises.forEach((ex, index) => {
+                tabsHtml += `
+                    <button onclick="switchTab(${index})" id="tab-btn-${index}" class="tab-btn shrink-0 text-xl font-bold py-4 px-8 rounded-t-2xl border-4 border-transparent border-b-0 text-teal-600 hover:text-teal-900 hover:bg-teal-50 transition-all ${index === currentTab ? 'active' : ''}">
+                        ${ex.title}
+                    </button>
+                `;
+            });
+            nav.innerHTML = tabsHtml;
+        }
+
+        function switchTab(index) {
+            currentTab = index;
+            // Update Tab Classes
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('active');
+                    btn.classList.remove('text-teal-600', 'hover:text-teal-900', 'hover:bg-teal-50');
+                } else {
+                    btn.classList.remove('active');
+                    btn.classList.add('text-teal-600', 'hover:text-teal-900', 'hover:bg-teal-50');
+                }
+            });
+            // Render Content
+            renderTabContent(index);
+        }
+
+        function renderTabContent(tabIndex) {
+            const container = document.getElementById('tab-content-container');
+            const ex = exercises[tabIndex];
+            
+            let html = `
+                <div class="mb-12 border-b-4 border-teal-100 pb-6 text-center">
+                    <h2 class="text-4xl font-extrabold text-teal-900 mb-3">${ex.title} <span class="text-teal-600">${ex.subtitle}</span></h2>
+                    <p class="text-2xl text-slate-600 font-medium">${ex.desc}</p>
+                </div>
+                <div class="space-y-12" id="questions-container-${tabIndex}">
+            `;
+
+            ex.questions.forEach((q, qIndex) => {
+                html += `
+                    <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200 shadow-sm transition hover:shadow-md" id="qdiv_${tabIndex}_${qIndex}">
+                        <p class="text-3xl font-bold text-slate-800 mb-8 flex items-center">
+                            <span class="bg-teal-600 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 text-2xl">${qIndex + 1}</span> 
+                            <span class="tracking-wide">${q.text}</span>
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                `;
+                
+                q.options.forEach((optText, optIndex) => {
+                    html += `
+                            <label class="block relative rounded-2xl border-4 border-slate-300 bg-white cursor-pointer hover:bg-teal-50 hover:border-teal-300 transition-all">
+                                <input type="radio" name="q_${tabIndex}_${qIndex}" value="${optIndex}" class="peer sr-only">
+                                <div class="p-6 text-2xl font-semibold peer-checked:bg-teal-100 peer-checked:border-teal-700 peer-checked:text-teal-900 rounded-[12px] option-inner h-full flex items-center">
+                                    <span class="text-3xl font-black text-teal-700 mr-4">${optIndex + 1}.</span> 
+                                    <span>${optText}</span>
+                                </div>
+                            </label>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                </div>
+                
+                <!-- Αποτελέσματα & Κουμπιά -->
+                <div class="mt-16 text-center border-t-4 border-teal-100 pt-10">
+                    <button id="check_btn_${tabIndex}" onclick="checkAnswers(${tabIndex})" class="bg-teal-600 hover:bg-teal-700 text-white text-3xl font-bold py-6 px-16 rounded-full shadow-2xl transition-transform transform hover:scale-105 active:scale-95">
+                        Check Answers
+                    </button>
+                    
+                    <div id="result_${tabIndex}" class="hidden mt-10 text-4xl p-10 rounded-3xl"></div>
+                    
+                    <button id="retry_btn_${tabIndex}" onclick="renderTabContent(${tabIndex})" class="hidden mt-8 mx-auto bg-slate-600 hover:bg-slate-700 text-white text-2xl font-bold py-4 px-12 rounded-full shadow transition">
+                        Επανάληψη Καρτέλας
+                    </button>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function checkAnswers(tabIndex) {
+            let score = 0;
+            const ex = exercises[tabIndex];
+            const total = ex.questions.length;
+            
+            ex.questions.forEach((q, qIndex) => {
+                const questionDiv = document.getElementById(`qdiv_${tabIndex}_${qIndex}`);
+                const selected = document.querySelector(`input[name="q_${tabIndex}_${qIndex}"]:checked`);
+                const labels = questionDiv.querySelectorAll('.option-inner');
+                const inputs = questionDiv.querySelectorAll('input');
+                
+                // Disable inputs after checking
+                inputs.forEach(input => input.disabled = true);
+
+                if (selected) {
+                    const val = parseInt(selected.value);
+                    if (val === q.correct) {
+                        score++;
+                        // Correct choice -> Green
+                        labels[val].classList.replace('peer-checked:bg-teal-100', 'bg-green-100');
+                        labels[val].classList.replace('peer-checked:border-teal-700', 'border-green-600');
+                        labels[val].classList.replace('peer-checked:text-teal-900', 'text-green-900');
+                        labels[val].parentElement.classList.replace('border-slate-300', 'border-green-500');
+                        labels[val].parentElement.classList.replace('hover:border-teal-300', 'border-green-500');
+                    } else {
+                        // Wrong choice -> Red
+                        labels[val].classList.replace('peer-checked:bg-teal-100', 'bg-red-100');
+                        labels[val].classList.replace('peer-checked:border-teal-700', 'border-red-600');
+                        labels[val].classList.replace('peer-checked:text-teal-900', 'text-red-900');
+                        labels[val].parentElement.classList.replace('border-slate-300', 'border-red-500');
+                        labels[val].parentElement.classList.replace('hover:border-teal-300', 'border-red-500');
+                        
+                        // Highlight the correct one
+                        labels[q.correct].classList.add('bg-green-100', 'border-green-500');
+                        labels[q.correct].parentElement.classList.replace('border-slate-300', 'border-green-500');
+                    }
+                } else {
+                    // Not answered -> Show correct
+                    labels[q.correct].classList.add('bg-green-100');
+                    labels[q.correct].parentElement.classList.replace('border-slate-300', 'border-green-500');
+                }
+            });
+
+            // Display Score
+            const resultDiv = document.getElementById(`result_${tabIndex}`);
+            resultDiv.innerHTML = `Score: <strong>${score} / ${total}</strong>`;
+            
+            if (score === total) {
+                resultDiv.className = "mt-10 text-4xl p-10 rounded-3xl bg-green-100 text-green-900 font-extrabold border-4 border-green-500 block shadow-lg";
+                resultDiv.innerHTML += " <br><span class='text-2xl font-bold mt-4 block text-green-700'>Άριστα! (Perfect!)</span>";
+            } else if (score >= total / 2) {
+                resultDiv.className = "mt-10 text-4xl p-10 rounded-3xl bg-yellow-100 text-yellow-900 font-extrabold border-4 border-yellow-500 block shadow-lg";
+                resultDiv.innerHTML += " <br><span class='text-2xl font-bold mt-4 block text-yellow-700'>Πολύ καλά! (Very good!)</span>";
+            } else {
+                resultDiv.className = "mt-10 text-4xl p-10 rounded-3xl bg-red-100 text-red-900 font-extrabold border-4 border-red-500 block shadow-lg";
+                resultDiv.innerHTML += " <br><span class='text-2xl font-bold mt-4 block text-red-700'>Χρειάζεται εξάσκηση. (Needs practice.)</span>";
+            }
+
+            // Swap Buttons
+            document.getElementById(`check_btn_${tabIndex}`).classList.add('hidden');
+            document.getElementById(`retry_btn_${tabIndex}`).classList.remove('hidden');
+            
+            // Smooth Scroll to Results
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Initialize Application
+        window.onload = initApp;
+    </script>
+</body>
+</html>
