@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="el"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ελληνικά για την Ντόρις – Μάθημα 1</title>
+<style>
+:root{--bg:#f6f9fc;--card:#fff;--ink:#1b2a3a;--blue:#1f4e79;--acc:#2a8bd0;--ok:#2e9e5b;--bad:#d64545;--soft:#e8f2fb}
+*{box-sizing:border-box}body{margin:0;font:20px/1.5 Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--blue);color:#fff;padding:14px 24px}header h1{margin:0;font-size:26px}
+nav{display:flex;gap:8px;padding:12px 24px;background:#fff;position:sticky;top:0;box-shadow:0 1px 4px #0002;flex-wrap:wrap}
+nav button{font:inherit;padding:8px 18px;border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:10px;cursor:pointer}
+nav button.on{background:var(--blue);color:#fff}
+main{max-width:1000px;margin:auto;padding:20px}section{display:none}section.on{display:block}
+.card{background:var(--card);border-radius:14px;padding:18px 22px;margin:14px 0;box-shadow:0 1px 5px #0001}
+h2{color:var(--blue);margin:.2em 0}h3{margin:.4em 0;color:var(--acc)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #cfdbe7;padding:8px 12px;text-align:left}th{background:var(--soft)}
+.n{display:inline-block;min-width:34px;height:34px;line-height:34px;text-align:center;background:var(--blue);color:#fff;border-radius:50%;font-weight:bold;margin-right:8px}
+.gr{font-size:1.15em;font-weight:bold}.pr{color:#667;font-size:.8em}.en{color:#4a6b86}
+.warn{background:#fff4e0;border-left:6px solid #f0a020}.step{min-height:300px}
+.q{margin:18px 0;padding:14px;border-radius:12px;background:#fbfdff;border:1px solid #d9e6f2}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.opt{font:inherit;text-align:left;padding:10px 14px;border:2px solid #b9cde0;background:#fff;border-radius:10px;cursor:pointer}
+.opt:hover{background:var(--soft)}.opt b{color:var(--blue);margin-right:8px}
+.opt.right{background:#d8f3e3;border-color:var(--ok)}.opt.wrong{background:#fbdede;border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.bar{height:16px;background:#dbe7f2;border-radius:8px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--ok);transition:.3s}
+.ctl{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.btn{font:inherit;padding:8px 20px;border:0;border-radius:10px;background:var(--acc);color:#fff;cursor:pointer}
+.score{font-size:24px;font-weight:bold;color:var(--blue)}
+@media(max-width:700px){.opts{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>🇬🇷 Ελληνικά για την Ντόρις — Μάθημα 1: Γνωριμία &amp; Ταξίδια</h1><div>Lesson 1 · Meeting people &amp; talking about languages · 50 min · Beginner (A1)</div></header>
+<nav id="nav"></nav>
+<main>
+
+<section id="theory"><h2>Θεωρία · Grammar theory</h2>
+<div class="card"><h3>1. Χαιρετισμοί · Greetings</h3>
+<table><tr><th>#</th><th>Greek</th><th>Sounds like</th><th>English</th></tr>
+<tr><td>1</td><td class="gr">Γεια σου!</td><td class="pr">ya soo</td><td>Hi! / Bye! (informal)</td></tr>
+<tr><td>2</td><td class="gr">Καλημέρα</td><td class="pr">ka-li-ME-ra</td><td>Good morning</td></tr>
+<tr><td>3</td><td class="gr">Καλησπέρα</td><td class="pr">ka-li-SPE-ra</td><td>Good afternoon / evening</td></tr>
+<tr><td>4</td><td class="gr">Ευχαριστώ</td><td class="pr">ef-kha-ri-STO</td><td>Thank you</td></tr>
+<tr><td>5</td><td class="gr">Παρακαλώ</td><td class="pr">pa-ra-ka-LO</td><td>You're welcome / please</td></tr>
+<tr><td>6</td><td class="gr">Συγγνώμη</td><td class="pr">sig-NO-mi</td><td>Sorry / excuse me</td></tr>
+<tr><td>7</td><td class="gr">Χάρηκα</td><td class="pr">KHA-ri-ka</td><td>Nice to meet you</td></tr></table></div>
+
+<div class="card"><h3>2. Το ρήμα «είμαι» · The verb "to be"</h3>
+<table><tr><th>#</th><th>Pronoun</th><th>Greek</th><th>Sounds like</th><th>English</th></tr>
+<tr><td>1</td><td>εγώ</td><td class="gr">είμαι</td><td class="pr">EE-me</td><td>I am</td></tr>
+<tr><td>2</td><td>εσύ</td><td class="gr">είσαι</td><td class="pr">EE-se</td><td>you are</td></tr>
+<tr><td>3</td><td>αυτός / αυτή / αυτό</td><td class="gr">είναι</td><td class="pr">EE-ne</td><td>he / she / it is</td></tr>
+<tr><td>4</td><td>εμείς</td><td class="gr">είμαστε</td><td class="pr">EE-ma-ste</td><td>we are</td></tr>
+<tr><td>5</td><td>εσείς</td><td class="gr">είστε</td><td class="pr">EE-ste</td><td>you are (plural / formal)</td></tr>
+<tr><td>6</td><td>αυτοί / αυτές / αυτά</td><td class="gr">είναι</td><td class="pr">EE-ne</td><td>they are</td></tr></table>
+<p><b>Nationality &amp; job have gender:</b> Είμαι <span class="gr">Καναδός</span> (m) / <span class="gr">Καναδή</span> (f) · <span class="gr">δάσκαλος / δασκάλα</span> · <span class="gr">νοσηλευτής / νοσηλεύτρια</span> · <span class="gr">γιατρός</span> (m &amp; f).<br>
+<b>Countries:</b> Είμαι από <span class="gr">τον Καναδά</span> · <span class="gr">την Ελλάδα</span> · <span class="gr">τη Γαλλία</span>.</p></div>
+
+<div class="card"><h3>3. Το ρήμα «μιλάω» · To speak</h3>
+<table><tr><th>#</th><th>Pronoun</th><th>Greek</th><th>English</th></tr>
+<tr><td>1</td><td>εγώ</td><td class="gr">μιλάω</td><td>I speak</td></tr><tr><td>2</td><td>εσύ</td><td class="gr">μιλάς</td><td>you speak</td></tr>
+<tr><td>3</td><td>αυτός/ή/ό</td><td class="gr">μιλάει</td><td>he/she speaks</td></tr><tr><td>4</td><td>εμείς</td><td class="gr">μιλάμε</td><td>we speak</td></tr>
+<tr><td>5</td><td>εσείς</td><td class="gr">μιλάτε</td><td>you speak (pl./formal)</td></tr><tr><td>6</td><td>αυτοί/ές/ά</td><td class="gr">μιλάνε</td><td>they speak</td></tr></table>
+<p>Languages end in <b>-ά</b> (neuter plural): <span class="gr">αγγλικά, γαλλικά, ελληνικά, ισπανικά, ιταλικά, γερμανικά…</span> Say: <span class="gr">Μιλάω γαλλικά.</span> (no article needed!)<br>
+<b>Negative:</b> put <span class="gr">δεν</span> before the verb → <span class="gr">Δεν μιλάω ρωσικά.</span></p>
+<p><b>Bonus verbs</b> (same pattern as μιλάω): μένω (I live), δουλεύω (I work), μαθαίνω (I learn), αγαπάω (I love), ξέρω (I know). <b>Chunk:</b> μου αρέσει / μου αρέσουν = I like.</p></div>
+
+<div class="card warn"><h3>⚠ Συχνά λάθη · Common mistakes</h3>
+<p><span class="n">1</span>You don't need <i>εγώ / εσύ</i>: <b>Είμαι</b> νοσηλεύτρια. is enough.</p>
+<p><span class="n">2</span>Don't say <i>«Μιλάω τα ελληνικά»</i> in basic sentences – just <b>Μιλάω ελληνικά</b>.</p>
+<p><span class="n">3</span>Women use feminine forms: <b>Καναδή, νοσηλεύτρια</b>.</p>
+<p><span class="n">4</span>The Greek question mark looks like a semicolon: <b>Πώς σε λένε;</b></p>
+<p><span class="n">5</span>Don't mix <b>είσαι</b> (you are) with <b>είναι</b> (he/she is) – they sound alike!</p></div></section>
+
+<section id="slides"><h2>Παρουσίαση · Lesson presentation</h2>
+<div class="bar"><i id="sbar"></i></div>
+<div class="card step" id="slide"></div>
+<div class="ctl"><button class="btn" onclick="go(-1)">◀ Πίσω</button><span id="scount"></span><button class="btn" onclick="go(1)">Επόμενο ▶</button></div></section>
+
+<section id="ex"><h2>Ασκήσεις · Exercises</h2>
+<div class="card ctl"><div class="score">Score: <span id="sc">0</span> / <span id="tot">0</span></div><div style="flex:1"><div class="bar"><i id="pbar"></i></div></div><button class="btn" onclick="resetEx()">↻ Reset</button></div>
+<div id="exbox"></div></section>
+</main>
+<script>
+const tabs=[["theory","1 · Θεωρία"],["slides","2 · Παρουσίαση"],["ex","3 · Ασκήσεις"]];
+const nav=document.getElementById("nav");
+tabs.forEach(([id,t])=>{const b=document.createElement("button");b.textContent=t;b.onclick=()=>show(id);b.dataset.id=id;nav.appendChild(b)});
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));nav.querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.id===id))}
+show("theory");
+
+const slides=[
+["⏱ 0–5′ · Ζέσταμα · Warm-up","<p><span class='n'>1</span><span class='gr'>Γεια σου!</span> Με λένε … Και εσένα;</p><p><span class='n'>2</span>Teacher shows the Greek words she may already know (travel / languages) and asks: <i>Which Greek words do you already know?</i></p><p><span class='n'>3</span>Goal today: <b>introduce yourself</b> and <b>talk about languages</b>.</p>"],
+["⏱ 5–12′ · Χαιρετισμοί · Greetings","<p>Repeat after me (numbered list in the Theory tab, rows 1–7).</p><p><span class='n'>1</span>Καλημέρα · <span class='n'>2</span>Καλησπέρα · <span class='n'>3</span>Ευχαριστώ · <span class='n'>4</span>Παρακαλώ · <span class='n'>5</span>Συγγνώμη · <span class='n'>6</span>Χάρηκα</p><p><b>Oral:</b> <span class='gr'>Τι λες το πρωί; Τι λες το βράδυ;</span> (What do you say in the morning / evening?)</p>"],
+["⏱ 12–22′ · Είμαι · I am","<p>See the table in the Theory tab. Teacher models, Doris repeats.</p><p><span class='n'>1</span><span class='gr'>Είμαι η Ντόρις. Είμαι Καναδή. Είμαι νοσηλεύτρια.</span></p><p><b>Oral:</b> <span class='n'>2</span>Πώς σε λένε; <span class='n'>3</span>Από πού είσαι; <span class='n'>4</span>Τι δουλειά κάνεις;</p><p class='en'>Polyglot tip: compare <i>είμαι</i> with “sono / suis / soy” – what is similar?</p>"],
+["⏱ 22–32′ · Μιλάω · I speak","<p><span class='n'>1</span><span class='gr'>Μιλάω αγγλικά, γαλλικά και λίγα ελληνικά.</span></p><p>Doris names her languages in Greek (the teacher supplies the words). Then:</p><p><span class='n'>2</span>Τι γλώσσες μιλάς; <span class='n'>3</span>Μιλάς γερμανικά; – Όχι, <b>δεν</b> μιλάω γερμανικά.</p>"],
+["⏱ 32–40′ · Διάλογος · Dialogue","<p><span class='n'>1</span>— Καλησπέρα! Με λένε Νίκος. Πώς σε λένε;<br><span class='n'>2</span>— Με λένε Ντόρις. Χάρηκα!<br><span class='n'>3</span>— Κι εγώ χάρηκα. Από πού είσαι;<br><span class='n'>4</span>— Είμαι από τον Καναδά. Εσύ;<br><span class='n'>5</span>— Είμαι από την Ελλάδα. Τι δουλειά κάνεις;<br><span class='n'>6</span>— Είμαι νοσηλεύτρια. Μιλάω αγγλικά, γαλλικά και λίγα ελληνικά.<br><span class='n'>7</span>— Μιλάς πολλές γλώσσες! Μπράβο!</p><p class='en'>Read together → swap roles → Doris replaces details with her own.</p>"],
+["⏱ 40–47′ · Παιχνίδια · Games","<p>Wordwall (pick 2–3): <span class='n'>1</span>Match Up (countries &amp; languages) · <span class='n'>2</span>Speaking Cards · <span class='n'>3</span>Random Wheel (jobs)</p><p>Or use the Exercises tab in this page.</p>"],
+["⏱ 47–50′ · Ανακεφαλαίωση · Wrap-up","<p><span class='n'>1</span>Doris introduces herself in 3 sentences, without notes.</p><p><span class='n'>2</span><b>Homework:</b> record a 30-second voice message: name, country, job, languages.</p><p class='gr'>Ευχαριστώ! Αντίο και καλή συνέχεια!</p>"]];
+let si=0;function drawSlide(){document.getElementById("slide").innerHTML="<h2>"+slides[si][0]+"</h2>"+slides[si][1];document.getElementById("scount").textContent=(si+1)+" / "+slides.length;document.getElementById("sbar").style.width=((si+1)/slides.length*100)+"%"}
+function go(d){si=Math.max(0,Math.min(slides.length-1,si+d));drawSlide()}drawSlide();
+
+// [question, [options], correctIndex]
+const sets=[
+["Α · Είμαι ή μιλάω; · Choose the correct form",[
+["Εγώ ___ Καναδή.",["είμαι","είσαι","είναι","είμαστε"],0],
+["Εσύ ___ νοσηλεύτρια;",["είμαι","είναι","είσαι","είστε"],2],
+["Ο Νίκος ___ γιατρός.",["είμαστε","είσαι","είμαι","είναι"],3],
+["Εμείς ___ από τον Καναδά.",["είμαστε","είμαι","είναι","είστε"],0],
+["Εγώ ___ πορτογαλικά.",["μιλάς","μιλάω","μιλάει","μιλάμε"],1],
+["Η Σοφία ___ γαλλικά.",["μιλάω","μιλάτε","μιλάς","μιλάει"],3],
+["Εσείς ___ ιταλικά;",["μιλάτε","μιλάω","μιλάνε","μιλάς"],0],
+["Εγώ ___ είμαι γιατρός.",["όχι","δεν","μην","ναι"],1]]],
+["Β · Διάλογος · Complete the dialogue",[
+["— Χάρηκα! Από πού ___; — Είμαι από τον Καναδά.",["είμαι","είναι","είστε","είσαι"],3],
+["— Τι δουλειά κάνεις; — ___ νοσηλεύτρια.",["Είμαι","Είσαι","Είναι","Είμαστε"],0],
+["— Μιλάς ελληνικά; — Ναι, ___ λίγα ελληνικά.",["μιλάς","μιλάει","μιλάω","μιλάτε"],2],
+["— Καλημέρα! Τι κάνεις; — ___, ευχαριστώ. Εσύ;",["Παρακαλώ","Αντίο","Καληνύχτα","Καλά"],3],
+["— Σου αρέσει η Ελλάδα; — Ναι, ___ πολύ!",["με λένε","μου αρέσει","μου αρέσουν","σου αρέσει"],1],
+["— Ευχαριστώ πολύ! — ___!",["Συγγνώμη","Καλημέρα","Παρακαλώ","Ναι"],2]]],
+["Γ · Κείμενο · Reading: «Με λένε Ντόρις. Είμαι από τον Καναδά και είμαι νοσηλεύτρια. Μιλάω αγγλικά, γαλλικά και ελληνικά. Μου αρέσουν τα ταξίδια.»",[
+["Πώς τη λένε; (What is her name?)",["Μαρία","Ντόρις","Σοφία","Έλεν"],1],
+["Από πού είναι η Ντόρις;",["από την Ελλάδα","από τη Γαλλία","από τον Καναδά","από την Ιταλία"],2],
+["Τι δουλειά κάνει;",["δασκάλα","γιατρός","φοιτήτρια","νοσηλεύτρια"],3],
+["Τι της αρέσει; (What does she like?)",["τα ταξίδια","τα βιβλία","η μουσική","το ψάρεμα"],0]]]];
+const L="ABCD";let score=0,total=0,done=0;
+function build(){const box=document.getElementById("exbox");box.innerHTML="";score=0;done=0;total=sets.reduce((a,s)=>a+s[1].length,0);let n=0;
+sets.forEach(s=>{const c=document.createElement("div");c.className="card";c.innerHTML="<h3>"+s[0]+"</h3>";
+s[1].forEach(q=>{n++;const d=document.createElement("div");d.className="q";d.innerHTML="<div><span class='n'>"+n+"</span>"+q[0]+"</div>";const o=document.createElement("div");o.className="opts";
+q[1].forEach((t,i)=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b>"+L[i]+"</b>"+t;
+b.onclick=()=>{o.querySelectorAll("button").forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add("right")});if(i===q[2])score++;else b.classList.add("wrong");done++;upd()};o.appendChild(b)});
+d.appendChild(o);c.appendChild(d)});box.appendChild(c)});upd()}
+function upd(){document.getElementById("sc").textContent=score;document.getElementById("tot").textContent=total;document.getElementById("pbar").style.width=(done/total*100)+"%"}
+function resetEx(){build()}build();
+</script></body></html>
