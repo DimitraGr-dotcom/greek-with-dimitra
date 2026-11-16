@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Lesson: Unequal Syllable Plurals (Ανισοσύλλαβα)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fdf4ff; /* Light fuchsia background */ }
+        
+        .option-btn { transition: all 0.2s ease; }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .option-btn:disabled { cursor: default; }
+        
+        .correct-answer { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; font-weight: 700; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; opacity: 0.8; }
+        .missed-correct { background-color: #fef08a !important; border-color: #eab308 !important; color: #854d0e !important; font-weight: 700; border-style: dashed; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fdf4ff; }
+        ::-webkit-scrollbar-thumb { background: #f0abfc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d946ef; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-fuchsia-700 text-white shadow-md z-10 shrink-0 border-b-4 border-fuchsia-400">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight">Unequal Syllable Plurals (Ανισοσύλλαβα) 🇬🇷</h1>
+                <p class="text-fuchsia-200 text-sm mt-1">Nouns that get an extra syllable in the plural form!</p>
+            </div>
+            <div class="flex space-x-2 bg-fuchsia-900 p-1.5 rounded-xl shadow-inner">
+                <button onclick="switchTab('theory')" id="tab-theory" class="px-6 py-2 rounded-lg font-bold bg-white text-fuchsia-800 shadow-sm transition-all hover:bg-gray-50">📖 Theory</button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="px-6 py-2 rounded-lg font-bold text-white hover:bg-fuchsia-800 transition-all">✏️ Practice Quiz</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-hidden relative">
+        
+        <!-- THEORY TAB -->
+        <div id="theory-content" class="h-full overflow-y-auto p-6 lg:p-10 block">
+            <div class="max-w-4xl mx-auto space-y-8 pb-20">
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-fuchsia-100 p-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">What are "Ανισοσύλλαβα"?</h2>
+                    <p class="text-slate-600 text-lg mb-6">In Greek, there is a special group of masculine nouns that <strong>gain an extra syllable</strong> when they become plural. We call them "Ανισοσύλλαβα" (Unequal syllables).<br><br>
+                    For example, the word "Κα-φές" has 2 syllables. In the plural, it becomes "Κα-φέ-δες" (3 syllables!).</p>
+
+                    <div class="space-y-6">
+                        
+                        <!-- Group 1: -ές -->
+                        <div class="bg-amber-50 p-6 rounded-xl border border-amber-200 shadow-sm">
+                            <h3 class="text-2xl font-bold text-amber-900 mb-3 flex items-center gap-2">1. Endings in <span class="bg-amber-200 px-2 py-1 rounded text-amber-900">-ές</span> ➔ <span class="bg-amber-200 px-2 py-1 rounded text-amber-900">-έδες</span></h3>
+                            <ul class="space-y-3 text-lg text-amber-800">
+                                <li>☕ Ο καφ<span class="font-bold">ές</span> (coffee) ➔ Οι καφ<span class="font-bold">έδες</span></li>
+                                <li>🛋️ Ο καναπ<span class="font-bold">ές</span> (sofa) ➔ Οι καναπ<span class="font-bold">έδες</span></li>
+                                <li>🥔 Ο πουρ<span class="font-bold">ές</span> (mashed potatoes) ➔ Οι πουρ<span class="font-bold">έδες</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Group 2: -άς -->
+                        <div class="bg-sky-50 p-6 rounded-xl border border-sky-200 shadow-sm">
+                            <h3 class="text-2xl font-bold text-sky-900 mb-3 flex items-center gap-2">2. Endings in <span class="bg-sky-200 px-2 py-1 rounded text-sky-900">-άς</span> ➔ <span class="bg-sky-200 px-2 py-1 rounded text-sky-900">-άδες</span></h3>
+                            <ul class="space-y-3 text-lg text-sky-800">
+                                <li>🎣 Ο ψαρ<span class="font-bold">άς</span> (fisherman) ➔ Οι ψαρ<span class="font-bold">άδες</span></li>
+                                <li>⛪ Ο παπ<span class="font-bold">άς</span> (priest) ➔ Οι παπ<span class="font-bold">άδες</span></li>
+                                <li>👨‍👧 Ο μπαμπ<span class="font-bold">άς</span> (dad) ➔ Οι μπαμπ<span class="font-bold">άδες</span></li>
+                                <li>🍍 Ο αναν<span class="font-bold">άς</span> (pineapple) ➔ Οι αναν<span class="font-bold">άδες</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Group 3: -ής -->
+                        <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-3 flex items-center gap-2">3. Endings in <span class="bg-emerald-200 px-2 py-1 rounded text-emerald-900">-ής / -ης</span> ➔ <span class="bg-emerald-200 px-2 py-1 rounded text-emerald-900">-ηδες</span></h3>
+                            <p class="text-emerald-800 mb-3 italic">Many of these are professions!</p>
+                            <ul class="space-y-3 text-lg text-emerald-800">
+                                <li>🥖 Ο φούρναρ<span class="font-bold">ης</span> (baker) ➔ Οι φουρνάρηδ<span class="font-bold">ες</span></li>
+                                <li>🥩 Ο χασάπ<span class="font-bold">ης</span> (butcher) ➔ Οι χασάπηδ<span class="font-bold">ες</span></li>
+                                <li>🚕 Ο ταξιτζ<span class="font-bold">ής</span> (taxi driver) ➔ Οι ταξιτζήδ<span class="font-bold">ες</span></li>
+                                <li>🍅 Ο μανάβ<span class="font-bold">ης</span> (greengrocer) ➔ Οι μανάβηδ<span class="font-bold">ες</span></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE TAB -->
+        <div id="practice-content" class="h-full hidden overflow-y-auto bg-slate-50 p-6 lg:p-10 relative">
+            
+            <div class="max-w-3xl mx-auto pb-24">
+                
+                <div class="flex justify-between items-end mb-8 border-b-2 border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-fuchsia-900">Unequal Syllables Quiz</h2>
+                        <p class="text-slate-500 mt-2 text-lg">Change the singular word to plural!</p>
+                    </div>
+                    <div class="text-right bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                        <span class="text-sm text-slate-500 uppercase tracking-wider font-bold">Score</span>
+                        <div id="score-display" class="text-4xl font-black text-fuchsia-600">0 / 20</div>
+                    </div>
+                </div>
+
+                <div id="questions-list" class="space-y-6">
+                    <!-- Questions will be injected here by JS -->
+                </div>
+                
+                <div id="quiz-completed" class="hidden mt-12 p-10 bg-fuchsia-100 border-4 border-fuchsia-400 rounded-3xl text-center shadow-lg">
+                    <div class="text-6xl mb-4">🥳</div>
+                    <h3 class="text-4xl font-extrabold text-fuchsia-800 mb-4">Καταπληκτικά! (Amazing!)</h3>
+                    <p class="text-xl text-fuchsia-700 font-medium">You have successfully mastered the Unequal Syllable Plurals!</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            const theoryBtn = document.getElementById('tab-theory');
+            const practiceBtn = document.getElementById('tab-practice');
+            const theoryContent = document.getElementById('theory-content');
+            const practiceContent = document.getElementById('practice-content');
+
+            if (tabId === 'theory') {
+                theoryBtn.className = "px-6 py-2 rounded-lg font-bold bg-white text-fuchsia-800 shadow-sm transition-all hover:bg-gray-50";
+                practiceBtn.className = "px-6 py-2 rounded-lg font-bold text-white hover:bg-fuchsia-800 transition-all";
+                theoryContent.classList.remove('hidden');
+                practiceContent.classList.add('hidden');
+            } else {
+                practiceBtn.className = "px-6 py-2 rounded-lg font-bold bg-white text-fuchsia-800 shadow-sm transition-all hover:bg-gray-50";
+                theoryBtn.className = "px-6 py-2 rounded-lg font-bold text-white hover:bg-fuchsia-800 transition-all";
+                practiceContent.classList.remove('hidden');
+                theoryContent.classList.add('hidden');
+                
+                if(document.getElementById('questions-list').children.length === 0) {
+                    renderQuiz();
+                }
+            }
+        }
+
+        const quizData = [
+            { sing: "Ο καφές", trans: "coffee", options: ["A) Οι καφέδες", "B) Οι καφέδοι", "C) Οι καφές", "D) Τα καφέδια"], ans: 0 },
+            { sing: "Ο ψαράς", trans: "fisherman", options: ["A) Οι ψαροί", "B) Οι ψαρές", "C) Οι ψαράδες", "D) Οι ψαράς"], ans: 2 },
+            { sing: "Ο φούρναρης", trans: "baker", options: ["A) Οι φουρνάροι", "B) Οι φουρνάρηδες", "C) Οι φουρνάρες", "D) Τα φουρνάρια"], ans: 1 },
+            { sing: "Ο παπάς", trans: "priest", options: ["A) Οι παπάδες", "B) Οι παπές", "C) Οι παποί", "D) Τα παπάδια"], ans: 0 },
+            { sing: "Ο καναπές", trans: "sofa", options: ["A) Οι καναπέδες", "B) Οι καναποί", "C) Οι καναπάδες", "D) Οι καναπές"], ans: 0 },
+            { sing: "Ο μπαμπάς", trans: "dad", options: ["A) Οι μπαμποί", "B) Οι μπαμπές", "C) Οι μπαμπάδες", "D) Τα μπαμπάδες"], ans: 2 },
+            { sing: "Ο μανάβης", trans: "greengrocer", options: ["A) Οι μανάβοι", "B) Οι μανάβηδες", "C) Οι μανάβες", "D) Οι μαναβήδες"], ans: 1 },
+            { sing: "Ο χασάπης", trans: "butcher", options: ["A) Οι χασάπηδες", "B) Οι χασάποι", "C) Οι χασάπες", "D) Τα χασάπια"], ans: 0 },
+            { sing: "Ο πουρές", trans: "mashed potatoes", options: ["A) Οι πουρές", "B) Οι πουράδες", "C) Οι πουρέδες", "D) Οι πουροί"], ans: 2 },
+            { sing: "Ο τσαγκάρης", trans: "shoemaker", options: ["A) Οι τσαγκάρηδες", "B) Οι τσαγκάροι", "C) Οι τσαγκάρές", "D) Οι τσαγκαράδες"], ans: 0 },
+            { sing: "Ο ανανάς", trans: "pineapple", options: ["A) Οι ανανάδες", "B) Οι ανανοί", "C) Οι ανανές", "D) Τα ανανάδια"], ans: 0 },
+            { sing: "Ο ταξιτζής", trans: "taxi driver", options: ["A) Οι ταξιτζοί", "B) Οι ταξιτζήδες", "C) Οι ταξιτζές", "D) Οι ταξιτζάδες"], ans: 1 },
+            { sing: "Ο μεζές", trans: "appetizer", options: ["A) Οι μεζές", "B) Οι μεζάδες", "C) Οι μεζέδες", "D) Οι μεζοί"], ans: 2 },
+            { sing: "Ο μπογιατζής", trans: "painter", options: ["A) Οι μπογιατζήδες", "B) Οι μπογιατζοί", "C) Οι μπογιατζές", "D) Οι μπογιατζάδες"], ans: 0 },
+            { sing: "Ο μπακάλης", trans: "grocer", options: ["A) Οι μπακάλοι", "B) Οι μπακάλες", "C) Οι μπακάληδες", "D) Οι μπακαλάδες"], ans: 2 },
+            { sing: "Ο χαλβάς", trans: "halva (sweet)", options: ["A) Οι χαλβές", "B) Οι χαλβάδες", "C) Οι χαλβοί", "D) Τα χαλβάδια"], ans: 1 },
+            { sing: "Ο λεκές", trans: "stain", options: ["A) Οι λεκέδες", "B) Οι λεκές", "C) Οι λεκοί", "D) Οι λεκάδες"], ans: 0 },
+            { sing: "Ο σουγιάς", trans: "pocket knife", options: ["A) Οι σουγές", "B) Οι σουγιοί", "C) Οι σουγιάδες", "D) Οι σουγιάδεις"], ans: 2 },
+            { sing: "Ο νοικοκύρης", trans: "householder", options: ["A) Οι νοικοκύρηδες", "B) Οι νοικοκύροι", "C) Οι νοικοκύρες", "D) Οι νοικοκυράδες"], ans: 0 },
+            { sing: "Ο τενεκές", trans: "tin can", options: ["A) Οι τενεκοί", "B) Οι τενεκέδες", "C) Οι τενεκάδες", "D) Οι τενεκές"], ans: 1 }
+        ];
+
+        let currentScore = 0;
+        let answeredQuestions = 0;
+
+        function renderQuiz() {
+            const list = document.getElementById('questions-list');
+            list.innerHTML = "";
+            currentScore = 0;
+            answeredQuestions = 0;
+            updateScoreDisplay();
+
+            quizData.forEach((q, qIndex) => {
+                let html = `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md" id="q-${qIndex}">
+                        <div class="mb-4">
+                            <span class="bg-fuchsia-100 text-fuchsia-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase tracking-wide">Question ${qIndex + 1}</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-800 mb-1">${q.sing} <span class="text-slate-400 font-normal ml-2">➔ ?</span></h4>
+                        <p class="text-slate-500 mb-5 italic">(${q.trans})</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                `;
+
+                q.options.forEach((opt, optIndex) => {
+                    html += `
+                        <button 
+                            class="option-btn text-left p-4 rounded-xl border-2 border-slate-200 text-lg font-bold text-slate-700 hover:border-fuchsia-400 hover:bg-fuchsia-50 focus:outline-none w-full flex items-center"
+                            onclick="handleAnswer(this, ${qIndex}, ${optIndex}, ${q.ans})"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function handleAnswer(btnElement, qIndex, selectedOptIndex, correctOptIndex) {
+            const qContainer = document.getElementById(`q-${qIndex}`);
+            const buttons = qContainer.querySelectorAll('button');
+
+            // Prevent multiple clicks
+            buttons.forEach(btn => btn.disabled = true);
+            answeredQuestions++;
+
+            if (selectedOptIndex === correctOptIndex) {
+                btnElement.classList.add('correct-answer');
+                btnElement.classList.remove('text-slate-700');
+                currentScore++;
+            } else {
+                btnElement.classList.add('wrong-answer');
+                btnElement.classList.remove('text-slate-700');
+                buttons[correctOptIndex].classList.add('missed-correct');
+                buttons[correctOptIndex].classList.remove('text-slate-700');
+            }
+
+            updateScoreDisplay();
+
+            if (answeredQuestions === 20) {
+                document.getElementById('quiz-completed').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('quiz-completed').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score-display').innerText = `${currentScore} / 20`;
+        }
+    </script>
+</body>
+</html>
