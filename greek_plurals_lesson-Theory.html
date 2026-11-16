@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greek Lesson 3: Plurals (Ο πληθυντικός)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        
+        .option-btn { transition: all 0.2s ease; }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .option-btn:disabled { cursor: default; }
+        
+        .correct-answer { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; font-weight: 700; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; opacity: 0.8; }
+        .missed-correct { background-color: #fef08a !important; border-color: #eab308 !important; color: #854d0e !important; font-weight: 700; border-style: dashed; }
+        
+        /* Genders Colors */
+        .masculine { background-color: #eff6ff; border-left: 5px solid #3b82f6; }
+        .feminine { background-color: #fef2f2; border-left: 5px solid #ef4444; }
+        .neuter { background-color: #f0fdf4; border-left: 5px solid #22c55e; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 h-screen flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white shadow-md z-10 shrink-0 border-b-4 border-indigo-400">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight">Lesson 3: The Plural (Ο Πληθυντικός) 🇬🇷</h1>
+                <p class="text-indigo-200 text-sm mt-1">Transforming words from Singular (One) to Plural (Many)</p>
+            </div>
+            <div class="flex space-x-2 bg-indigo-900 p-1.5 rounded-xl shadow-inner">
+                <button onclick="switchTab('theory')" id="tab-theory" class="px-6 py-2 rounded-lg font-bold bg-white text-indigo-800 shadow-sm transition-all hover:bg-gray-50">📖 Theory</button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="px-6 py-2 rounded-lg font-bold text-white hover:bg-indigo-800 transition-all">✏️ Practice</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-hidden relative">
+        
+        <!-- THEORY TAB -->
+        <div id="theory-content" class="h-full overflow-y-auto p-6 lg:p-10 block">
+            <div class="max-w-4xl mx-auto space-y-10 pb-20">
+                
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">How to form the Plural in Greek</h2>
+                    <p class="text-slate-600 text-lg mb-8">Just like in English we add an "s" (apple -> apples), in Greek we change both the <strong>article</strong> and the <strong>ending</strong> of the noun. The rules depend on the gender!</p>
+
+                    <div class="space-y-6">
+                        
+                        <!-- Masculine -->
+                        <div class="masculine p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold text-blue-900 mb-2 flex items-center gap-2">🟦 Masculine (Αρσενικό)</h3>
+                            <p class="text-blue-800 mb-4 font-medium">Article changes from <span class="font-bold text-xl">Ο</span> to <span class="font-bold text-xl">Οι</span>. Ending changes from <span class="font-bold">-ος / -ας / -ης</span> to <span class="font-bold">-οι / -ες</span>.</p>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg border border-blue-100">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Singular (1)</p>
+                                    <p class="text-xl"><strong>Ο</strong> φίλ<span class="text-blue-600 font-bold">ος</span> (The friend)</p>
+                                    <p class="text-xl"><strong>Ο</strong> μαθητ<span class="text-blue-600 font-bold">ής</span> (The student)</p>
+                                    <p class="text-xl"><strong>Ο</strong> πατέρ<span class="text-blue-600 font-bold">ας</span> (The father)</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Plural (2+)</p>
+                                    <p class="text-xl"><strong>Οι</strong> φίλ<span class="text-blue-600 font-bold">οι</span> (The friends)</p>
+                                    <p class="text-xl"><strong>Οι</strong> μαθητ<span class="text-blue-600 font-bold">ές</span> (The students)</p>
+                                    <p class="text-xl"><strong>Οι</strong> πατέρ<span class="text-blue-600 font-bold">ες</span> (The fathers)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feminine -->
+                        <div class="feminine p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold text-red-900 mb-2 flex items-center gap-2">🟥 Feminine (Θηλυκό)</h3>
+                            <p class="text-red-800 mb-4 font-medium">Article changes from <span class="font-bold text-xl">Η</span> to <span class="font-bold text-xl">Οι</span>. Ending changes from <span class="font-bold">-α / -η</span> to <span class="font-bold">-ες</span>.</p>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg border border-red-100">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Singular (1)</p>
+                                    <p class="text-xl"><strong>Η</strong> γυναίκ<span class="text-red-600 font-bold">α</span> (The woman)</p>
+                                    <p class="text-xl"><strong>Η</strong> φίλ<span class="text-red-600 font-bold">η</span> (The friend)</p>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Plural (2+)</p>
+                                    <p class="text-xl"><strong>Οι</strong> γυναίκ<span class="text-red-600 font-bold">ες</span> (The women)</p>
+                                    <p class="text-xl"><strong>Οι</strong> φίλ<span class="text-red-600 font-bold">ες</span> (The friends)</p>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-sm text-red-700 italic">* Notice that Masculine and Feminine both use the plural article <strong>Οι</strong>!</p>
+                        </div>
+
+                        <!-- Neuter -->
+                        <div class="neuter p-6 rounded-xl shadow-sm">
+                            <h3 class="text-2xl font-bold text-green-900 mb-2 flex items-center gap-2">🟩 Neuter (Ουδέτερο)</h3>
+                            <p class="text-green-800 mb-4 font-medium">Article changes from <span class="font-bold text-xl">Το</span> to <span class="font-bold text-xl">Τα</span>. Ending changes from <span class="font-bold">-ο</span> to <span class="font-bold">-α</span>, and from <span class="font-bold">-ι</span> to <span class="font-bold">-ια</span>.</p>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg border border-green-100">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Singular (1)</p>
+                                    <p class="text-xl"><strong>Το</strong> βιβλί<span class="text-green-600 font-bold">ο</span> (The book)</p>
+                                    <p class="text-xl"><strong>Το</strong> παιδ<span class="text-green-600 font-bold">ί</span> (The child)</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-1">Plural (2+)</p>
+                                    <p class="text-xl"><strong>Τα</strong> βιβλί<span class="text-green-600 font-bold">α</span> (The books)</p>
+                                    <p class="text-xl"><strong>Τα</strong> παιδ<span class="text-green-600 font-bold">ιά</span> (The children)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTICE TAB -->
+        <div id="practice-content" class="h-full hidden overflow-y-auto bg-slate-50 p-6 lg:p-10 relative">
+            
+            <div class="max-w-3xl mx-auto pb-24">
+                
+                <div class="flex justify-between items-end mb-8 border-b-2 border-slate-200 pb-4">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-indigo-900">Plurals Quiz</h2>
+                        <p class="text-slate-500 mt-2 text-lg">Choose the correct plural form for each word.</p>
+                    </div>
+                    <div class="text-right bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                        <span class="text-sm text-slate-500 uppercase tracking-wider font-bold">Score</span>
+                        <div id="score-display" class="text-4xl font-black text-indigo-600">0 / 20</div>
+                    </div>
+                </div>
+
+                <div id="questions-list" class="space-y-6">
+                    <!-- Questions will be injected here by JS -->
+                </div>
+                
+                <div id="quiz-completed" class="hidden mt-12 p-10 bg-green-100 border-4 border-green-400 rounded-3xl text-center shadow-lg">
+                    <div class="text-6xl mb-4">🏆</div>
+                    <h3 class="text-4xl font-extrabold text-green-800 mb-4">Excellent! (Άριστα!)</h3>
+                    <p class="text-xl text-green-700 font-medium">You have successfully completed the quiz and mastered Greek plurals.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            const theoryBtn = document.getElementById('tab-theory');
+            const practiceBtn = document.getElementById('tab-practice');
+            const theoryContent = document.getElementById('theory-content');
+            const practiceContent = document.getElementById('practice-content');
+
+            if (tabId === 'theory') {
+                theoryBtn.className = "px-6 py-2 rounded-lg font-bold bg-white text-indigo-800 shadow-sm transition-all hover:bg-gray-50";
+                practiceBtn.className = "px-6 py-2 rounded-lg font-bold text-white hover:bg-indigo-800 transition-all";
+                theoryContent.classList.remove('hidden');
+                practiceContent.classList.add('hidden');
+            } else {
+                practiceBtn.className = "px-6 py-2 rounded-lg font-bold bg-white text-indigo-800 shadow-sm transition-all hover:bg-gray-50";
+                theoryBtn.className = "px-6 py-2 rounded-lg font-bold text-white hover:bg-indigo-800 transition-all";
+                practiceContent.classList.remove('hidden');
+                theoryContent.classList.add('hidden');
+                
+                // Initialize quiz if not already done
+                if(document.getElementById('questions-list').children.length === 0) {
+                    renderQuiz();
+                }
+            }
+        }
+
+        const quizData = [
+            { sing: "Ο φίλος", pluralEng: "the friends (male)", options: ["A) Οι φίλοι", "B) Τα φίλοι", "C) Οι φίλες", "D) Το φίλοι"], ans: 0 },
+            { sing: "Η φίλη", pluralEng: "the friends (female)", options: ["A) Τα φίλες", "B) Οι φίλοι", "C) Οι φίλες", "D) Η φίλες"], ans: 2 },
+            { sing: "Το βιβλίο", pluralEng: "the books", options: ["A) Τα βιβλία", "B) Οι βιβλία", "C) Το βιβλία", "D) Τα βιβλίοι"], ans: 0 },
+            { sing: "Ο δάσκαλος", pluralEng: "the teachers (male)", options: ["A) Οι δασκάλες", "B) Οι δάσκαλοι", "C) Τα δάσκαλοι", "D) Οι δάσκαλος"], ans: 1 },
+            { sing: "Η θάλασσα", pluralEng: "the seas", options: ["A) Οι θάλασσοι", "B) Τα θάλασσες", "C) Η θάλασσες", "D) Οι θάλασσες"], ans: 3 },
+            { sing: "Το παιδί", pluralEng: "the children", options: ["A) Οι παιδιά", "B) Τα παιδιά", "C) Τα παιδοί", "D) Το παιδιά"], ans: 1 },
+            { sing: "Ο μαθητής", pluralEng: "the students", options: ["A) Οι μαθητές", "B) Οι μαθητοί", "C) Τα μαθητές", "D) Οι μαθητής"], ans: 0 },
+            { sing: "Η γυναίκα", pluralEng: "the women", options: ["A) Τα γυναίκες", "B) Οι γυναικοί", "C) Οι γυναίκες", "D) Η γυναίκες"], ans: 2 },
+            { sing: "Το γραφείο", pluralEng: "the desks", options: ["A) Τα γραφεία", "B) Οι γραφείοι", "C) Οι γραφείες", "D) Το γραφεία"], ans: 0 },
+            { sing: "Ο πατέρας", pluralEng: "the fathers", options: ["A) Οι πατέρες", "B) Οι πατέροι", "C) Τα πατέρες", "D) Ο πατέρες"], ans: 0 },
+            { sing: "Η μητέρα", pluralEng: "the mothers", options: ["A) Τα μητέρες", "B) Η μητέρες", "C) Οι μητέρες", "D) Οι μητέροι"], ans: 2 },
+            { sing: "Το όνομα", pluralEng: "the names", options: ["A) Οι ονόματα", "B) Τα ονόματα", "C) Τα ονόμα", "D) Οι όνομα"], ans: 1 },
+            { sing: "Ο άνθρωπος", pluralEng: "the people/humans", options: ["A) Οι ανθρώπες", "B) Τα άνθρωποι", "C) Οι άνθρωποι", "D) Οι άνθρωπος"], ans: 2 },
+            { sing: "Η μέρα", pluralEng: "the days", options: ["A) Τα μέρες", "B) Οι μέρες", "C) Οι μέροι", "D) Η μέρες"], ans: 1 },
+            { sing: "Το σπίτι", pluralEng: "the houses", options: ["A) Τα σπίτια", "B) Οι σπίτια", "C) Τα σπίτες", "D) Οι σπίτοι"], ans: 0 },
+            { sing: "Ο καφές", pluralEng: "the coffees", options: ["A) Οι καφέδες", "B) Οι καφέδοι", "C) Τα καφέδες", "D) Η καφέδες"], ans: 0 },
+            { sing: "Η νύχτα", pluralEng: "the nights", options: ["A) Οι νύχτες", "B) Τα νύχτες", "C) Οι νύχτοι", "D) Το νύχτες"], ans: 0 },
+            { sing: "Το λουλούδι", pluralEng: "the flowers", options: ["A) Οι λουλούδια", "B) Τα λουλούδια", "C) Τα λουλούδες", "D) Οι λουλούδες"], ans: 1 },
+            { sing: "Ο τοίχος", pluralEng: "the walls", options: ["A) Τα τοίχοι", "B) Οι τοίχες", "C) Οι τοίχοι", "D) Ο τοίχοι"], ans: 2 },
+            { sing: "Η πόρτα", pluralEng: "the doors", options: ["A) Οι πόρτοι", "B) Τα πόρτες", "C) Η πόρτες", "D) Οι πόρτες"], ans: 3 }
+        ];
+
+        let currentScore = 0;
+        let answeredQuestions = 0;
+
+        function renderQuiz() {
+            const list = document.getElementById('questions-list');
+            list.innerHTML = "";
+            currentScore = 0;
+            answeredQuestions = 0;
+            updateScoreDisplay();
+
+            quizData.forEach((q, qIndex) => {
+                let html = `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 transition-all hover:shadow-md" id="q-${qIndex}">
+                        <div class="mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-0.5 rounded uppercase tracking-wide">Question ${qIndex + 1}</span>
+                        </div>
+                        <h4 class="text-2xl font-bold text-slate-800 mb-1">${q.sing} <span class="text-slate-400 font-normal ml-2">➔ ?</span></h4>
+                        <p class="text-slate-500 mb-5 italic">(${q.pluralEng})</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                `;
+
+                q.options.forEach((opt, optIndex) => {
+                    html += `
+                        <button 
+                            class="option-btn text-left p-4 rounded-xl border-2 border-slate-200 text-lg font-bold text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 focus:outline-none w-full flex items-center"
+                            onclick="handleAnswer(this, ${qIndex}, ${optIndex}, ${q.ans})"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function handleAnswer(btnElement, qIndex, selectedOptIndex, correctOptIndex) {
+            const qContainer = document.getElementById(`q-${qIndex}`);
+            const buttons = qContainer.querySelectorAll('button');
+
+            // Prevent multiple clicks
+            buttons.forEach(btn => btn.disabled = true);
+            answeredQuestions++;
+
+            if (selectedOptIndex === correctOptIndex) {
+                btnElement.classList.add('correct-answer');
+                btnElement.classList.remove('text-slate-700');
+                currentScore++;
+            } else {
+                btnElement.classList.add('wrong-answer');
+                btnElement.classList.remove('text-slate-700');
+                buttons[correctOptIndex].classList.add('missed-correct');
+                buttons[correctOptIndex].classList.remove('text-slate-700');
+            }
+
+            updateScoreDisplay();
+
+            if (answeredQuestions === 20) {
+                document.getElementById('quiz-completed').classList.remove('hidden');
+                // Scroll to the completion message
+                setTimeout(() => {
+                    document.getElementById('quiz-completed').scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('score-display').innerText = `${currentScore} / 20`;
+        }
+    </script>
+</body>
+</html>
