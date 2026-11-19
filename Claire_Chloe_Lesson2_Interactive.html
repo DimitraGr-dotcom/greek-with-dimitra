@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greek Lesson 2 — Claire &amp; Chloe | Alphabet &amp; Everyday Expressions</title>
+<style>
+  :root {
+    --navy: #1b365d;
+    --aegean: #0077b6;
+    --sky: #e0f2fe;
+    --sand: #fff8eb;
+    --green: #16a34a;
+    --green-bg: #dcfce7;
+    --red: #dc2626;
+    --red-bg: #fee2e2;
+    --gold: #f59e0b;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    color: var(--text);
+    margin: 0;
+    padding: 0 0 60px 0;
+  }
+  header {
+    background: linear-gradient(120deg, var(--navy), var(--aegean));
+    color: white;
+    padding: 22px 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(27,54,93,0.18);
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.85rem; }
+  header p { margin: 0; opacity: 0.92; font-size: 1rem; }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: white;
+    border-bottom: 2px solid #cbd5e1;
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tab-btn {
+    border: 2px solid var(--aegean);
+    background: white;
+    color: var(--navy);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--aegean);
+    color: white;
+  }
+  .score-panel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .progress-wrap {
+    width: 140px;
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    transition: width 0.35s ease;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 18px;
+  }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.07);
+    border: 1px solid #e2e8f0;
+  }
+  .card h2 {
+    margin-top: 0;
+    color: var(--navy);
+    border-bottom: 2px solid var(--sky);
+    padding-bottom: 8px;
+    font-size: 1.35rem;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 8px;
+    margin-right: 8px;
+    font-size: 0.9rem;
+  }
+  .letter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+  }
+  .letter-box {
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+  .letter-box:hover {
+    transform: translateY(-2px);
+    border-color: var(--aegean);
+    background: var(--sky);
+  }
+  .box-num {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    background: var(--navy);
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 800;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+  }
+  .big-greek { font-size: 2rem; font-weight: 800; color: var(--aegean); margin: 8px 0 4px; }
+  .sound-tag { font-weight: 700; color: var(--navy); font-size: 0.95rem; }
+  .example-tag { font-size: 0.88rem; color: var(--muted); margin-top: 4px; }
+  .speak-btn {
+    background: var(--aegean);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .speak-btn:hover { background: var(--navy); }
+
+  .phrase-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .phrase-table th, .phrase-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+  }
+  .phrase-table th { background: var(--navy); color: white; }
+  .phrase-table tr:nth-child(even) { background: #f8fafc; }
+
+  .q-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .q-title { font-size: 1.08rem; font-weight: 700; margin-bottom: 12px; color: var(--navy); }
+  .opts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--aegean); background: var(--sky); }
+  .opt-letter {
+    background: var(--navy);
+    color: white;
+    font-weight: 800;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .opt-btn.correct { background: var(--green-bg); border-color: var(--green); color: #14532d; }
+  .opt-btn.correct .opt-letter { background: var(--green); }
+  .opt-btn.wrong { background: var(--red-bg); border-color: var(--red); color: #7f1d1d; }
+  .opt-btn.wrong .opt-letter { background: var(--red); }
+  .feedback { margin-top: 8px; font-weight: 700; font-size: 0.95rem; min-height: 22px; }
+  .feedback.ok { color: var(--green); }
+  .feedback.no { color: var(--red); }
+
+  /* Matching Game */
+  .match-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 650px) { .match-wrap { grid-template-columns: 1fr; } }
+  .match-col h3 { margin-top: 0; color: var(--aegean); }
+  .match-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+  }
+  .match-item.selected { border-color: var(--gold); background: #fef3c7; }
+  .match-item.matched { border-color: var(--green); background: var(--green-bg); color: #14532d; cursor: default; }
+  .match-item.wrong-flash { border-color: var(--red); background: var(--red-bg); }
+
+  /* Fill in the blank */
+  .fill-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+  }
+  .fill-select {
+    padding: 7px 12px;
+    border: 2px solid var(--aegean);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    background: white;
+  }
+  .check-btn {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .check-btn:hover { background: var(--aegean); }
+  .reset-btn {
+    background: #e2e8f0;
+    color: var(--navy);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.88rem;
+  }
+  .tip-box {
+    background: var(--sand);
+    border-left: 5px solid var(--gold);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 0.96rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🇬🇷 Greek Lesson 2 — Claire &amp; Chloe</h1>
+  <p>Alphabet Mastery, Pronunciation &amp; Everyday Expressions • Screen-Sharing Interactive Edition</p>
+</header>
+
+<div class="topbar">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('theory', this)">1. Θεωρία (Theory)</button>
+    <button class="tab-btn" onclick="showTab('quiz', this)">2. Alphabet Quiz</button>
+    <button class="tab-btn" onclick="showTab('match', this)">3. Match Game</button>
+    <button class="tab-btn" onclick="showTab('fill', this)">4. Everyday Dialogues</button>
+    <button class="tab-btn" onclick="showTab('decode', this)">5. Reading Challenge</button>
+  </div>
+  <div class="score-panel">
+    <span>🏆 Score: <span id="scoreVal">0</span> / <span id="totalVal">22</span></span>
+    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+    <button class="reset-btn" onclick="location.reload()">↻ Reset</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TAB 1: THEORY -->
+  <div id="theory" class="section active">
+    <div class="card">
+      <h2><span class="badge">1</span> The 6 "False Friends" (Click any box to hear Greek!)</h2>
+      <div class="tip-box">💡 <strong>Screen-Share Tip:</strong> Claire &amp; Chloe can just call out the box number (1–6) and read the Greek word out loud!</div>
+      <div class="letter-grid" id="falseFriendsGrid"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="badge">2</span> The 5 Unique Greek Consonants &amp; 4 Power Teams</h2>
+      <div class="letter-grid" id="uniqueLettersGrid"></div>
+    </div>
+
+    <div class="card">
+      <h2><span class="badge">3</span> Everyday Expressions (Click 🔊 to listen &amp; repeat)</h2>
+      <table class="phrase-table">
+        <thead>
+          <tr><th>#</th><th>Greek</th><th>Pronunciation</th><th>English</th><th>Audio</th></tr>
+        </thead>
+        <tbody id="phrasesBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB 2: ALPHABET QUIZ -->
+  <div id="quiz" class="section">
+    <div class="card">
+      <h2><span class="badge">Game 1</span> Alphabet &amp; Pronunciation Quiz (8 Questions)</h2>
+      <div class="tip-box">📢 Call out the question number (1–8) and the Greek option letter (<strong>Α, Β, Γ, Δ</strong>)!</div>
+      <div id="quizContainer"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: MATCHING GAME -->
+  <div id="match" class="section">
+    <div class="card">
+      <h2><span class="badge">Game 2</span> Match the Greek Expression (6 Pairs)</h2>
+      <div class="tip-box">📢 Say a number on the left (<strong>1–6</strong>) and its matching letter on the right (<strong>Α–Ζ</strong>)!</div>
+      <div class="match-wrap">
+        <div class="match-col">
+          <h3>Greek (1 – 6)</h3>
+          <div id="matchLeft"></div>
+        </div>
+        <div class="match-col">
+          <h3>English (Α – Ζ)</h3>
+          <div id="matchRight"></div>
+        </div>
+      </div>
+      <div id="matchMsg" class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- TAB 4: FILL IN THE BLANKS -->
+  <div id="fill" class="section">
+    <div class="card">
+      <h2><span class="badge">Game 3</span> Complete the Everyday Phrases (8 Sentences)</h2>
+      <div class="tip-box">📢 Choose the right Greek word (<strong>Α, Β, Γ</strong>) to complete each real-life sentence!</div>
+      <div id="fillContainer"></div>
+    </div>
+  </div>
+
+  <!-- TAB 5: READING CHALLENGE -->
+  <div id="decode" class="section">
+    <div class="card">
+      <h2><span class="badge">Bonus</span> Greek Street Signs &amp; Words Decoding Challenge!</h2>
+      <div class="tip-box">🌟 Mom &amp; Daughter Team Challenge: Read each Greek word aloud first, then click <strong>🔊 Hear &amp; Reveal</strong> to check your pronunciation!</div>
+      <div class="letter-grid" id="decodeGrid"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Speech Synthesis Helper (el-GR)
+  function speakGreek(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'el-GR';
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  }
+
+  // Score & Progress
+  let score = 0;
+  const totalPoints = 22; // 8 quiz + 6 match + 8 fill
+  function addPoint() {
+    score++;
+    document.getElementById('scoreVal').textContent = score;
+    const pct = Math.min(100, Math.round((score / totalPoints) * 100));
+    document.getElementById('progressBar').style.width = pct + '%';
+  }
+
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // 1. THEORY DATA
+  const falseFriends = [
+    { num: 1, letter: 'Β β', sound: 'V (vase)', ex: 'Βιβλίο (Book)', speak: 'Βιβλίο' },
+    { num: 2, letter: 'Η η', sound: 'EE (see)', ex: 'Ήλιος (Sun)', speak: 'Ήλιος' },
+    { num: 3, letter: 'Ν ν', sound: 'N (nice)', ex: 'Νερό (Water)', speak: 'Νερό' },
+    { num: 4, letter: 'Ρ ρ', sound: 'R (rolled)', ex: 'Ρόδος (Rhodes)', speak: 'Ρόδος' },
+    { num: 5, letter: 'Χ χ', sound: 'H (Bach)', ex: 'Χαρά (Joy)', speak: 'Χαρά' },
+    { num: 6, letter: 'Υ υ', sound: 'EE (see)', ex: 'Σκύλος (Dog)', speak: 'Σκύλος' }
+  ];
+
+  const uniqueLetters = [
+    { num: 1, letter: 'Γ γ', sound: 'gh / y (yes)', ex: 'Γάτα (Cat)', speak: 'Γάτα' },
+    { num: 2, letter: 'Δ δ', sound: 'TH (this)', ex: 'Δρόμος (Street)', speak: 'Δρόμος' },
+    { num: 3, letter: 'Θ θ', sound: 'TH (think)', ex: 'Θάλασσα (Sea)', speak: 'Θάλασσα' },
+    { num: 4, letter: 'Ξ ξ', sound: 'KS (box)', ex: 'Έξοδος (Exit)', speak: 'Έξοδος' },
+    { num: 5, letter: 'Ψ ψ', sound: 'PS (lips)', ex: 'Ψωμί (Bread)', speak: 'Ψωμί' },
+    { num: 6, letter: 'ΟΥ ου', sound: 'OO (moon)', ex: 'Μουσική (Music)', speak: 'Μουσική' },
+    { num: 7, letter: 'ΑΙ αι', sound: 'E (pet)', ex: 'Ναι (Yes)', speak: 'Ναι' },
+    { num: 8, letter: 'ΜΠ μπ', sound: 'B (boy)', ex: 'Μπράβο (Bravo)', speak: 'Μπράβο' },
+    { num: 9, letter: 'ΝΤ ντ', sound: 'D (dog)', ex: 'Εντάξει (Okay)', speak: 'Εντάξει' }
+  ];
+
+  function renderBoxes(containerId, items) {
+    const el = document.getElementById(containerId);
+    items.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'letter-box';
+      div.onclick = () => speakGreek(item.speak);
+      div.innerHTML = `
+        <span class="box-num">${item.num}</span>
+        <div class="big-greek">${item.letter}</div>
+        <div class="sound-tag">${item.sound}</div>
+        <div class="example-tag">${item.ex}</div>
+        <button class="speak-btn" type="button">🔊 Listen</button>
+      `;
+      el.appendChild(div);
+    });
+  }
+  renderBoxes('falseFriendsGrid', falseFriends);
+  renderBoxes('uniqueLettersGrid', uniqueLetters);
+
+  const phrases = [
+    ['Καλημέρα', 'ka-lee-ME-ra', 'Good morning'],
+    ['Καλησπέρα', 'ka-lee-SPE-ra', 'Good evening'],
+    ['Καληνύχτα', 'ka-lee-NEEH-ta', 'Good night'],
+    ['Γεια σου / Γεια σας', 'YA-soo / YA-sas', 'Hello / Bye (informal / polite)'],
+    ['Τι κάνεις;', 'tee KA-nees', 'How are you?'],
+    ['Πολύ καλά, ευχαριστώ!', 'po-LEE ka-LA, ef-ha-ree-STO', 'Very well, thank you!'],
+    ['Παρακαλώ', 'pa-ra-ka-LO', "Please / You're welcome"],
+    ['Συγγνώμη', 'see-GNO-mee', 'Sorry / Excuse me'],
+    ['Ναι / Όχι / Εντάξει', 'neh / O-hee / en-DA-ksee', 'Yes / No / Okay'],
+    ['Μιλάω λίγο ελληνικά', 'mee-LA-o LEE-gho e-lee-nee-KA', 'I speak a little Greek'],
+    ['Δεν καταλαβαίνω', 'then ka-ta-la-VE-no', "I don't understand"],
+    ['Πιο αργά, παρακαλώ', 'pyo ar-GHA pa-ra-ka-LO', 'More slowly, please']
+  ];
+  const pBody = document.getElementById('phrasesBody');
+  phrases.forEach((p, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${idx + 1}</strong></td>
+      <td><strong>${p[0]}</strong></td>
+      <td>${p[1]}</td>
+      <td>${p[2]}</td>
+      <td><button class="speak-btn" onclick="speakGreek('${p[0].split('/')[0].trim()}')">🔊</button></td>
+    `;
+    pBody.appendChild(tr);
+  });
+
+  // 2. QUIZ DATA (8 Questions, Options Α Β Γ Δ)
+  const greekOptLabels = ['Α', 'Β', 'Γ', 'Δ'];
+  const quizQuestions = [
+    { q: 'Which letter sounds like "V" (as in vase)?', opts: ['Β β', 'Ρ ρ', 'Π π', 'Η η'], ans: 0, note: 'Β β (Vita) always sounds like V!' },
+    { q: 'How do you pronounce the Greek letter "Ρ ρ"?', opts: ['Like P', 'Like R', 'Like B', 'Like F'], ans: 1, note: 'Ρ ρ (Rho) is a rolled R!' },
+    { q: 'Which letter sounds like "TH" in "THINK"?', opts: ['Δ δ', 'Φ φ', 'Θ θ', 'Χ χ'], ans: 2, note: 'Θ θ (Theta) = th in think (Θάλασσα).' },
+    { q: 'How is the combination "ΟΥ / ου" pronounced?', opts: ['Like "oy"', 'Like "ow"', 'Like "oh"', 'Like "oo" in moon'], ans: 3, note: 'ΟΥ = oo as in Μουσική!' },
+    { q: 'What does "Ναι" mean in English?', opts: ['Yes', 'No', 'Night', 'Name'], ans: 0, note: 'Ναι sounds like "neh" and means YES!' },
+    { q: 'Which greeting do you use at 8:00 PM?', opts: ['Καλημέρα', 'Καλησπέρα', 'Καλή όρεξη', 'Καλό μεσημέρι'], ans: 1, note: 'Καλησπέρα = Good evening!' },
+    { q: 'How do you pronounce "ΜΠ" at the start of a word (Μπράβο)?', opts: ['M', 'P', 'B', 'V'], ans: 2, note: 'ΜΠ = B (Μπράβο = BRA-vo)!' },
+    { q: 'Which symbol is the Greek question mark?', opts: ['?', '!', ':', ';'], ans: 3, note: 'Greek uses the semicolon (;) as a question mark!' }
+  ];
+
+  const quizContainer = document.getElementById('quizContainer');
+  quizQuestions.forEach((item, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.innerHTML = `<div class="q-title"><span class="badge">${qIdx + 1}</span> ${item.q}</div>`;
+    const grid = document.createElement('div');
+    grid.className = 'opts-grid';
+    const fb = document.createElement('div');
+    fb.className = 'feedback';
+
+    item.opts.forEach((optText, oIdx) => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.innerHTML = `<span class="opt-letter">${greekOptLabels[oIdx]}</span> <span>${optText}</span>`;
+      btn.onclick = () => {
+        if (card.dataset.answered) return;
+        card.dataset.answered = 'true';
+        const allBtns = grid.querySelectorAll('button');
+        allBtns.forEach(b => b.disabled = true);
+        if (oIdx === item.ans) {
+          btn.classList.add('correct');
+          fb.className = 'feedback ok';
+          fb.textContent = '✅ Μπράβο! ' + item.note;
+          addPoint();
+        } else {
+          btn.classList.add('wrong');
+          allBtns[item.ans].classList.add('correct');
+          fb.className = 'feedback no';
+          fb.textContent = '❌ Not quite! Correct: ' + greekOptLabels[item.ans] + ' — ' + item.note;
+        }
+      };
+      grid.appendChild(btn);
+    });
+    card.appendChild(grid);
+    card.appendChild(fb);
+    quizContainer.appendChild(card);
+  });
+
+  // 3. MATCHING GAME (6 Pairs: 1-6 left, Α-Ζ right)
+  const matchPairs = [
+    { id: 1, el: 'Ευχαριστώ', en: 'Thank you' },
+    { id: 2, el: 'Παρακαλώ', en: "Please / You're welcome" },
+    { id: 3, el: 'Συγγνώμη', en: 'Sorry / Excuse me' },
+    { id: 4, el: 'Δεν καταλαβαίνω', en: "I don't understand" },
+    { id: 5, el: 'Πιο αργά', en: 'More slowly' },
+    { id: 6, el: 'Εντάξει', en: 'Okay / Alright' }
+  ];
+  const rightOrder = [
+    { label: 'Α', id: 4, en: "I don't understand" },
+    { label: 'Β', id: 1, en: 'Thank you' },
+    { label: 'Γ', id: 6, en: 'Okay / Alright' },
+    { label: 'Δ', id: 2, en: "Please / You're welcome" },
+    { label: 'Ε', id: 5, en: 'More slowly' },
+    { label: 'Ζ', id: 3, en: 'Sorry / Excuse me' }
+  ];
+
+  let selectedLeft = null;
+  const matchLeft = document.getElementById('matchLeft');
+  const matchRight = document.getElementById('matchRight');
+  const matchMsg = document.getElementById('matchMsg');
+
+  matchPairs.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'match-item';
+    btn.dataset.id = p.id;
+    btn.innerHTML = `<span class="opt-letter">${p.id}</span> <span>${p.el}</span>`;
+    btn.onclick = () => {
+      if (btn.classList.contains('matched')) return;
+      speakGreek(p.el);
+      document.querySelectorAll('#matchLeft .match-item').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedLeft = btn;
+      matchMsg.textContent = `Selected #${p.id} (${p.el}) — now choose its English match (Α–Ζ)!`;
+      matchMsg.className = 'feedback';
+    };
+    matchLeft.appendChild(btn);
+  });
+
+  rightOrder.forEach(r => {
+    const btn = document.createElement('button');
+    btn.className = 'match-item';
+    btn.dataset.id = r.id;
+    btn.innerHTML = `<span class="opt-letter">${r.label}</span> <span>${r.en}</span>`;
+    btn.onclick = () => {
+      if (btn.classList.contains('matched') || !selectedLeft) return;
+      if (selectedLeft.dataset.id === btn.dataset.id) {
+        selectedLeft.classList.remove('selected');
+        selectedLeft.classList.add('matched');
+        btn.classList.add('matched');
+        selectedLeft = null;
+        matchMsg.textContent = '✅ Τέλεια! Perfect match!';
+        matchMsg.className = 'feedback ok';
+        addPoint();
+      } else {
+        btn.classList.add('wrong-flash');
+        matchMsg.textContent = '❌ Try again! Look closely at the Greek phrase.';
+        matchMsg.className = 'feedback no';
+        setTimeout(() => btn.classList.remove('wrong-flash'), 600);
+      }
+    };
+    matchRight.appendChild(btn);
+  });
+
+  // 4. FILL IN THE BLANKS (8 Sentences, numbered 1-8 with Α, Β, Γ choices)
+  const fillItems = [
+    { pre: 'Μιλάω', post: 'ελληνικά. (I speak a little Greek.)', opts: ['Α. λίγο', 'Β. ναι', 'Γ. αντίο'], ans: 'Α. λίγο' },
+    { pre: 'Από', post: 'είσαι; (Where are you from?)', opts: ['Α. τι', 'Β. πού', 'Γ. πώς'], ans: 'Β. πού' },
+    { pre: 'Είμαι πολύ', post: ', ευχαριστώ! (I am very well!)', opts: ['Α. όχι', 'Β. αργά', 'Γ. καλά'], ans: 'Γ. καλά' },
+    { pre: 'Ένα', post: ', παρακαλώ. (One water, please.)', opts: ['Α. νερό', 'Β. γεια', 'Γ. ναι'], ans: 'Α. νερό' },
+    { pre: 'Πιο', post: ', παρακαλώ! (More slowly, please!)', opts: ['Α. καλά', 'Β. αργά', 'Γ. πολύ'], ans: 'Β. αργά' },
+    { pre: '', post: 'πολύ! (Nice to meet you!)', opts: ['Α. Μπράβο', 'Β. Εντάξει', 'Γ. Χαίρω'], ans: 'Γ. Χαίρω' },
+    { pre: 'Πόσο', post: '; (How much does it cost?)', opts: ['Α. κάνει', 'Β. είσαι', 'Γ. λένε'], ans: 'Α. κάνει' },
+    { pre: 'Καλή', post: '! (Enjoy your meal!)', opts: ['Α. νύχτα', 'Β. όρεξη', 'Γ. μέρα'], ans: 'Β. όρεξη' }
+  ];
+
+  const fillContainer = document.getElementById('fillContainer');
+  fillItems.forEach((f, idx) => {
+    const row = document.createElement('div');
+    row.className = 'fill-row';
+    const sel = document.createElement('select');
+    sel.className = 'fill-select';
+    sel.innerHTML = `<option value="">-- Choose (Α/Β/Γ) --</option>` + f.opts.map(o => `<option value="${o}">${o}</option>`).join('');
+    const btn = document.createElement('button');
+    btn.className = 'check-btn';
+    btn.textContent = 'Check';
+    const res = document.createElement('span');
+    res.style.fontWeight = '700';
+
+    btn.onclick = () => {
+      if (!sel.value) return;
+      if (sel.value === f.ans) {
+        if (!row.dataset.done) {
+          row.dataset.done = 'true';
+          addPoint();
+        }
+        sel.disabled = true;
+        btn.disabled = true;
+        res.textContent = '✅ Σωστό!';
+        res.style.color = '#16a34a';
+      } else {
+        res.textContent = '❌ Try again!';
+        res.style.color = '#dc2626';
+      }
+    };
+
+    row.innerHTML = `<span class="badge">${idx + 1}</span> <span>${f.pre}</span>`;
+    row.appendChild(sel);
+    const postSpan = document.createElement('span');
+    postSpan.textContent = f.post;
+    row.appendChild(postSpan);
+    row.appendChild(btn);
+    row.appendChild(res);
+    fillContainer.appendChild(row);
+  });
+
+  // 5. DECODING CHALLENGE (8 Cards)
+  const decodeWords = [
+    { num: 1, gr: 'ΤΑΞΙ', pron: 'ta-KSEE', en: 'Taxi' },
+    { num: 2, gr: 'ΜΕΤΡΟ', pron: 'me-TRO', en: 'Metro' },
+    { num: 3, gr: 'ΦΑΡΜΑΚΕΙΟ', pron: 'far-ma-KEE-o', en: 'Pharmacy' },
+    { num: 4, gr: 'ΕΞΟΔΟΣ', pron: 'EK-so-thos', en: 'Exit' },
+    { num: 5, gr: 'ΕΙΣΟΔΟΣ', pron: 'EE-so-thos', en: 'Entrance' },
+    { num: 6, gr: 'ΠΑΓΩΤΟ', pron: 'pa-gho-TO', en: 'Ice cream' },
+    { num: 7, gr: 'ΣΟΚΟΛΑΤΑ', pron: 'so-ko-LA-ta', en: 'Chocolate' },
+    { num: 8, gr: 'ΕΛΛΑΔΑ', pron: 'e-LA-tha', en: 'Greece' }
+  ];
+  const decodeGrid = document.getElementById('decodeGrid');
+  decodeWords.forEach(w => {
+    const div = document.createElement('div');
+    div.className = 'letter-box';
+    div.innerHTML = `
+      <span class="box-num">${w.num}</span>
+      <div class="big-greek" style="font-size:1.55rem;">${w.gr}</div>
+      <div class="sound-tag" style="display:none;" id="rev-${w.num}">${w.pron} — ${w.en}</div>
+      <button class="speak-btn" type="button">🔊 Hear &amp; Reveal</button>
+    `;
+    div.onclick = () => {
+      speakGreek(w.gr);
+      document.getElementById(`rev-${w.num}`).style.display = 'block';
+    };
+    decodeGrid.appendChild(div);
+  });
+</script>
+</body>
+</html>
