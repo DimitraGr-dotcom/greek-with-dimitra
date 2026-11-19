@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ελληνικά — Μαριάμ | Ορθογραφία & Επανάληψη (Screen-Share Ready)</title>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #eff6ff;
+            --accent: #d97706;
+            --accent-bg: #fef3c7;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --success: #15803d;
+            --success-bg: #dcfce7;
+            --error: #b91c1c;
+            --error-bg: #fee2e2;
+            --border: #cbd5e1;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 28px 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 6px 18px rgba(30, 58, 138, 0.2);
+        }
+        header h1 { margin: 0; font-size: 1.8rem; }
+        header p { margin: 5px 0 0; opacity: 0.9; font-size: 1.05rem; }
+        .global-score {
+            background: rgba(255,255,255,0.18);
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255,255,255,0.35);
+        }
+        .progress-wrap {
+            background: #e2e8f0;
+            height: 14px;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #16a34a, #22c55e);
+            transition: width 0.35s ease;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .tab-btn {
+            padding: 13px 20px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            background: white;
+            color: var(--text);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(30, 64, 175, 0.25);
+        }
+        .section {
+            display: none;
+            background: var(--card);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+            border: 1px solid var(--border);
+        }
+        .section.active { display: block; }
+        h2 { color: var(--primary); margin-top: 0; font-size: 1.65rem; border-bottom: 3px solid var(--primary-light); padding-bottom: 10px; }
+        
+        /* Theory boxes */
+        .rule-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-left: 7px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 22px;
+        }
+        .rule-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .num-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            padding: 0 10px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .letter-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--accent-bg);
+            color: var(--accent);
+            border: 2px solid #f59e0b;
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; background: white; font-size: 1.05rem; }
+        th, td { border: 1px solid var(--border); padding: 12px 14px; text-align: left; }
+        th { background: var(--primary); color: white; }
+        tr:nth-child(even) { background: #f8fafc; }
+        .hl { color: #b91c1c; font-weight: 800; }
+        .geo { color: #475569; font-style: italic; font-size: 0.95rem; }
+        
+        /* Dialogue lines */
+        .dialogue-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 18px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+        
+        /* Quiz */
+        .q-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 24px;
+            background: #ffffff;
+        }
+        .q-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .opts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        @media (max-width: 720px) { .opts-grid { grid-template-columns: 1fr; } }
+        .opt-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.18s;
+            color: var(--text);
+        }
+        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-light); }
+        .opt-btn.correct { background: var(--success-bg) !important; border-color: var(--success) !important; color: var(--success) !important; }
+        .opt-btn.correct .letter-badge { background: var(--success); color: white; border-color: var(--success); }
+        .opt-btn.wrong { background: var(--error-bg) !important; border-color: var(--error) !important; color: var(--error) !important; }
+        .opt-btn.wrong .letter-badge { background: var(--error); color: white; border-color: var(--error); }
+        .q-feedback {
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            padding: 10px 14px;
+            border-radius: 8px;
+            display: none;
+        }
+        .q-feedback.show { display: block; }
+        .q-feedback.ok { background: var(--success-bg); color: var(--success); }
+        .q-feedback.no { background: var(--error-bg); color: var(--error); }
+
+        /* Matching */
+        .match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 18px;
+        }
+        .match-col { display: flex; flex-direction: column; gap: 12px; }
+        .match-box {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.18s;
+        }
+        .match-box:hover { border-color: var(--primary); background: var(--primary-light); }
+        .match-box.selected { border-color: var(--primary); background: #dbeafe; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25); }
+        .match-box.matched { background: var(--success-bg); border-color: var(--success); color: var(--success); cursor: default; }
+        .match-box.matched .num-badge, .match-box.matched .letter-badge { background: var(--success); color: white; border-color: var(--success); }
+        .match-box.shake { border-color: var(--error); background: var(--error-bg); }
+
+        .section-footer {
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+        .reset-btn {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .reset-btn:hover { background: #1e3a8a; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div>
+            <h1>Ελληνικά με τη Μαριάμ — Ορθογραφία & Επανάληψη</h1>
+            <p>Screen-Sharing Mode • Αρίθμηση 1, 2, 3… και Α, Β, Γ, Δ σε όλες τις ασκήσεις</p>
+        </div>
+        <div class="global-score" id="global-score">Συνολικό Σκορ: 0 / 55</div>
+    </header>
+
+    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('tab-theory', this)">1. Θεωρία Ορθογραφίας</button>
+        <button class="tab-btn" onclick="openTab('tab-dialogue', this)">2. Διάλογος & Προφορικά</button>
+        <button class="tab-btn" onclick="openTab('tab-q1', this)">3. Κουίζ Ορθογραφίας (15)</button>
+        <button class="tab-btn" onclick="openTab('tab-q2', this)">4. Βρες το Σωστό (15)</button>
+        <button class="tab-btn" onclick="openTab('tab-q3', this)">5. Γενική Επανάληψη (15)</button>
+        <button class="tab-btn" onclick="openTab('tab-match', this)">6. Αντιστοίχιση (10)</button>
+    </div>
+
+    <!-- TAB 1: THEORY -->
+    <div id="tab-theory" class="section active">
+        <h2>Βασικοί Κανόνες Ορθογραφίας (Spelling Rules / მართლწერა)</h2>
+
+        <div class="rule-card">
+            <div class="rule-title"><span class="num-badge">1</span> Ρήματα στον Ενεστώτα (Verb Endings / ზმნის დაბოლოებები)</div>
+            <table>
+                <tr><th>Πρόσωπο</th><th>Κατάληξη</th><th>Παραδείγματα</th><th>Εξαίρεση: είμαι (მე ვარ)</th></tr>
+                <tr><td>1. Εγώ (I)</td><td><span class="hl">-ω</span> (πάντα ω)</td><td>έχ<span class="hl">ω</span>, θέλ<span class="hl">ω</span>, δουλεύ<span class="hl">ω</span></td><td><span class="hl">εί</span>μ<span class="hl">αι</span></td></tr>
+                <tr><td>2. Εσύ (You)</td><td><span class="hl">-εις</span> (πάντα ει)</td><td>έχ<span class="hl">εις</span>, θέλ<span class="hl">εις</span>, κάν<span class="hl">εις</span></td><td><span class="hl">εί</span>σ<span class="hl">αι</span></td></tr>
+                <tr><td>3. Αυτός/ή/ό</td><td><span class="hl">-ει</span> (πάντα ει)</td><td>έχ<span class="hl">ει</span>, θέλ<span class="hl">ει</span>, κάν<span class="hl">ει</span></td><td><span class="hl">εί</span>ν<span class="hl">αι</span></td></tr>
+                <tr><td>4. Εμείς (We)</td><td><span class="hl">-ουμε</span> (με ε)</td><td>έχ<span class="hl">ουμε</span>, θέλ<span class="hl">ουμε</span></td><td><span class="hl">εί</span>μαστ<span class="hl">ε</span></td></tr>
+                <tr><td>5. Εσείς (You pl.)</td><td><span class="hl">-ετε</span> (με ε)</td><td>έχ<span class="hl">ετε</span>, θέλ<span class="hl">ετε</span></td><td><span class="hl">εί</span>στ<span class="hl">ε</span></td></tr>
+                <tr><td>6. Αυτοί/ές/ά</td><td><span class="hl">-ουν</span></td><td>έχ<span class="hl">ουν</span>, θέλ<span class="hl">ουν</span></td><td><span class="hl">εί</span>ν<span class="hl">αι</span></td></tr>
+            </table>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title"><span class="num-badge">2</span> Άρθρα & Καταλήξεις Ουσιαστικών (Ενικός & Πληθυντικός)</div>
+            <table>
+                <tr><th>Γένος</th><th>Ενικός (მხოლობითი)</th><th>Πληθυντικός (მრავლობითი)</th><th>Χρυσός Κανόνας</th></tr>
+                <tr><td>Α. Αρσενικό (Masc.)</td><td><b>ο</b> φίλ<span class="hl">ος</span>, <b>ο</b> πελάτ<span class="hl">ης</span>, <b>ο</b> μήν<span class="hl">ας</span></td><td><b>οι</b> φίλ<span class="hl">οι</span>, <b>οι</b> πελάτ<span class="hl">ες</span>, <b>οι</b> μήν<span class="hl">ες</span></td><td>ο → οι | -ος → -οι | -ης/-ας → -ες</td></tr>
+                <tr><td>Β. Θηλυκό (Fem.)</td><td><b>η</b> τράπεζ<span class="hl">α</span>, <b>η</b> μέρ<span class="hl">α</span></td><td><b>οι</b> τράπεζ<span class="hl">ες</span>, <b>οι</b> μέρ<span class="hl">ες</span></td><td>η → οι | -α/-η → -ες</td></tr>
+                <tr><td>Γ. Ουδέτερο (Neut.)</td><td><b>το</b> γραφεί<span class="hl">ο</span>, <b>το</b> ταξίδ<span class="hl">ι</span>, <b>το</b> όνο<span class="hl">μα</span></td><td><b>τα</b> γραφεί<span class="hl">α</span>, <b>τα</b> ταξίδ<span class="hl">ια</span>, <b>τα</b> ονό<span class="hl">ματα</span></td><td>το → τα | -ο → -α | -ι → -ια | -μα → -ματα</td></tr>
+            </table>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title"><span class="num-badge">3</span> Οι 3 «Οικογένειες» Ήχων (Same Sound, Different Letters)</div>
+            <p><strong>Α. Ήχος [i]:</strong> ι, η, υ, ει, οι → <em>η ημέρα, είμαι, οι φίλοι, το τυρί</em></p>
+            <p><strong>Β. Ήχος [e]:</strong> ε, αι → <em>και (და), είμαι, δεν (არ), μέρα</em></p>
+            <p><strong>Γ. Ήχος [o]:</strong> ο, ω → <em>Εγώ θέλ<span class="hl">ω</span> (ρήμα = ω) vs Το νερ<span class="hl">ό</span> (ουδέτερο = ο), οκτ<span class="hl">ώ</span> (8)</em></p>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title"><span class="num-badge">4</span> Συχνά Λάθη (Common Mistakes)</div>
+            <p><strong>1.</strong> ❌ θέλο → ✅ <span class="hl">θέλω</span> &nbsp;|&nbsp; <strong>2.</strong> ❌ είνε → ✅ <span class="hl">είναι</span> &nbsp;|&nbsp; <strong>3.</strong> ❌ η φίλοι → ✅ <span class="hl">οι φίλοι</span> &nbsp;|&nbsp; <strong>4.</strong> ❌ το βιβλίω → ✅ <span class="hl">το βιβλίο</span></p>
+        </div>
+    </div>
+
+    <!-- TAB 2: DIALOGUE -->
+    <div id="tab-dialogue" class="section">
+        <h2>Διάλογος: Στην Τράπεζα (At the Bank / ბანკში)</h2>
+        <div class="dialogue-line"><span class="num-badge">1</span><div><strong>Πελάτης:</strong> Καλημέρα σας! Έχω ένα ραντεβού σήμερα, Τρίτη, στις έντεκα.</div></div>
+        <div class="dialogue-line"><span class="num-badge">2</span><div><strong>Μαριάμ:</strong> Καλημέρα! Πώς λέγεστε, παρακαλώ;</div></div>
+        <div class="dialogue-line"><span class="num-badge">3</span><div><strong>Πελάτης:</strong> Με λένε Νίκο. Θέλω να ανοίξω έναν νέο λογαριασμό και να πάρω μία κάρτα.</div></div>
+        <div class="dialogue-line"><span class="num-badge">4</span><div><strong>Μαριάμ:</strong> Πολύ ωραία. Έχετε μαζί σας τα έγγραφα;</div></div>
+        <div class="dialogue-line"><span class="num-badge">5</span><div><strong>Πελάτης:</strong> Ναι, έχω την ταυτότητα και δύο φωτογραφίες.</div></div>
+        <div class="dialogue-line"><span class="num-badge">6</span><div><strong>Μαριάμ:</strong> Τέλεια! Η νέα κάρτα είναι έτοιμη την Παρασκευή ή τη Δευτέρα.</div></div>
+        <div class="dialogue-line"><span class="num-badge">7</span><div><strong>Πελάτης:</strong> Ευχαριστώ πολύ! Καλή συνέχεια.</div></div>
+        <div class="dialogue-line"><span class="num-badge">8</span><div><strong>Μαριάμ:</strong> Παρακαλώ, καλή σας μέρα!</div></div>
+
+        <h2 style="margin-top:32px;">Προφορικές Ερωτήσεις (Speaking Practice)</h2>
+        <div class="dialogue-line"><span class="letter-badge">Α</span><div>Τι μέρα είναι σήμερα και τι ημερομηνία έχουμε; <span class="geo">(What day and date is today?)</span></div></div>
+        <div class="dialogue-line"><span class="letter-badge">Β</span><div>Ποιες μέρες δουλεύεις και τι ώρα ξεκινάς; <span class="geo">(Which days do you work and what time do you start?)</span></div></div>
+        <div class="dialogue-line"><span class="letter-badge">Γ</span><div>Ποιος είναι ο αγαπημένος σου μήνας και γιατί; <span class="geo">(What is your favorite month and why?)</span></div></div>
+        <div class="dialogue-line"><span class="letter-badge">Δ</span><div>Τι έχεις πάντα πάνω στο γραφείο σου; <span class="geo">(What do you always have on your desk?)</span></div></div>
+    </div>
+
+    <!-- TAB 3: QUIZ 1 -->
+    <div id="tab-q1" class="section">
+        <h2>3. Κουίζ Ορθογραφίας (15 Ερωτήσεις • Επίλεξε Α, Β, Γ ή Δ)</h2>
+        <div id="container-q1"></div>
+        <div class="section-footer">
+            <span id="score-q1">Σκορ Ενότητας: 0 / 15</span>
+            <button class="reset-btn" onclick="resetQuiz('q1')">Επανάληψη Άσκησης</button>
+        </div>
+    </div>
+
+    <!-- TAB 4: QUIZ 2 -->
+    <div id="tab-q2" class="section">
+        <h2>4. Βρες τη Σωστή Πρόταση (15 Ερωτήσεις • Επίλεξε Α, Β, Γ ή Δ)</h2>
+        <div id="container-q2"></div>
+        <div class="section-footer">
+            <span id="score-q2">Σκορ Ενότητας: 0 / 15</span>
+            <button class="reset-btn" onclick="resetQuiz('q2')">Επανάληψη Άσκησης</button>
+        </div>
+    </div>
+
+    <!-- TAB 5: QUIZ 3 -->
+    <div id="tab-q3" class="section">
+        <h2>5. Γενική Επανάληψη Ύλης (15 Ερωτήσεις • Επίλεξε Α, Β, Γ ή Δ)</h2>
+        <div id="container-q3"></div>
+        <div class="section-footer">
+            <span id="score-q3">Σκορ Ενότητας: 0 / 15</span>
+            <button class="reset-btn" onclick="resetQuiz('q3')">Επανάληψη Άσκησης</button>
+        </div>
+    </div>
+
+    <!-- TAB 6: MATCHING -->
+    <div id="tab-match" class="section">
+        <h2>6. Παιχνίδι Αντιστοίχισης (10 Ζευγάρια • Πες π.χ. «1 με Γ»)</h2>
+        <p style="color: var(--muted); margin-top: 0;">Επίλεξε ένα κουτί από τους <strong>Αριθμούς (1–10)</strong> και το σωστό ταίρι από τα <strong>Γράμματα (Α–Κ)</strong>.</p>
+        <div class="match-grid">
+            <div class="match-col" id="match-left"></div>
+            <div class="match-col" id="match-right"></div>
+        </div>
+        <div class="section-footer">
+            <span id="score-match">Σκορ Αντιστοίχισης: 0 / 10</span>
+            <button class="reset-btn" onclick="initMatch()">Επανάληψη Παιχνιδιού</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const GREEK_LETTERS = ['Α', 'Β', 'Γ', 'Δ'];
+    const MATCH_LETTERS = ['Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ζ', 'Η', 'Θ', 'Ι', 'Κ'];
+
+    const quizzes = {
+        q1: [{"q": "Ποιο είναι σωστά γραμμένο; (I want)", "opts": ["θέλο", "θέλω", "θαίλω", "θέλοι"], "a": 1, "exp": "Τα ρήματα στο «εγώ» τελειώνουν πάντα σε -ω."}, {"q": "Ποιο είναι σωστά γραμμένο; (You have)", "opts": ["έχης", "έχις", "έχεις", "αίχεις"], "a": 2, "exp": "Τα ρήματα στο «εσύ» τελειώνουν πάντα σε -εις."}, {"q": "Ποιο είναι σωστά γραμμένο; (He/She is)", "opts": ["είνε", "ίνε", "ήναι", "είναι"], "a": 3, "exp": "Το «είναι» γράφεται με ει- και -αι."}, {"q": "Ποιο είναι σωστά γραμμένο; (The friends - masc.)", "opts": ["οι φίλοι", "η φίλοι", "οι φίλη", "ι φίλοι"], "a": 0, "exp": "Αρσενικός πληθυντικός: οι ...-οι."}, {"q": "Ποιο είναι σωστά γραμμένο; (The water)", "opts": ["το νερώ", "τω νερό", "το νερό", "το ναιρό"], "a": 2, "exp": "Τα ουδέτερα σε -ο γράφονται πάντα με ο (όχι ω)."}, {"q": "Ποιο είναι σωστά γραμμένο; (Good morning)", "opts": ["Καλιμέρα", "Καλημέρα", "Καλημαίρα", "Καλυμέρα"], "a": 1, "exp": "καλή + μέρα -> Καλημέρα."}, {"q": "Ποιο είναι σωστά γραμμένο; (We have)", "opts": ["έχουμαι", "έχομε", "αίχουμε", "έχουμε"], "a": 3, "exp": "Κατάληξη ρημάτων «εμείς»: -ουμε (με ε)."}, {"q": "Ποιο είναι σωστά γραμμένο; (You pl. are)", "opts": ["είστε", "είσται", "ίστε", "ήστε"], "a": 0, "exp": "είστε: με ει- και -ε."}, {"q": "Ποιο είναι σωστά γραμμένο; (The children)", "opts": ["τα πεδιά", "τα παιδειά", "τα παιδιά", "τα πεδειά"], "a": 2, "exp": "παιδί -> παιδιά (με αι)."}, {"q": "Ποιο είναι σωστά γραμμένο; (Tuesday)", "opts": ["Τρίτι", "Τρήτη", "Τρύτη", "Τρίτη"], "a": 3, "exp": "Τρίτη (ι, η)."}, {"q": "Ποιο είναι σωστά γραμμένο; (Twenty)", "opts": ["είκοσι", "ίκοσι", "είκωσι", "είκοση"], "a": 0, "exp": "είκοσι (ει, ο, ι)."}, {"q": "Ποιο είναι σωστά γραμμένο; (Thank you)", "opts": ["Ευχαριστό", "Ευχαριστώ", "Εφχαριστώ", "Ευχαρηστώ"], "a": 1, "exp": "Ρήμα στο «εγώ» -> τελειώνει σε -ώ."}, {"q": "Ποιο είναι σωστά γραμμένο; (The days)", "opts": ["η μέρες", "ι μέρες", "οι μέρες", "οι μαίρες"], "a": 2, "exp": "Θηλυκός πληθυντικός: οι ...-ες."}, {"q": "Ποιο είναι σωστά γραμμένο; (And)", "opts": ["κε", "κεί", "καί", "και"], "a": 3, "exp": "Η λέξη «και» γράφεται πάντα με αι (χωρίς τόνο)."}, {"q": "Ποιο είναι σωστά γραμμένο; (Eight)", "opts": ["οκτώ", "οκτό", "ωκτώ", "οχτό"], "a": 0, "exp": "οκτώ (ο, ω)."}],
+        q2: [{"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Εγώ θέλο νερό.", "Εγώ θέλω νερό.", "Εγώ θαίλω νερό.", "Εγώ θέλω νερώ."], "a": 1, "exp": "θέλω (-ω) και νερό (-ο)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Η φίλοι μου είναι εδώ.", "Οι φίλη μου είναι εδώ.", "Οι φίλοι μου είναι εδώ.", "Οι φίλοι μου είνε εδώ."], "a": 2, "exp": "Οι φίλοι μου είναι εδώ."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Εσύ έχης ένα βιβλίο.", "Εσύ έχεις ένα βιβλίω.", "Εσύ έχεις ένα βιβλίο.", "Εσύ έχις ένα βιβλίο."], "a": 2, "exp": "έχεις (-εις) και βιβλίο (-ο)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Είμαι από τη Γεωργία.", "Ίμαι από τη Γεωργία.", "Είμε από τη Γεωργία.", "Ήμαι από τη Γεωργία."], "a": 0, "exp": "Είμαι (ει-, -αι)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Η τράπεζα είνε ανοιχτή.", "Ι τράπεζα είναι ανοιχτή.", "Η τράπαιζα είναι ανοιχτή.", "Η τράπεζα είναι ανοιχτή."], "a": 3, "exp": "Η τράπεζα είναι ανοιχτή."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Εμείς δουλεύουμε τη Δευτέρα.", "Εμείς δουλεύουμαι τη Δευτέρα.", "Εμείς δουλέβουμε τη Δευτέρα.", "Εμίς δουλεύουμε τη Δευτέρα."], "a": 0, "exp": "Εμείς δουλεύουμε (-ουμε)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Αυτή θέλη έναν καφέ.", "Αυτή θέλει έναν καφέ.", "Αυτή θέλι έναν καφέ.", "Αυτί θέλει έναν καφέ."], "a": 1, "exp": "Αυτή θέλει (-ει)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Τα πεδιά είναι στο σπίτι.", "Τα παιδιά είνε στο σπίτι.", "Τα παιδιά είναι στο σπίτι.", "Οι παιδιά είναι στο σπίτι."], "a": 2, "exp": "Τα παιδιά είναι στο σπίτι."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Εσείς είσται έτοιμοι;", "Εσείς ίστε έτοιμοι;", "Εσείς είστε έτοιμη;", "Εσείς είστε έτοιμοι;"], "a": 3, "exp": "Εσείς είστε έτοιμοι;"}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Έχω ραντεβού την Πέμπτη.", "Έχο ραντεβού την Πέμπτη.", "Έχω ραντεβού την Πέμπτι.", "Έχω ραντεβού τιν Πέμπτη."], "a": 0, "exp": "Έχω (-ω) και Πέμπτη (-η)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Ο μήνας έχει τριάντα μέραις.", "Ο μήνας έχει τριάντα μέρες.", "Ο μίνας έχει τριάντα μέρες.", "Ο μήνας έχη τριάντα μέρες."], "a": 1, "exp": "Ο μήνας έχει τριάντα μέρες."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Καλισπέρα, τι κάνεις;", "Καλησπαίρα, τι κάνεις;", "Καλησπέρα, τι κάνεις;", "Καλησπέρα, τι κάνης;"], "a": 2, "exp": "Καλησπέρα, τι κάνεις;"}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Οι πελάτες θέλουν κάρτα.", "Η πελάτες θέλουν κάρτα.", "Οι πελάταις θέλουν κάρτα.", "Οι πελάτες θαίλουν κάρτα."], "a": 0, "exp": "Οι πελάτες θέλουν κάρτα."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Το γραφείω είναι μεγάλο.", "Το γραφείο είναι μεγάλω.", "Το γραφείο είναι μεγάλο.", "Τω γραφείο είναι μεγάλο."], "a": 2, "exp": "Το γραφείο είναι μεγάλο (-ο)."}, {"q": "Βρες τη ΣΩΣΤΗ πρόταση:", "opts": ["Ευχαριστό πολύ και αντίο!", "Ευχαριστώ πολύ κε αντίο!", "Ευχαριστώ πολύ και αντίω!", "Ευχαριστώ πολύ και αντίο!"], "a": 3, "exp": "Ευχαριστώ (-ώ), και (-αι), αντίο (-ο)."}],
+        q3: [{"q": "Ποιος είναι ο πληθυντικός: «ο πελάτης»;", "opts": ["οι πελάτες", "οι πελάτοι", "τα πελάτες", "η πελάτες"], "a": 0, "exp": "Τα αρσενικά σε -ης κάνουν πληθυντικό σε -ες."}, {"q": "Ποιος είναι ο πληθυντικός: «το ταξίδι»;", "opts": ["οι ταξίδια", "τα ταξίδια", "τα ταξίδι", "τα ταξίδες"], "a": 1, "exp": "Τα ουδέτερα σε -ι κάνουν πληθυντικό σε -ια."}, {"q": "Ποια μέρα είναι μετά την Τετάρτη;", "opts": ["Τρίτη", "Παρασκευή", "Πέμπτη", "Δευτέρα"], "a": 2, "exp": "Τετάρτη -> Πέμπτη."}, {"q": "Ποιος αριθμός είναι το «εβδομήντα πέντε»;", "opts": ["57", "65", "85", "75"], "a": 3, "exp": "εβδομήντα (70) + πέντε (5) = 75."}, {"q": "Συμπλήρωσε: «_____ συνάδελφοί μου δουλεύουν εδώ.»", "opts": ["Οι", "Η", "Τα", "Ο"], "a": 0, "exp": "Αρσενικός πληθυντικός -> Οι."}, {"q": "Ποιος είναι ο 10ος μήνας του χρόνου;", "opts": ["Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Αύγουστος"], "a": 1, "exp": "Ο Οκτώβριος είναι ο δέκατος μήνας."}, {"q": "Συμπλήρωσε: «Εμείς _____ από την Ελλάδα.»", "opts": ["είστε", "είναι", "είμαστε", "είμαι"], "a": 2, "exp": "Εμείς είμαστε."}, {"q": "Ποιος είναι ο πληθυντικός: «η τράπεζα»;", "opts": ["τα τράπεζες", "οι τράπεζα", "η τράπεζες", "οι τράπεζες"], "a": 3, "exp": "Θηλυκός πληθυντικός: οι τράπεζες."}, {"q": "Πώς λέμε το 90 στα ελληνικά;", "opts": ["ενενήντα", "ογδόντα", "εξήντα", "εννέα"], "a": 0, "exp": "90 = ενενήντα."}, {"q": "Συμπλήρωσε: «Εσύ _____ έναν καφέ;» (Do you want)", "opts": ["θέλω", "θέλεις", "θέλει", "θέλετε"], "a": 1, "exp": "Εσύ θέλεις."}, {"q": "Ποιος είναι ο πληθυντικός: «το όνομα»;", "opts": ["τα όνομα", "οι ονόματα", "τα ονόματα", "τα ονόμες"], "a": 2, "exp": "Ουδέτερα σε -μα -> -ματα (τα ονόματα)."}, {"q": "Ποιος μήνας είναι πριν από τον Μάρτιο;", "opts": ["Ιανουάριος", "Απρίλιος", "Μάιος", "Φεβρουάριος"], "a": 3, "exp": "Φεβρουάριος -> Μάρτιος."}, {"q": "Συμπλήρωσε: «_____ έγγραφα είναι έτοιμα.»", "opts": ["Τα", "Οι", "Το", "Η"], "a": 0, "exp": "Ουδέτερος πληθυντικός: Τα έγγραφα."}, {"q": "Πώς λέμε «Good evening» στα ελληνικά;", "opts": ["Καλημέρα", "Καλησπέρα", "Καληνύχτα", "Αντίο"], "a": 1, "exp": "Καλησπέρα = Good evening."}, {"q": "Συμπλήρωσε: «Αυτοί _____ ραντεβού στις 12.» (have)", "opts": ["έχω", "έχουμε", "έχουν", "έχει"], "a": 2, "exp": "Αυτοί έχουν."}]
+    };
+
+    const matchLeftData = [{"id": 1, "text": "ο λογαριασμός"}, {"id": 2, "text": "η κάρτα"}, {"id": 3, "text": "το γραφείο"}, {"id": 4, "text": "ο πελάτης"}, {"id": 5, "text": "το ταξίδι"}, {"id": 6, "text": "Εγώ (έχω)"}, {"id": 7, "text": "Εσύ (θέλω)"}, {"id": 8, "text": "Αυτός (είμαι)"}, {"id": 9, "text": "40"}, {"id": 10, "text": "Wednesday"}];
+    const matchRightData = [{"id": 7, "text": "θέλεις (με -εις)"}, {"id": 8, "text": "είναι (με ει-, -αι)"}, {"id": 3, "text": "τα γραφεία"}, {"id": 2, "text": "οι κάρτες"}, {"id": 5, "text": "τα ταξίδια"}, {"id": 1, "text": "οι λογαριασμοί"}, {"id": 9, "text": "σαράντα"}, {"id": 6, "text": "έχω (με -ω)"}, {"id": 4, "text": "οι πελάτες"}, {"id": 10, "text": "Τετάρτη (με -η)"}];
+
+    const scores = { q1: 0, q2: 0, q3: 0, match: 0 };
+    const answered = { q1: 0, q2: 0, q3: 0, match: 0 };
+    const TOTAL_ITEMS = 55;
+
+    function openTab(tabId, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function updateGlobal() {
+        const totalScore = scores.q1 + scores.q2 + scores.q3 + scores.match;
+        const totalAns = answered.q1 + answered.q2 + answered.q3 + answered.match;
+        document.getElementById('global-score').innerText = `Συνολικό Σκορ: ${totalScore} / ${TOTAL_ITEMS}`;
+        document.getElementById('progress-bar').style.width = `${(totalAns / TOTAL_ITEMS) * 100}%`;
+    }
+
+    function renderQuiz(key) {
+        const container = document.getElementById(`container-${key}`);
+        container.innerHTML = '';
+        scores[key] = 0;
+        answered[key] = 0;
+        document.getElementById(`score-${key}`).innerText = `Σκορ Ενότητας: 0 / ${quizzes[key].length}`;
+
+        quizzes[key].forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'q-card';
+            card.innerHTML = `<div class="q-header"><span class="num-badge">${idx + 1}</span><span>${item.q}</span></div>`;
+
+            const grid = document.createElement('div');
+            grid.className = 'opts-grid';
+
+            const fb = document.createElement('div');
+            fb.className = 'q-feedback';
+
+            item.opts.forEach((opt, optIdx) => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerHTML = `<span class="letter-badge">${GREEK_LETTERS[optIdx]}</span><span>${opt}</span>`;
+                btn.onclick = () => {
+                    const allBtns = grid.querySelectorAll('.opt-btn');
+                    allBtns.forEach(b => b.disabled = true);
+                    answered[key]++;
+                    if (optIdx === item.a) {
+                        btn.classList.add('correct');
+                        scores[key]++;
+                        fb.className = 'q-feedback show ok';
+                        fb.innerText = `✓ Σωστό! (${item.exp})`;
+                    } else {
+                        btn.classList.add('wrong');
+                        allBtns[item.a].classList.add('correct');
+                        fb.className = 'q-feedback show no';
+                        fb.innerText = `✗ Λάθος. Σωστή απάντηση: ${GREEK_LETTERS[item.a]}) ${item.opts[item.a]} — ${item.exp}`;
+                    }
+                    document.getElementById(`score-${key}`).innerText = `Σκορ Ενότητας: ${scores[key]} / ${quizzes[key].length}`;
+                    updateGlobal();
+                };
+                grid.appendChild(btn);
+            });
+
+            card.appendChild(grid);
+            card.appendChild(fb);
+            container.appendChild(card);
+        });
+        updateGlobal();
+    }
+
+    function resetQuiz(key) {
+        renderQuiz(key);
+    }
+
+    let selLeft = null;
+    let selRight = null;
+
+    function initMatch() {
+        const leftCol = document.getElementById('match-left');
+        const rightCol = document.getElementById('match-right');
+        leftCol.innerHTML = '';
+        rightCol.innerHTML = '';
+        selLeft = null;
+        selRight = null;
+        scores.match = 0;
+        answered.match = 0;
+        document.getElementById('score-match').innerText = `Σκορ Αντιστοίχισης: 0 / 10`;
+
+        matchLeftData.forEach((item, idx) => {
+            const box = document.createElement('div');
+            box.className = 'match-box left-box';
+            box.dataset.id = item.id;
+            box.innerHTML = `<span class="num-badge" style="margin-right:14px;">${idx + 1}</span><span>${item.text}</span>`;
+            box.onclick = () => {
+                if (box.classList.contains('matched')) return;
+                document.querySelectorAll('.left-box').forEach(b => b.classList.remove('selected'));
+                box.classList.add('selected');
+                selLeft = box;
+                checkMatch();
+            };
+            leftCol.appendChild(box);
+        });
+
+        matchRightData.forEach((item, idx) => {
+            const box = document.createElement('div');
+            box.className = 'match-box right-box';
+            box.dataset.id = item.id;
+            box.innerHTML = `<span class="letter-badge">${MATCH_LETTERS[idx]}</span><span>${item.text}</span>`;
+            box.onclick = () => {
+                if (box.classList.contains('matched')) return;
+                document.querySelectorAll('.right-box').forEach(b => b.classList.remove('selected'));
+                box.classList.add('selected');
+                selRight = box;
+                checkMatch();
+            };
+            rightCol.appendChild(box);
+        });
+        updateGlobal();
+    }
+
+    function checkMatch() {
+        if (!selLeft || !selRight) return;
+        const l = selLeft, r = selRight;
+        selLeft = null; selRight = null;
+        if (l.dataset.id === r.dataset.id) {
+            l.classList.remove('selected'); r.classList.remove('selected');
+            l.classList.add('matched'); r.classList.add('matched');
+            scores.match++;
+            answered.match++;
+            document.getElementById('score-match').innerText = `Σκορ Αντιστοίχισης: ${scores.match} / 10` + (scores.match === 10 ? ' — Μπράβο! 🎉' : '');
+            updateGlobal();
+        } else {
+            l.classList.remove('selected'); r.classList.remove('selected');
+            l.classList.add('shake'); r.classList.add('shake');
+            setTimeout(() => { l.classList.remove('shake'); r.classList.remove('shake'); }, 500);
+        }
+    }
+
+    renderQuiz('q1');
+    renderQuiz('q2');
+    renderQuiz('q3');
+    initMatch();
+</script>
+</body>
+</html>
