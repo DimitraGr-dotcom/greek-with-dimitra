@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claire & Chloe — Greek Starter</title>
+<style>
+:root{--navy:#174a7e;--blue:#2876a8;--pale:#edf5fb;--ink:#203040;--good:#147d4a;--bad:#b43b3b}
+*{box-sizing:border-box}body{margin:0;background:#f4f7fa;color:var(--ink);font:16px/1.55 Arial,sans-serif}
+header{background:linear-gradient(120deg,#174a7e,#2876a8);color:white;padding:24px 5%;}header h1{margin:0;font-size:clamp(24px,4vw,36px)}header p{margin:6px 0 0}
+main{max-width:1000px;margin:20px auto;padding:0 16px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+button,.tab{border:0;border-radius:10px;padding:10px 14px;background:var(--navy);color:white;cursor:pointer;font-weight:700}
+.tab{background:#dbe9f4;color:var(--navy)}.tab.active{background:var(--navy);color:white}
+.panel{background:white;border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 3px 14px #193b5712}
+h2{color:var(--navy);margin-top:0}.muted{color:#5c6b78;font-size:.93rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.letter{background:var(--pale);border:1px solid #d2e2ef;border-radius:10px;padding:10px;text-align:center}
+.letter strong{display:block;font-size:27px;color:var(--navy)}.letter small{display:block}
+.q{padding:14px;border:1px solid #dce5ec;border-radius:12px;margin:12px 0}
+.options{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.opt{background:#f1f5f8;color:var(--ink);text-align:left;border:1px solid #d4e0e9}
+.opt:hover{background:#e2eff8}.opt:disabled{cursor:default;opacity:1}
+.feedback{font-weight:bold;margin-top:8px;min-height:24px}.correct{color:var(--good)}.wrong{color:var(--bad)}
+input[type=text]{padding:11px;border:1px solid #b9cbd8;border-radius:8px;width:min(100%,420px);font-size:16px}
+.hidden{display:none}.score{font-weight:bold;color:var(--navy)}.phrase{padding:9px 12px;background:#f5f9fc;border-left:4px solid var(--blue);margin:8px 0}
+footer{text-align:center;color:#71808d;padding:24px;font-size:13px}
+</style></head><body>
+<header><h1>Τα πρώτα μου ελληνικά 🇬🇷</h1><p>Claire & Chloe · Beginner · Μάθημα 50 λεπτών</p></header>
+<main>
+<div class="tabs">
+<button class="tab active" onclick="showTab('theory',this)">1. Θεωρία</button>
+<button class="tab" onclick="showTab('alphabet',this)">2. Αλφάβητο</button>
+<button class="tab" onclick="showTab('phrases',this)">3. Εκφράσεις</button>
+<button class="tab" onclick="showTab('quiz',this)">4. Quiz</button>
+<button class="tab" onclick="showTab('practice',this)">5. Εξάσκηση</button>
+</div>
+<section id="theory" class="panel">
+<h2>Καλώς ήρθατε!</h2><p>Σήμερα θα θυμηθούμε γράμματα και ήχους και θα χρησιμοποιήσουμε μικρές φράσεις που χρειάζονται στην καθημερινότητα.</p>
+<h3>Τι να θυμάμαι;</h3>
+<ul><li>Το <b>β</b> προφέρεται /v/, όχι /b/.</li><li><b>θ</b>: όπως το th στο <i>think</i>. Παράδειγμα: θέλω.</li><li><b>δ</b>: όπως το th στο <i>this</i>. Παράδειγμα: δεν.</li><li><b>χ</b>: πιο τραχύς ήχος από το αγγλικό h. Παράδειγμα: χαίρω.</li><li>Ο τόνος δείχνει τη συλλαβή που τονίζουμε: μα-ΜΑ, νε-ΡΟ.</li></ul>
+<h3>Σημαντικοί συνδυασμοί</h3>
+<p><b>αι</b> → ε · <b>ει, οι, υι</b> → ι · <b>ου</b> → ου · <b>μπ</b> συχνά /b/ · <b>ντ</b> συχνά /d/ · <b>γκ</b> συχνά /g/ · <b>τσ</b> /ts/ · <b>τζ</b> /dz/.</p>
+<p class="muted">Οι αγγλικές αντιστοιχίες είναι προσεγγιστικές. Ακούμε και μιμούμαστε το φυσικό ελληνικό πρότυπο.</p>
+</section>
+<section id="alphabet" class="panel hidden">
+<h2>Το ελληνικό αλφάβητο</h2><p class="muted">Διαβάστε το γράμμα, πείτε το όνομά του και μετά τον ήχο του.</p>
+<div class="grid" id="letters"></div>
+<h3>Μικρή πρόκληση προφοράς</h3><p>Πείτε αργά και μετά φυσικά: <b>θέλω – δεν – γεια – χαίρω – βάζω – νερό</b>.</p>
+</section>
+<section id="phrases" class="panel hidden">
+<h2>Φράσεις που θα χρησιμοποιώ</h2>
+<div id="phraseList"></div>
+<h3>Διάλογος: Στο καφέ</h3>
+<p><b>Α:</b> Καλημέρα! Τι θα θέλατε;</p><p><b>Β:</b> Έναν καφέ και ένα νερό, παρακαλώ.</p><p><b>Α:</b> Βεβαίως. Κάτι άλλο;</p><p><b>Β:</b> Όχι, ευχαριστώ. Πόσο κάνει;</p><p><b>Α:</b> Τέσσερα ευρώ.</p><p><b>Β:</b> Ευχαριστώ πολύ. Αντίο!</p>
+</section>
+<section id="quiz" class="panel hidden">
+<h2>Quiz — διάλεξε τη σωστή απάντηση</h2><p class="muted">Κάθε ερώτηση έχει άμεση διόρθωση. Σύνολο: 10 βαθμοί.</p>
+<div id="quizBox"></div><p class="score" id="quizScore">Σκορ: 0 / 10</p><button onclick="resetQuiz()">Ξανά από την αρχή</button>
+</section>
+<section id="practice" class="panel hidden">
+<h2>Συμπλήρωσε τη φράση</h2>
+<div id="fillBox"></div><p class="score" id="fillScore">Σωστές απαντήσεις: 0 / 8</p><button onclick="checkAll()">Έλεγχος απαντήσεων</button> <button onclick="resetFill()">Καθαρισμός</button>
+<h3>Προφορικό exit ticket</h3>
+<ol><li>Συστήσου με 2 προτάσεις.</li><li>Πες «I speak a little Greek».</li><li>Ζήτησε από κάποιον να μιλήσει πιο αργά.</li></ol>
+</section>
+</main><footer>Μάθημα Ελληνικών ως Ξένης Γλώσσας · Claire & Chloe</footer>
+<script>
+function showTab(id,btn){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+const letters=[['Α α','άλφα','a'],['Β β','βήτα','v'],['Γ γ','γάμμα','gh / y'],['Δ δ','δέλτα','th (this)'],['Ε ε','έψιλον','e'],['Ζ ζ','ζήτα','z'],['Η η','ήτα','ee'],['Θ θ','θήτα','th (think)'],['Ι ι','ιώτα','ee'],['Κ κ','κάπα','k'],['Λ λ','λάμδα','l'],['Μ μ','μι','m'],['Ν ν','νι','n'],['Ξ ξ','ξι','ks'],['Ο ο','όμικρον','o'],['Π π','πι','p'],['Ρ ρ','ρο','tapped r'],['Σ σ/ς','σίγμα','s'],['Τ τ','ταυ','t'],['Υ υ','ύψιλον','ee'],['Φ φ','φι','f'],['Χ χ','χι','kh'],['Ψ ψ','ψι','ps'],['Ω ω','ωμέγα','o']];
+document.getElementById('letters').innerHTML=letters.map(x=>`<div class="letter"><strong>${x[0]}</strong>${x[1]}<small>${x[2]}</small></div>`).join('');
+const phrases=[['Γεια σου!','Hi! (informal)'],['Γεια σας!','Hello! (polite/plural)'],['Καλημέρα!','Good morning!'],['Καλησπέρα!','Good evening!'],['Καληνύχτα!','Good night!'],['Τι κάνεις;','How are you?'],['Καλά, ευχαριστώ.','Fine, thank you.'],['Με λένε…','My name is…'],['Χάρηκα!','Nice to meet you!'],['Παρακαλώ.','Please / You’re welcome.'],['Ευχαριστώ πολύ.','Thank you very much.'],['Συγγνώμη.','Sorry / Excuse me.'],['Δεν καταλαβαίνω.','I don’t understand.'],['Μπορείτε να μιλήσετε πιο αργά;','Can you speak more slowly?'],['Μπορείτε να το επαναλάβετε;','Can you repeat that?'],['Μιλάω λίγα ελληνικά.','I speak a little Greek.'],['Πού είναι η τουαλέτα;','Where is the bathroom?'],['Έναν καφέ, παρακαλώ.','A coffee, please.'],['Πόσο κάνει;','How much is it?'],['Αντίο!','Goodbye!']];
+document.getElementById('phraseList').innerHTML=phrases.map(p=>`<div class="phrase"><b>${p[0]}</b> — ${p[1]}</div>`).join('');
+const qs=[
+['Πώς προφέρεται το β;',['b','v','th','f'],1,'Το β προφέρεται /v/.'],
+['Ποιο γράμμα ακούγεται όπως το th στο think;',['Δ δ','Θ θ','Χ χ','Ζ ζ'],1,'Το θ είναι άηχο th.'],
+['Τι σημαίνει «Καλημέρα»;',['Good night','Goodbye','Good morning','Good evening'],2,'Καλημέρα = Good morning.'],
+['Πώς λέμε «Thank you very much»;',['Ευχαριστώ πολύ','Παρακαλώ πολύ','Καλημέρα πολύ','Αντίο πολύ'],0,'Ευχαριστώ πολύ.'],
+['Τι σημαίνει «Δεν καταλαβαίνω»;',['I am fine','I don’t understand','I am hungry','I am here'],1,'Δεν καταλαβαίνω = I don’t understand.'],
+['Ποιο γράμμα ακούγεται όπως το th στο this;',['Θ θ','Τ τ','Δ δ','Ν ν'],2,'Το δ είναι ηχηρό th.'],
+['Πώς ζητάμε να μιλήσουν πιο αργά;',['Πόσο κάνει;','Μιλάω ελληνικά.','Μπορείτε να μιλήσετε πιο αργά;','Πού είναι;'],2,'Αυτή είναι η ευγενική ερώτηση.'],
+['Τι σημαίνει «Με λένε Chloe»;',['I call Chloe','My name is Chloe','Where is Chloe?','Hello Chloe'],1,'Με λένε… = My name is…'],
+['Ποια είναι η σωστή φράση για να παραγγείλουμε;',['Έναν καφέ, παρακαλώ.','Καφέ είμαι.','Αντίο καφέ.','Δεν καφέ.'],0,'Χρησιμοποιούμε παρακαλώ για ευγένεια.'],
+['Πώς λέμε «Where is the bathroom?»;',['Πόσο κάνει;','Τι κάνεις;','Πού είναι η τουαλέτα;','Πώς σε λένε;'],2,'Πού είναι η τουαλέτα;']
+];let qScore=0,answered=new Set();
+function renderQuiz(){document.getElementById('quizBox').innerHTML=qs.map((q,i)=>`<div class="q"><b>${i+1}. ${q[0]}</b><div class="options">${q[1].map((o,j)=>`<button class="opt" id="q${i}o${j}" onclick="answer(${i},${j})">${String.fromCharCode(65+j)}. ${o}</button>`).join('')}</div><div class="feedback" id="qf${i}"></div></div>`).join('')}
+function answer(i,j){if(answered.has(i))return;answered.add(i);let ok=j===qs[i][2];if(ok)qScore++;qs[i][1].forEach((_,k)=>{let b=document.getElementById(`q${i}o${k}`);b.disabled=true;if(k===qs[i][2])b.style.border='2px solid #147d4a'});let f=document.getElementById('qf'+i);f.textContent=(ok?'Σωστά! ':'Όχι αυτή τη φορά. ')+qs[i][3];f.className='feedback '+(ok?'correct':'wrong');document.getElementById('quizScore').textContent=`Σκορ: ${qScore} / 10`}
+function resetQuiz(){qScore=0;answered.clear();document.getElementById('quizScore').textContent='Σκορ: 0 / 10';renderQuiz()}
+renderQuiz();
+const fills=[['Καλη______.','μέρα'],['Ευχαρι______.','στώ'],['Με λένε ______.','claire'],['Δεν καταλαβαίνω. Μιλήστε πιο ______.','αργά'],['Μιλάω λίγα ______.','ελληνικά'],['Πού είναι η ______;','τουαλέτα'],['Έναν καφέ, ______.','παρακαλώ'],['Καλη______. (Good evening)','σπέρα']];
+document.getElementById('fillBox').innerHTML=fills.map((x,i)=>`<div class="q"><label><b>${i+1}. ${x[0]}</b><br><input type="text" id="f${i}" aria-label="Απάντηση ${i+1}"><span id="ff${i}" class="feedback"></span></label></div>`).join('');
+function norm(s){return s.trim().toLocaleLowerCase('el').normalize('NFC')}
+function checkAll(){let n=0;fills.forEach((x,i)=>{let val=norm(document.getElementById('f'+i).value);let target=norm(x[1]);let ok=val===target || (i===2 && ['claire','chloe'].includes(val));let f=document.getElementById('ff'+i);f.textContent=ok?' ✓ Σωστά':' ✗ Σωστή απάντηση: '+x[1];f.className='feedback '+(ok?'correct':'wrong');if(ok)n++});document.getElementById('fillScore').textContent=`Σωστές απαντήσεις: ${n} / 8`}
+function resetFill(){fills.forEach((_,i)=>{document.getElementById('f'+i).value='';document.getElementById('ff'+i).textContent=''});document.getElementById('fillScore').textContent='Σωστές απαντήσεις: 0 / 8'}
+</script></body></html>
