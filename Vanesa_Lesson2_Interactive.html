@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Μάθημα 2 – Vanesa | Καταγωγή, Γλώσσες & Ρήματα (-ω)</title>
+<style>
+  :root {
+    --navy: #1B365D;
+    --teal: #2A6F97;
+    --light-bg: #F4F7FA;
+    --card-bg: #FFFFFF;
+    --border: #D0D7DE;
+    --success: #1E7E34;
+    --success-bg: #E6F4EA;
+    --error: #C62828;
+    --error-bg: #FDECEA;
+    --accent: #E8F4F8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: #222;
+    margin: 0;
+    padding: 0;
+    line-height: 1.55;
+  }
+  header {
+    background: linear-gradient(135deg, var(--navy), var(--teal));
+    color: #fff;
+    padding: 26px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 6px; font-size: 1.75rem; }
+  header p { margin: 0; opacity: 0.92; font-size: 1rem; }
+
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .nav-btn {
+    background: var(--light-bg);
+    color: var(--navy);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+  }
+  .nav-btn.active, .nav-btn:hover {
+    background: var(--navy);
+    color: #fff;
+    border-color: var(--navy);
+  }
+  .score-box {
+    background: var(--accent);
+    border: 1px solid var(--teal);
+    color: var(--navy);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .progress-wrap {
+    width: 120px;
+    height: 10px;
+    background: #D0D7DE;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--success);
+    transition: width 0.3s ease;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 16px 40px;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  h2 { color: var(--navy); margin-top: 0; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+  h3 { color: var(--teal); margin-top: 18px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  th { background: var(--navy); color: #fff; }
+  tr:nth-child(even) { background: #F8FAFC; }
+
+  .callout {
+    background: var(--accent);
+    border-left: 5px solid var(--navy);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+  }
+
+  .speak-btn {
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 9px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+  .speak-btn:hover { background: var(--navy); }
+
+  /* Exercise Items */
+  .q-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .q-title {
+    font-weight: 700;
+    font-size: 1.04rem;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .q-en {
+    font-weight: 400;
+    color: #555;
+    font-size: 0.92rem;
+    margin-left: 6px;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 10px;
+  }
+  .opt-btn {
+    text-align: left;
+    background: #F8FAFC;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #222;
+    font-weight: 500;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--teal); background: var(--accent); }
+  .opt-btn.correct { background: var(--success-bg); border-color: var(--success); color: var(--success); font-weight: 700; }
+  .opt-btn.wrong { background: var(--error-bg); border-color: var(--error); color: var(--error); }
+  .opt-letter {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 22px;
+    text-align: center;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .fill-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+  .fill-input {
+    padding: 8px 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 170px;
+  }
+  .check-btn {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .check-btn:hover { background: var(--teal); }
+  .feedback {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 0.94rem;
+  }
+  .fb-ok { color: var(--success); }
+  .fb-no { color: var(--error); }
+
+  /* Matching Game (15 items, numbered boxes 1-15 and lettered choices Α-Δ per item or board) */
+  .match-select {
+    padding: 8px 10px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.96rem;
+    background: #fff;
+  }
+
+  .speaking-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .speak-card {
+    background: #F8FAFC;
+    border: 2px solid var(--teal);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .speak-num {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  .reset-btn {
+    background: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .reset-btn:hover { background: #495057; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Μάθημα 2: Καταγωγή, Γλώσσες, Κατοικία & Ρήματα (-ω)</h1>
+  <p>Διαδραστική Σελίδα για τη Vanesa • Beginner A1 • Screen-Share Ready (1, 2, 3… & Α, Β, Γ, Δ)</p>
+</header>
+
+<div class="top-bar">
+  <div class="nav-pills">
+    <button class="nav-btn active" onclick="showTab('theory', this)">1. Θεωρία</button>
+    <button class="nav-btn" onclick="showTab('ex1', this)">2. Άσκηση 1: Ρήματα (×15)</button>
+    <button class="nav-btn" onclick="showTab('ex2', this)">3. Άσκηση 2: σε & από (×15)</button>
+    <button class="nav-btn" onclick="showTab('ex3', this)">4. Παιχνίδι 3: Χώρες & Γλώσσες (×15)</button>
+    <button class="nav-btn" onclick="showTab('speaking', this)">5. Speaking & Role-Play</button>
+  </div>
+  <div class="score-box">
+    <span id="score-text">Βαθμολογία: 0 / 45</span>
+    <div class="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+    <button class="reset-btn" onclick="location.reload()">Επαναφορά</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TAB 1: THEORY -->
+  <div id="theory" class="section active">
+    <div class="card">
+      <h2>Α. Ενεστώτας Ρημάτων Α' Συζυγίας (-ω) – Present Tense</h2>
+      <p>Τα ρήματα αλλάζουν κατάληξη ανάλογα με το πρόσωπο (όπως στα ισπανικά: <i>vivo, vives, vive</i>).</p>
+      <table>
+        <tr><th>Πρόσωπο</th><th>Κατάληξη</th><th>μένω (live)</th><th>δουλεύω (work)</th><th>διαβάζω (read)</th><th>βλέπω (watch)</th></tr>
+        <tr><td><b>εγώ</b> (I)</td><td><b>-ω</b></td><td>μένω <button class="speak-btn" onclick="speak('μένω')">🔊</button></td><td>δουλεύω</td><td>διαβάζω</td><td>βλέπω</td></tr>
+        <tr><td><b>εσύ</b> (you)</td><td><b>-εις</b></td><td>μένεις <button class="speak-btn" onclick="speak('μένεις')">🔊</button></td><td>δουλεύεις</td><td>διαβάζεις</td><td>βλέπεις</td></tr>
+        <tr><td><b>αυτός/ή/ό</b> (he/she/it)</td><td><b>-ει</b></td><td>μένει <button class="speak-btn" onclick="speak('μένει')">🔊</button></td><td>δουλεύει</td><td>διαβάζει</td><td>βλέπει</td></tr>
+        <tr><td><b>εμείς</b> (we)</td><td><b>-ουμε</b></td><td>μένουμε <button class="speak-btn" onclick="speak('μένουμε')">🔊</button></td><td>δουλεύουμε</td><td>διαβάζουμε</td><td>βλέπουμε</td></tr>
+        <tr><td><b>εσείς</b> (you pl./formal)</td><td><b>-ετε</b></td><td>μένετε <button class="speak-btn" onclick="speak('μένετε')">🔊</button></td><td>δουλεύετε</td><td>διαβάζετε</td><td>βλέπετε</td></tr>
+        <tr><td><b>αυτοί/ές/ά</b> (they)</td><td><b>-ουν</b></td><td>μένουν <button class="speak-btn" onclick="speak('μένουν')">🔊</button></td><td>δουλεύουν</td><td>διαβάζουν</td><td>βλέπουν</td></tr>
+      </table>
+      <div class="callout">
+        <b>Ρήμα «μιλάω» (to speak):</b> μιλάω, μιλάς, μιλάει, μιλάμε, μιλάτε, μιλάνε.
+        <button class="speak-btn" onclick="speak('Μιλάω ισπανικά, αγγλικά, γαλλικά και λίγα ελληνικά.')">🔊 Άκουσε</button><br>
+        <i>Παράδειγμα:</i> Μιλάω ισπανικά, αγγλικά, γαλλικά και λίγα ελληνικά.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Β. Πρόθεση «σε» + άρθρο (in / at / to)</h2>
+      <table>
+        <tr><th>Γένος</th><th>Συνδυασμός</th><th>Τύπος</th><th>Παραδείγματα</th></tr>
+        <tr><td>Αρσενικό (Masc.)</td><td>σε + τον</td><td><b>στον</b></td><td>στον Πειραιά, στον Καναδά <button class="speak-btn" onclick="speak('στον Πειραιά, στον Καναδά')">🔊</button></td></tr>
+        <tr><td>Θηλυκό (Fem.)</td><td>σε + την</td><td><b>στην / στη</b></td><td>στην Αθήνα, στην Ελλάδα • στη Γαλλία, στη Μαδρίτη <button class="speak-btn" onclick="speak('στην Αθήνα, στην Ελλάδα, στη Γαλλία')">🔊</button></td></tr>
+        <tr><td>Ουδέτερο (Neut.)</td><td>σε + το</td><td><b>στο</b></td><td>στο Ελ Σαλβαδόρ, στο Παρίσι, στο σπίτι, στο γραφείο <button class="speak-btn" onclick="speak('στο Ελ Σαλβαδόρ, στο Παρίσι, στο σπίτι')">🔊</button></td></tr>
+        <tr><td>Πληθυντικός (Plural)</td><td>σε + τις / τα</td><td><b>στις / στα</b></td><td>στις ΗΠΑ, στα νησιά <button class="speak-btn" onclick="speak('στις ΗΠΑ, στα νησιά')">🔊</button></td></tr>
+      </table>
+      <div class="callout">
+        <b>Σημείωση:</b> Οι γλώσσες γράφονται με <b>πεζό</b> αρχικό γράμμα: <i>ελληνικά, ισπανικά, αγγλικά, γαλλικά</i>.
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: EXERCISE 1 (15 MCQ) -->
+  <div id="ex1" class="section">
+    <div class="card">
+      <h2>Άσκηση 1: Διάλεξε το σωστό ρήμα (15 ερωτήσεις • Α, Β, Γ, Δ)</h2>
+      <p>Επίλεξε το σωστό γράμμα (Α, Β, Γ ή Δ) για κάθε πρόταση.</p>
+      <div id="ex1-list"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: EXERCISE 2 (15 Fill-in-the-blank) -->
+  <div id="ex2" class="section">
+    <div class="card">
+      <h2>Άσκηση 2: Συμπλήρωσε στον / στην / στη / στο / στις / στα / από (15 προτάσεις)</h2>
+      <p>Επίλεξε τη σωστή απάντηση από τις επιλογές Α, Β, Γ, Δ (ή γράψε την αν θες εξάσκηση στο Writing!).</p>
+      <div id="ex2-list"></div>
+    </div>
+  </div>
+
+  <!-- TAB 4: EXERCISE 3 (15 Nationalities, Countries & Languages Game) -->
+  <div id="ex3" class="section">
+    <div class="card">
+      <h2>Παιχνίδι 3: Χώρες, Εθνικότητες & Γλώσσες (15 κάρτες • Α, Β, Γ, Δ)</h2>
+      <p>Ταιριάζουμε σωστά τη χώρα, την εθνικότητα ή τη γλώσσα.</p>
+      <div id="ex3-list"></div>
+    </div>
+  </div>
+
+  <!-- TAB 5: SPEAKING & ROLE-PLAY -->
+  <div id="speaking" class="section">
+    <div class="card">
+      <h2>Προφορική Εξάσκηση & Role-Play (Αριθμημένα Κουτιά 1–8)</h2>
+      <p>Διάλεξε έναν αριθμό (1–8) και απάντησε προφορικά στα ελληνικά!</p>
+      <div class="speaking-grid" id="speaking-grid"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const LETTERS = ["Α", "Β", "Γ", "Δ"];
+let totalScore = 0;
+const totalQuestions = 45;
+const answeredSet = new Set();
+
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'el-GR';
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  }
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function updateScore() {
+  document.getElementById('score-text').innerText = `Βαθμολογία: ${totalScore} / ${totalQuestions}`;
+  const pct = Math.round((totalScore / totalQuestions) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// Exercise 1: 15 Verb MCQ Questions
+const ex1Data = [
+  { q: "Εγώ ___ στο Ελ Σαλβαδόρ.", en: "(I live)", opts: ["μένω", "μένεις", "μένει", "μένουμε"], ans: 0 },
+  { q: "Εσύ ___ από το σπίτι;", en: "(Do you work?)", opts: ["δουλεύω", "δουλεύεις", "δουλεύει", "δουλεύουν"], ans: 1 },
+  { q: "Η Βανέσα ___ πολλά βιβλία.", en: "(reads)", opts: ["διαβάζω", "διαβάζεις", "διαβάζει", "διαβάζουν"], ans: 2 },
+  { q: "Εμείς ___ μια ελληνική ταινία.", en: "(watch)", opts: ["βλέπω", "βλέπετε", "βλέπουν", "βλέπουμε"], ans: 3 },
+  { q: "Εσείς ___ συχνά στην Ευρώπη;", en: "(Do you travel?)", opts: ["ταξιδεύετε", "ταξιδεύουμε", "ταξιδεύει", "ταξιδεύω"], ans: 0 },
+  { q: "Αυτοί ___ σημειώσεις στα ελληνικά.", en: "(write)", opts: ["γράφω", "γράφουν", "γράφει", "γράφετε"], ans: 1 },
+  { q: "Ο αρραβωνιαστικός μου ___ να πάει στην Ελλάδα.", en: "(wants)", opts: ["θέλω", "θέλεις", "θέλει", "θέλουμε"], ans: 2 },
+  { q: "Εγώ ___ λίγα ελληνικά.", en: "(know)", opts: ["ξέρεις", "ξέρει", "ξέρουν", "ξέρω"], ans: 3 },
+  { q: "Τι δουλειά ___ ο αδερφός του;", en: "(does)", opts: ["κάνει", "κάνω", "κάνεις", "κάνουμε"], ans: 0 },
+  { q: "Εμείς ___ ισπανικά και αγγλικά.", en: "(speak)", opts: ["μιλάω", "μιλάμε", "μιλάς", "μιλάνε"], ans: 1 },
+  { q: "Εσύ ___ ειδήσεις για την πολιτική;", en: "(Do you watch?)", opts: ["βλέπω", "βλέπει", "βλέπεις", "βλέπετε"], ans: 2 },
+  { q: "Οι γονείς του ___ στην Αθήνα.", en: "(live)", opts: ["μένει", "μένουμε", "μένετε", "μένουν"], ans: 3 },
+  { q: "Εσείς ___ αγγλικά ή γαλλικά;", en: "(Do you speak?)", opts: ["μιλάτε", "μιλάμε", "μιλάς", "μιλάει"], ans: 0 },
+  { q: "Αυτή ___ άρθρα για την πολιτική.", en: "(reads)", opts: ["διαβάζω", "διαβάζει", "διαβάζεις", "διαβάζουμε"], ans: 1 },
+  { q: "Εμείς ___ να πάμε στην Κρήτη.", en: "(want)", opts: ["θέλω", "θέλεις", "θέλουμε", "θέλετε"], ans: 2 }
+];
+
+// Exercise 2: 15 Prepositions (σε / από) Questions
+const ex2Data = [
+  { q: "Μένω ___ Ελ Σαλβαδόρ.", en: "(in El Salvador)", opts: ["στο", "στην", "στον", "στη"], ans: 0 },
+  { q: "Ο φίλος του μένει ___ Αθήνα.", en: "(in Athens)", opts: ["στο", "στην", "στον", "στη"], ans: 1 },
+  { q: "Θέλουμε να ταξιδέψουμε ___ Γαλλία.", en: "(to France)", opts: ["στο", "στον", "στη", "στα"], ans: 2 },
+  { q: "Δουλεύω ___ σπίτι.", en: "(at home)", opts: ["στην", "στον", "στη", "στο"], ans: 3 },
+  { q: "Ο θείος του μένει ___ Καναδά.", en: "(in Canada)", opts: ["στον", "στην", "στο", "στη"], ans: 0 },
+  { q: "Πάμε διακοπές ___ Κρήτη.", en: "(to Crete)", opts: ["στο", "στην", "στον", "στη"], ans: 1 },
+  { q: "Έχει φίλους ___ Θεσσαλονίκη.", en: "(in Thessaloniki)", opts: ["στον", "στο", "στη", "στα"], ans: 2 },
+  { q: "Μένουν ___ Παρίσι.", en: "(in Paris)", opts: ["στην", "στον", "στη", "στο"], ans: 3 },
+  { q: "Είμαι ___ Ελ Σαλβαδόρ.", en: "(from El Salvador)", opts: ["από το", "από την", "από τον", "από τη"], ans: 0 },
+  { q: "Είναι ___ Ελλάδα.", en: "(from Greece)", opts: ["από το", "από την", "από τον", "από τη"], ans: 1 },
+  { q: "Δουλεύει ___ γραφείο κάθε μέρα.", en: "(at the office)", opts: ["στην", "στον", "στο", "στη"], ans: 2 },
+  { q: "Πάμε ___ ελληνικά νησιά.", en: "(to the Greek islands)", opts: ["στο", "στις", "στους", "στα"], ans: 3 },
+  { q: "Έχουν συγγενείς ___ ΗΠΑ.", en: "(in the USA)", opts: ["στις", "στα", "στους", "στην"], ans: 0 },
+  { q: "Ο πατέρας του είναι ___ Πειραιά.", en: "(from Piraeus)", opts: ["από την", "από τον", "από το", "από τη"], ans: 1 },
+  { q: "Μένει ___ Μαδρίτη δύο χρόνια.", en: "(in Madrid)", opts: ["στον", "στο", "στη", "στα"], ans: 2 }
+];
+
+// Exercise 3: 15 Countries, Nationalities & Languages Questions
+const ex3Data = [
+  { q: "Ο αρραβωνιαστικός μου είναι από την Ελλάδα. Είναι ___.", en: "(Greek man)", opts: ["Έλληνας", "Ελληνίδα", "ελληνικά", "Ελλάδα"], ans: 0 },
+  { q: "Η μητέρα του είναι από την Ελλάδα. Είναι ___.", en: "(Greek woman)", opts: ["Έλληνας", "Ελληνίδα", "ελληνικά", "Ελλάδα"], ans: 1 },
+  { q: "Στην Ισπανία μιλάνε ___.", en: "(Spanish language)", opts: ["Ισπανός", "Ισπανίδα", "ισπανικά", "Ισπανία"], ans: 2 },
+  { q: "Η φίλη μου είναι από τη Γαλλία. Είναι ___.", en: "(French woman)", opts: ["Γάλλος", "γαλλικά", "Γαλλία", "Γαλλίδα"], ans: 3 },
+  { q: "Στη Γαλλία μιλάνε ___.", en: "(French language)", opts: ["γαλλικά", "Γάλλος", "Γαλλίδα", "Γαλλία"], ans: 0 },
+  { q: "Ο Νίκος είναι από την Κύπρο. Είναι ___.", en: "(Cypriot man)", opts: ["Κύπρια", "Κύπριος", "Κύπρος", "ελληνικά"], ans: 1 },
+  { q: "Στην Αγγλία και στις ΗΠΑ μιλάνε ___.", en: "(English language)", opts: ["Άγγλος", "Αγγλίδα", "αγγλικά", "Αγγλία"], ans: 2 },
+  { q: "Η Σοφία είναι από την Ιταλία. Είναι ___.", en: "(Italian woman)", opts: ["Ιταλός", "ιταλικά", "Ιταλία", "Ιταλίδα"], ans: 3 },
+  { q: "Ο Χανς είναι από τη Γερμανία. Είναι ___.", en: "(German man)", opts: ["Γερμανός", "Γερμανίδα", "γερμανικά", "Γερμανία"], ans: 0 },
+  { q: "Πώς ρωτάμε 'Where are you from?'", en: "(Origin question)", opts: ["Πού μένεις;", "Από πού είσαι;", "Τι γλώσσες μιλάς;", "Τι δουλειά κάνεις;"], ans: 1 },
+  { q: "Πώς ρωτάμε 'Where do you live?'", en: "(Residence question)", opts: ["Από πού είσαι;", "Τι κάνεις;", "Πού μένεις;", "Πώς σε λένε;"], ans: 2 },
+  { q: "Πώς ρωτάμε 'What languages do you speak?'", en: "(Languages question)", opts: ["Πού μένεις;", "Τι δουλειά κάνεις;", "Από πού είσαι;", "Τι γλώσσες μιλάς;"], ans: 3 },
+  { q: "Η Κάρμεν είναι από την Ισπανία. Είναι ___.", en: "(Spanish woman)", opts: ["Ισπανίδα", "Ισπανός", "ισπανικά", "Ισπανία"], ans: 0 },
+  { q: "Ο Κάρλος είναι από το Μεξικό. Είναι ___.", en: "(Mexican man)", opts: ["Μεξικανή", "Μεξικανός", "Μεξικό", "ισπανικά"], ans: 1 },
+  { q: "Πώς λέμε 'I speak a little Greek'?", en: "(Confidence phrase)", opts: ["Δεν μιλάω αγγλικά.", "Μένω στην Ελλάδα.", "Μιλάω λίγα ελληνικά.", "Διαβάζω ελληνικά."], ans: 2 }
+];
+
+function renderMCQ(containerId, data, prefix) {
+  const container = document.getElementById(containerId);
+  data.forEach((item, idx) => {
+    const qKey = `${prefix}-${idx}`;
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    let html = `<div class="q-title">${idx + 1}. ${item.q} <span class="q-en">${item.en}</span></div><div class="options-grid">`;
+    item.opts.forEach((opt, oIdx) => {
+      html += `<button class="opt-btn" id="${qKey}-opt-${oIdx}" onclick="checkMCQ('${qKey}', ${oIdx}, ${item.ans}, '${opt.replace(/'/g, "\'")}')">
+        <span class="opt-letter">${LETTERS[oIdx]}</span>${opt}
+      </button>`;
+    });
+    html += `</div><div class="feedback" id="${qKey}-fb"></div>`;
+    card.innerHTML = html;
+    container.appendChild(card);
+  });
+}
+
+function checkMCQ(qKey, chosen, correct, chosenText) {
+  if (answeredSet.has(qKey)) return;
+  const fb = document.getElementById(`${qKey}-fb`);
+  const btn = document.getElementById(`${qKey}-opt-${chosen}`);
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    fb.innerHTML = `<span class="fb-ok">✔ Σωστά! Μπράβο!</span> <button class="speak-btn" onclick="speak('${chosenText}')">🔊</button>`;
+    answeredSet.add(qKey);
+    totalScore++;
+    updateScore();
+    for (let i = 0; i < 4; i++) {
+      document.getElementById(`${qKey}-opt-${i}`).disabled = true;
+    }
+  } else {
+    btn.classList.add('wrong');
+    btn.disabled = true;
+    fb.innerHTML = `<span class="fb-no">✘ Δοκίμασε ξανά! (Try again!)</span>`;
+  }
+}
+
+// Speaking Cards (8 numbered boxes)
+const speakingPrompts = [
+  { gr: "Από πού είσαι και πού μένεις τώρα;", en: "Say where you are from and where you live." },
+  { gr: "Τι γλώσσες μιλάς;", en: "Mention Spanish, English, French, and a little Greek." },
+  { gr: "Πού μένει ο αρραβωνιαστικός σου / η οικογένειά του;", en: "Use 'μένει στην / στο...'." },
+  { gr: "Δουλεύεις στο γραφείο ή από το σπίτι;", en: "Answer using 'Δουλεύω...'." },
+  { gr: "Τι διαβάζεις στον ελεύθερο χρόνο σου;", en: "Talk about books or news/politics." },
+  { gr: "Τι σειρές ή ταινίες βλέπεις;", en: "Use 'Βλέπω...'." },
+  { gr: "Πού θέλεις να ταξιδέψεις στην Ελλάδα;", en: "Use 'Θέλω να ταξιδέψω στην / στο...'." },
+  { gr: "Role-Play: Συστήσου στον φίλο του αρραβωνιαστικού σου!", en: "Name + origin + languages + 1 hobby." }
+];
+
+const spGrid = document.getElementById('speaking-grid');
+speakingPrompts.forEach((p, idx) => {
+  const div = document.createElement('div');
+  div.className = 'speak-card';
+  div.innerHTML = `<span class="speak-num">Κάρτα ${idx + 1}</span>
+    <div style="font-weight:700; color:#1B365D; margin-bottom:6px;">${p.gr} <button class="speak-btn" onclick="speak('${p.gr.replace(/'/g, "\'")}')">🔊</button></div>
+    <div style="font-size:0.9rem; color:#555;">${p.en}</div>`;
+  spGrid.appendChild(div);
+});
+
+renderMCQ('ex1-list', ex1Data, 'ex1');
+renderMCQ('ex2-list', ex2Data, 'ex2');
+renderMCQ('ex3-list', ex3Data, 'ex3');
+</script>
+</body>
+</html>
